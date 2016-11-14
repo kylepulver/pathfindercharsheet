@@ -1,0 +1,293 @@
+body {
+    background: #EEE;
+}
+
+.exporter,
+.importer {
+    display: none;
+    width: 75%;
+    position: fixed;
+    left: 50%;
+    margin: 10rem auto;
+    margin-left: -37.5%;
+    border: 2px solid #000;
+    background: #fff;
+    left: 50%;
+    z-index: 50;
+    padding: 1rem;
+}
+
+.container {
+    width: 112rem;
+    margin: 0 auto;
+    background: #fff;
+}
+/* Fixes for tagging style UGH */
+div.tagsinput {
+    border: 0.1rem solid #d1d1d1;
+    border-radius: 0.4rem;
+    height: 2.4rem;
+    padding: 0.6rem 1rem;
+    font-size: 1.6rem;
+    line-height: 1.15;
+    margin: 0;
+    box-shadow: none;
+}
+div.tagsinput span.tag {
+    background: #ededed;
+    border: 0.1rem solid #d1d1d1;
+    font-size: 1.8rem;
+    padding: 0.1rem 0.3rem;
+    color: #606c76;
+    margin: 0 0.5rem 0 0;
+}
+div.tagsinput span.tag a {
+    color: #606c76;
+}
+#language-tags_addTag,
+#language-tags_tag,
+#resistance-tags_addTag,
+#resistance-tags_tag,
+#conditions-tags_addTag,
+#conditions-tags_tag {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #606c76 !important;
+    font-weight: 200;
+    padding: 0.1rem 0 0 0 ;
+}
+
+.loading-overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    opacity: 0.9;
+    background: #fff;
+    font-size: 15rem;
+    text-align: center;
+}
+.loading-overlay div {
+    position: absolute;
+    top: 50%;
+    margin-top: -15rem;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.needs-train, .warning {
+    color: #f00;
+}
+
+/*input[readonly="readonly"] {
+    font-weight: 600;
+}*/
+input[calctype="subtract"] {
+    color: #D15;
+    font-style: italic;
+}
+input[type="submit"] {
+    padding: 0rem 1rem;
+}
+input, h4, select, textarea {
+    margin-bottom: 0.75rem;
+}
+label {
+    margin-bottom: 0.2rem;
+}
+h1 {
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+textarea {
+    min-height: 11.3rem;
+    resize: vertical;
+}
+select {
+    background-color: #fff;
+}
+
+.squeeze {
+    letter-spacing: -0.15rem;
+}
+
+#server-message {
+    font-size: 1.2rem;
+}
+
+.skills input[type="text"],
+.skills input[type="number"],
+.skills select {
+    padding: 0.2rem;
+    padding-left: 0.3em;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+    background: transparent;
+}
+.skills input[type="checkbox"] {
+    margin: 0.5rem;
+}
+.skills h4,
+.skills p {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+}
+.skills:hover,
+.highlight:hover {
+    background: #ffA;
+}
+.row-pc {
+    background: #dff;
+}
+
+.valign {
+    vertical-align: bottom;
+}
+
+.special-abilities input[type="number"],
+.cmd input[type="number"],
+input[type="number"].narrow {
+    padding-right: 0.2em;
+    padding-left: 0.3em;
+}
+
+.strong {
+    font-weight: 600;
+}
+
+.error {
+    color: #f00;
+}
+
+footer {
+    width: 112rem;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    height: 12rem;
+}
+.toolbar-under {
+    height: 8rem;
+}
+.toolbar {
+    z-index: 10;
+    border-bottom: 3px #EEE solid;
+    width: 100%;
+    position: fixed;
+    background: #fff;
+}
+
+.bottombar {
+    z-index: 10;
+    border-top: 3px #EEE solid;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+}
+#navbar a {
+    padding: 0.1rem;
+    display: inline-block;
+    font-size: 1.2rem;
+    letter-spacing: -0.075rem;
+    cursor: pointer; cursor: hand;
+}
+#navbar {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+}
+
+#search-text {
+    font-weight: 600;
+}
+.d20pfsrd {
+    margin: 0.2rem auto;
+
+}
+.selected-text {
+    display: inline-block;
+    vertical-align: top;
+    width: 75%;
+    text-overflow: clip;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.rolz input {
+    width: auto;
+    padding: 0.25rem;
+    height: 1.8rem;
+    margin: 0;
+    line-height: normal;
+}
+.rolz input[type="text"] {
+    font-size: 1.2rem;
+}
+.rolz input[type="submit"] {
+    border: 0;
+}
+#rolz-result {
+    display: inline-block;
+    font-weight: 600;
+    margin: 0 0.5rem;
+    width: 4rem;
+    text-align: center;
+    cursor: pointer; cursor: hand;
+}
+.calc-result {
+    font-weight: 600;
+}
+
+.bar-container {
+    width: 100%;
+    height: 3.8rem;
+    border: 0.2rem #000 solid;
+    border-radius: 0.5rem;
+    font-size: 0;
+}
+.bar-container .bar {
+    height: 3.4rem;
+    width: 0;
+    display: inline-block;
+    border-radius: 0.5rem;
+}
+.health-bar {
+    background: #322;
+}
+.health-bar .health {
+    background: #fd3;
+}
+.health-bar .ko {
+    background: #e93;
+}
+
+.experience-bar {
+    background: #333;
+}
+.experience-bar .experience {
+    background: #39E;
+}
+
+.reveal {
+    padding-bottom: 5rem;
+}
+
+.more-tools {
+    display: none;
+}
+
+.retired {
+    opacity: 0.5;
+}
+
+p {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+    margin-top: 0.6rem;
+    font-weight: 500;
+    overflow: auto;
+}

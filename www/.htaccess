@@ -1,0 +1,7 @@
+RewriteEngine On
+
+RewriteRule ^([a-zA-Z0-9]+)$ index.php?mode=$1
+RewriteRule ^([a-zA-Z0-9]+)/$ index.php?mode=$1
+
+RewriteRule ^([a-zA-Z0-9]+)/([a-zA-Z0-9]+)$ index.php?mode=$1&info=$2
+RewriteRule ^([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/$ index.php?mode=$1&info=$2
