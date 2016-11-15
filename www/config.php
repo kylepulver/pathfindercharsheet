@@ -41,6 +41,6 @@ $config['email']        = "pulverk@gmail.com";
 
 // Dev mode
 // DO NOT SET THIS TO TRUE WHEN LIVE!!  Risky business.
-$is_dev = true;
+$is_dev = false;
 
 ?>
