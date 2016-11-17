@@ -1,6 +1,7 @@
 function goTo(page) {
     window.location.href = page;
 }
+
 function logout() {
     $.post("/p", {
         mode: "logout",
@@ -10,6 +11,7 @@ function logout() {
         window.location.href = "/";
     });
 }
+
 function createNew() {
     $.post("/p", {
         mode: "create",
@@ -24,4 +26,18 @@ function createNew() {
             window.location.href = "/e/" + editid;
         }
     });
+}
+
+function mapRange(value, low1, high1, low2, high2) {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+}
+
+function capitalizeFirstLetter(string) {
+    if (string === null) return "";
+    if (typeof string == 'undefined') return "";
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function log(str) {
+    if (enableLog) console.log(str);
 }

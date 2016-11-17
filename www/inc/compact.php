@@ -210,7 +210,9 @@
 <div>
     <span class="strong">Feats</span>
     <span class="entries" savetype="columns">
-        <span saveas="feat_name" class="list"></span>
+        <span class="list">
+            <span saveas="feat_name"></span>
+        </span>
     </span>
 </div>
 <div>
@@ -304,7 +306,7 @@ $(function() {
         });
 
         $('[saveas="gear_quantity_description"]').each(function() {
-            var text = $(this).text().replace(/ /g, '\xa0');
+            var text = $(this).text().replace(/ /g, '\xa0'); // Dont break up names with auto wrap
             $(this).text(text);
         });
 
@@ -332,10 +334,25 @@ $(function() {
             $(this).text(text);
         });
 
+        var specialAbilityNotes = decodeToArray(data['special_notes']);
+        $('.list [saveas="special_name"]').each(function(i) {
+            $(this).attr('title', specialAbilityNotes[i]);
+        });
+
+        var featNotes = decodeToArray(data['feat_notes']);
+        $('.list [saveas="feat_name"]').each(function(i) {
+            $(this).attr('title', featNotes[i]);
+        });
+
         // Spell list stuff oh my god why
         var classes = decodeToArray(data['casting_class']);
         var levels = decodeToArray(data['spell_list_level']);
         var spellNames = decodeToArray(data['spell_list_name']);
+        var spellSchools = decodeToArray(data['spell_list_school']);
+        var spellDurations = decodeToArray(data['spell_list_duration']);
+        var spellRanges = decodeToArray(data['spell_list_range']);
+        var spellSaves = decodeToArray(data['spell_list_save']);
+        var spellSrs = decodeToArray(data['spell_list_sr']);
         var spellCasters = decodeToArray(data['spell_list_class_name']);
         var dcs = decodeToArray(data['spell_list_dc']);
         var mods = decodeToArray(data['casting_class_mod']);
@@ -374,6 +391,19 @@ $(function() {
                     if (levels[i] == lv && spellCasters[i] == className) {
                         var newSpellName = spellName.clone();
                         newSpellName.text(spellNames[i]);
+                        var hoverText =
+                            spellNames[i] + ": " +
+                            spellSchools[i] + ", " +
+                            spellDurations[i] + ", " +
+                            spellRanges[i];
+
+                        if (spellSaves[i] != "null" && spellSaves[i] != "" && spellSaves[i] != "Null")
+                            hoverText += ", " + capitalizeFirstLetter(spellSaves[i]);
+
+                        if (spellSrs[i] == "true")
+                            hoverText += ", SR";
+
+                        newSpellName.attr('title', hoverText);
                         newSpellName.appendTo(spellNameContainer);
                     }
                 }
