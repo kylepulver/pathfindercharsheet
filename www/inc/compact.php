@@ -153,7 +153,7 @@
 <div class="entries" savetype="columns">
     <div>
         <span class="strong capitalize" saveas="weapon_attack_type"></span>
-        <span saveas="weapon_name"></span>
+        <a saveas="weapon_name"></a>
         <span saveas="weapon_attack"></span>
         <span saveas="weapon_damage"></span>
         <span class="clear-if-empty">(<span saveas="weapon_critical"></span>)</span>
@@ -170,7 +170,7 @@
             [<span data="spell-per-day"></span>]
             <span data="spell-dc"></span>
             <span data="spell-names">
-                <span class="list"></span>
+                <a class="list"></a>
             </span>
         </div>
     </div>
@@ -211,7 +211,7 @@
     <span class="strong">Feats</span>
     <span class="entries" savetype="columns">
         <span class="list">
-            <span saveas="feat_name"></span>
+            <a saveas="feat_name"></a>
         </span>
     </span>
 </div>
@@ -231,7 +231,7 @@
     <span class="strong">Abilities</span>
     <span class="entries" savetype="columns">
         <span class="list">
-            <span saveas="special_name"></span>
+            <a saveas="special_name"></a>
             <span class="clear-if-empty">(<span saveas="special_type" class="check-for-empty"></span>)</span>
         </span>
     </span>
@@ -240,13 +240,13 @@
     <span class="strong">Gear</span>
     <span class="entries list" savetype="columns">
         <span class="list clear-if-empty">
-            <span saveas="gear_quantity_description"></span>&nbsp;x<span saveas="gear_quantity"></span>
+            <a saveas="gear_quantity_description"></a>&nbsp;x<span saveas="gear_quantity"></span>
         </span>
     </span>
 
     <span class="entries list" savetype="columns">
         <span class="list clear-if-empty">
-            <span saveas="gear_uses_description"></span>&nbsp;*<span saveas="gear_uses"></span>
+            <a saveas="gear_uses_description"></a>&nbsp;*<span saveas="gear_uses"></span>
         </span>
     </span>
 </div>
@@ -334,14 +334,33 @@ $(function() {
             $(this).text(text);
         });
 
+        var weaponNotes = decodeToArray(data['weapon_notes']);
+        var weaponUrl = decodeToArray(data['weapon_ref']);
+        $('.entries [saveas="weapon_name"]').each(function(i) {
+            var hoverText = weaponNotes[i];
+            $(this).attr('title', hoverText);
+            if (weaponUrl[i] != "")
+                $(this).attr('href', weaponUrl[i]);
+        });
+
         var specialAbilityNotes = decodeToArray(data['special_notes']);
+        var specialAbilityUrl = decodeToArray(data['special_url']);
         $('.list [saveas="special_name"]').each(function(i) {
             $(this).attr('title', specialAbilityNotes[i]);
+            if (specialAbilityUrl[i] != "")
+                $(this).attr('href', specialAbilityUrl[i]);
         });
 
         var featNotes = decodeToArray(data['feat_notes']);
+        var featMoreNotes = decodeToArray(data['feat_more_notes'])
+        var featUrl = decodeToArray(data['feat_url']);
         $('.list [saveas="feat_name"]').each(function(i) {
-            $(this).attr('title', featNotes[i]);
+            var featTitle = featNotes[i];
+            if (featMoreNotes[i] != "")
+                featTitle += "\n\n" + featMoreNotes[i];
+            $(this).attr('title', featTitle);
+            if (featUrl[i] != "")
+                $(this).attr('href', featUrl[i]);
         });
 
         // Spell list stuff oh my god why
@@ -354,6 +373,8 @@ $(function() {
         var spellSaves = decodeToArray(data['spell_list_save']);
         var spellSrs = decodeToArray(data['spell_list_sr']);
         var spellCasters = decodeToArray(data['spell_list_class_name']);
+        var spellNotes = decodeToArray(data['spell_list_notes']);
+        var spellUrl = decodeToArray(data['spell_list_ref']);
         var dcs = decodeToArray(data['spell_list_dc']);
         var mods = decodeToArray(data['casting_class_mod']);
 
@@ -403,8 +424,14 @@ $(function() {
                         if (spellSrs[i] == "true")
                             hoverText += ", SR";
 
+                        if (spellNotes[i] != "")
+                            hoverText += "\n\n" + spellNotes[i];
+
                         newSpellName.attr('title', hoverText);
                         newSpellName.appendTo(spellNameContainer);
+
+                        if (spellUrl[i] != "")
+                            newSpellName.attr('href', spellUrl[i]);
                     }
                 }
 
@@ -414,6 +441,9 @@ $(function() {
             }
             row.remove();
         });
+
+        // I'm so lazy
+        $('.entries a').attr('target', 'pfsearch')
     }
 });
 

@@ -22,6 +22,13 @@ a:hover {
     cursor: hand; cursor: pointer;
 }
 
+.entries a {
+    color: #000;
+}
+.entries a:hover {
+    color: #444;
+}
+
 [title] {
     cursor: hand; cursor: pointer;
 }
