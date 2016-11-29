@@ -12,6 +12,41 @@ $(document).ready(function() {
     });
 });
 
+function saveHp() {
+    sendMessage("Updating health...");
+
+    var finalHpTotal = readValue('#health [saveas="final_hp_total"]');
+    var finalHpCurrent = readValue('#health [saveas="final_hp_current"]');
+    var healthNonlethal = readValue('#health [saveas="health_nonlethal"]');
+    var healthLethal = readValue('#health [saveas="health_lethal"]');
+
+    var canPost = true;
+
+    var editid = $('#editid').val();
+    if (editid == "") canPost = false;
+
+    if (canPost) {
+        $.post("/p", {
+            mode: "health",
+            token: $('#session-token').val(),
+            total: finalHpTotal,
+            current: finalHpCurrent,
+            nonlethal: healthNonlethal,
+            lethal: healthLethal,
+            editid: editid
+        },
+        function(data, status) {
+            if (data == "-") {
+
+            }
+            else {
+                sendMessage("Health updated successfully!");
+            }
+        });
+    }
+
+}
+
 function save() {
     sendMessage("Saving...");
 

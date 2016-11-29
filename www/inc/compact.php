@@ -150,6 +150,16 @@
         <span class="clear-if-empty">Misc <span saveas="movement_misc"></span>ft</span>
     </span>
 </div>
+<div>
+    <span class="list">
+        <span class="strong">Melee</span>
+        <span saveas="final_melee"></span>
+    </span>
+    <span class="list">
+        <span class="strong">Ranged</span>
+        <span saveas="final_ranged"></span>
+    </span>
+</div>
 <div class="entries" savetype="columns">
     <div>
         <span class="strong capitalize" saveas="weapon_attack_type"></span>
@@ -299,6 +309,7 @@
 $(function() {
 
     callbackFinishedLoading = function(data) {
+        // Dont break up names with auto wrap
         $('[saveas="skill_name"]').each(function() {
             var text = $(this).text().replace(' *', '');
             text = text.replace(/ /g, '\xa0');
@@ -306,7 +317,7 @@ $(function() {
         });
 
         $('[saveas="gear_quantity_description"]').each(function() {
-            var text = $(this).text().replace(/ /g, '\xa0'); // Dont break up names with auto wrap
+            var text = $(this).text().replace(/ /g, '\xa0');
             $(this).text(text);
         });
 
@@ -315,6 +326,7 @@ $(function() {
             $(this).text(text);
         });
 
+        // Some things should just be removed from the dom if they're empty
         $('.clear-if-empty').each(function() {
             var parent = $(this);
             parent.find('[saveas]').each(function() {
@@ -329,11 +341,13 @@ $(function() {
             });
         });
 
+        // Make tagged lists more readable
         $('.comma-list').each(function() {
             var text = $(this).text().replace(/,/g, ', ');
             $(this).text(text);
         });
 
+        // Add hover over stuff and links to everything
         var weaponNotes = decodeToArray(data['weapon_notes']);
         var weaponUrl = decodeToArray(data['weapon_ref']);
         $('.entries [saveas="weapon_name"]').each(function(i) {
@@ -363,6 +377,24 @@ $(function() {
                 $(this).attr('href', featUrl[i]);
         });
 
+        var gearQuantityNotes = decodeToArray(data['gear_quantity_notes']);
+        var gearQuantityUrl = decodeToArray(data['gear_quantity_url']);
+        $('.list [saveas="gear_quantity_description"]').each(function(i) {
+            var hoverText = gearQuantityNotes[i];
+            $(this).attr('title', hoverText);
+            if (gearQuantityUrl[i] != "")
+                $(this).attr('href', gearQuantityUrl[i]);
+        });
+
+        var gearUsesNotes = decodeToArray(data['gear_uses_notes']);
+        var gearUsesUrl = decodeToArray(data['gear_uses_url']);
+        $('.list [saveas="gear_uses_description"]').each(function(i) {
+            var hoverText = gearUsesNotes[i];
+            $(this).attr('title', hoverText);
+            if (gearUsesUrl[i] != "")
+                $(this).attr('href', gearUsesUrl[i]);
+        });
+
         // Spell list stuff oh my god why
         var classes = decodeToArray(data['casting_class']);
         var levels = decodeToArray(data['spell_list_level']);
@@ -378,6 +410,7 @@ $(function() {
         var dcs = decodeToArray(data['spell_list_dc']);
         var mods = decodeToArray(data['casting_class_mod']);
 
+        // Make the spell list yahoooooo~
         $('[saveas="casting_class"]').each(function() {
             var className = $(this).text();
             var classNameIndex;
@@ -408,6 +441,7 @@ $(function() {
                 var spellNameContainer = newRow.find('[data="spell-names"]');
                 var spellName = spellNameContainer.children();
 
+                // WHAT IS HAPPENING
                 for(var i = 0; i < spellNames.length; i++) {
                     if (levels[i] == lv && spellCasters[i] == className) {
                         var newSpellName = spellName.clone();

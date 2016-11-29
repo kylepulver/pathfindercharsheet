@@ -30,7 +30,14 @@
 <div class="toolbar">
     <div class="container">
         <div class="row">
-            <div class="column column-25">
+            <div class="column column-5">
+                <label>&nbsp;</label>
+                <div class="dropdown">
+                    <h4><a onclick="dropDown()"><span class="glyphicon glyphicon-menu-hamburger"></span></a></h4>
+                    <div class="dropdown-content" id="dropdown"></div>
+                </div>
+            </div>
+            <div class="column column-20">
                 <label>Sheet Name</label>
                 <input type="text" saveas="sheetname" class="sheet">
             </div>
@@ -77,15 +84,22 @@
         <div class="row">
             <div class="column column-66">
                 <div class="selected-text">
-                    Selected Text: "<span id="search-text"></span>"
+                    <span class="glyphicon glyphicon-search"></span>&nbsp;<span id="search-text"></span>
                 </div>
-                <a id="search-d20" target="pfsearch" href="http://www.d20pfsrd.com/">D20PFSRD</a>
-                <a id="search-prd" target="pfsearch" href="http://paizo.com/pathfinderRPG/prd/">Paizo PRD</a>
+                <a class="strong" id="search-d20" target="pfsearch" href="http://www.d20pfsrd.com/">
+                    <span class="glyphicon glyphicon-search"></span>
+                    D20PFSRD
+                </a>
+                <a class="strong" id="search-prd" target="pfsearch" href="http://paizo.com/pathfinderRPG/prd/">
+                    <span class="glyphicon glyphicon-search"></span>
+                    Paizo PRD
+                </a>
             </div>
             <div class="column rolz">
                 <a href="http://rolz.org" target="pfsearch">Rolz.org</a> Dice Roller:
                 <input type="text" style="width: 10rem;" id="rolz-input">
                 <input type="submit" value="Roll" id="rolz">
+                <span class="glyphicon glyphicon-arrow-right"></span>
                 <span id="rolz-result"></span>
             </div>
         </div>
@@ -101,7 +115,7 @@
 <div class="toolbar-under"></div>
 
 <div class="container" id="sheet">
-    <h1>Character</h1>
+    <h1><span class="glyphicon glyphicon-user"></span> Character</h1>
     <div class="row">
         <div class="column">
             <label>Name</label>
@@ -220,7 +234,7 @@
         </div>
     </div>
 
-    <h1>Ability Scores</h1>
+    <h1><span class="glyphicon glyphicon-th-list"></span> Ability Scores</h1>
 
     <div class="row">
         <div class="column">
@@ -243,6 +257,9 @@
         </div>
         <div class="column">
             <label>Enhance</label>
+        </div>
+        <div class="column">
+            <label>Size</label>
         </div>
         <div class="column">
             <label>Damage</label>
@@ -286,6 +303,9 @@
             <input type="number" sum="<?=$type?>" saveas="<?=$type?>_enhance">
         </div>
         <div class="column">
+            <input type="number" sum="<?=$type?>" saveas="<?=$type?>_size">
+        </div>
+        <div class="column">
             <input type="number" sum="<?=$type?>" saveas="<?=$type?>_damage" calctype="subtract">
         </div>
         <div class="column">
@@ -303,7 +323,7 @@
     </div>
     <? } ?>
 
-    <h1>Class</h1>
+    <h1><span class="glyphicon glyphicon-knight"></span> Class</h1>
 
     <div class="row" calc="classes-total">
         <div class="column column-20">
@@ -406,7 +426,7 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1>Skills</h1>
+                    <h1><span class="glyphicon glyphicon-education"></span> Skills</h1>
                 </div>
             </div>
 
@@ -540,7 +560,7 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1>Feats</h1>
+                    <h1><span class="glyphicon glyphicon-star"></span> Feats</h1>
 
                     <div class="row">
                         <div class="column column-40">
@@ -591,7 +611,7 @@
                     </div>
                     <? } ?>
 
-                    <h1>Special Abilities</h1>
+                    <h1><span class="glyphicon glyphicon-star-empty"></span> Special Abilities</h1>
 
                     <div class="row">
                         <div class="column column-33">
@@ -664,7 +684,7 @@
         </div>
     </div>
 
-    <h1>Health</h1>
+    <h1><span class="glyphicon glyphicon-heart"></span> Health</h1>
 
     <div class="row" id="health">
         <input type="hidden" ref="con-total">
@@ -727,7 +747,7 @@
         </div>
     </div>
 
-    <h1>Armor</h1>
+    <h1><span class="glyphicon glyphicon-tower"></span> Armor</h1>
 
     <div class="row" calc="armor-class">
         <input type="hidden" ref="dex-mod"> <!-- So armor updates when dex mod changes -->
@@ -842,7 +862,7 @@
         <div class="column">
             <div class="row">
                 <div class="column0">
-                    <h1>Saves</h1>
+                    <h1><span class="glyphicon glyphicon-flash"></span> Saves</h1>
                 </div>
             </div>
 
@@ -905,7 +925,7 @@
         <div class="column">
             <div class="row">
                 <div class="column">
-                    <h1>Resistance</h1>
+                    <h1><span class="glyphicon glyphicon-heart-empty"></span> Resistance</h1>
                 </div>
             </div>
 
@@ -929,7 +949,7 @@
         </div>
     </div>
 
-    <h1>Weapons</h1>
+    <h1><span class="glyphicon glyphicon-scissors"></span> Weapons</h1>
 
     <div class="row">
         <div class="column column-20">
@@ -1027,7 +1047,7 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1>Attacks</h1>
+                    <h1><span class="glyphicon glyphicon-warning-sign"></span> Attacks</h1>
                 </div>
             </div>
 
@@ -1067,7 +1087,7 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1>Maneuvers</h1>
+                    <h1><span class="glyphicon glyphicon-record"></span> Maneuvers</h1>
                 </div>
             </div>
 
@@ -1147,7 +1167,7 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1>Initiative</h1>
+                    <h1><span class="glyphicon glyphicon-alert"></span> Initiative</h1>
                 </div>
             </div>
             <div class="row" calc="initiative">
@@ -1173,7 +1193,7 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1>Movement</h1>
+                    <h1><span class="glyphicon glyphicon-dashboard"></span> Movement</h1>
                 </div>
             </div>
             <div class="row">
@@ -1209,7 +1229,7 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1>Experience</h1>
+                    <h1><span class="glyphicon glyphicon-bookmark"></span> Experience</h1>
                 </div>
             </div>
             <div class="row" id="experience">
@@ -1246,7 +1266,7 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1>Pool Points</h1>
+                    <h1><span class="glyphicon glyphicon-tasks"></span> Pool Points</h1>
                 </div>
             </div>
 
@@ -1304,7 +1324,7 @@
         <div class="column column-50" id="gear">
             <div class="row">
                 <div class="column">
-                    <h1>Gear</h1>
+                    <h1><span class="glyphicon glyphicon-shopping-cart"></span> Gear</h1>
                 </div>
             </div>
 
@@ -1442,7 +1462,7 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1>Magic Items</h1>
+                    <h1><span class="glyphicon glyphicon-gift"></span> Magic Items</h1>
                 </div>
             </div>
 
@@ -1501,7 +1521,7 @@
         <div class="column">
             <div class="row">
                 <div class="column">
-                    <h1>Currency</h1>
+                    <h1><span class="glyphicon glyphicon-piggy-bank"></span> Currency</h1>
                 </div>
             </div>
 
@@ -1567,7 +1587,7 @@
         <div class="column" id="weight">
             <div class="row">
                 <div class="column">
-                    <h1>Weight</h1>
+                    <h1><span class="glyphicon glyphicon-scale"></span> Weight</h1>
                 </div>
             </div>
 
@@ -1641,7 +1661,7 @@
         </div>
     </div>
 
-    <h1>Casting</h1>
+    <h1><span class="glyphicon glyphicon-fire"></span> Casting</h1>
 
     <div id="casting-class" class="entries" savetype="columns">
         <div class="spaced">
@@ -1704,7 +1724,7 @@
             <div class="row reveal" calc="spell-casting-class">
                 <div class="column column-20">
                     <label>Caster Type</label>
-                    <select>
+                    <select saveas="caster_type">
                         <option value="divine">Divine</option>
                         <option value="arcane">Arcane</option>
                         <option value="other">Other</option>
@@ -1795,7 +1815,7 @@
         <? } ?>
     </div>
 
-    <h1>Spell List</h1>
+    <h1><span class="glyphicon glyphicon-list-alt"></span> Spell List</h1>
 
     <div class="row">
         <div class="column">
@@ -1831,7 +1851,7 @@
 
     <div id="spell-list" class="entries" savetype="columns">
         <div>
-            <div class="row">
+            <div class="row highlight">
                 <div class="column">
                     <input type="number" calc="spell-list-level" class="narrow strong" saveas="spell_list_level">
                 </div>
@@ -1904,7 +1924,7 @@
     </div>
     <? } ?>
 
-    <h1>Notes</h1>
+    <h1><span class="glyphicon glyphicon-file"></span> Notes</h1>
     <div class="row">
         <? for($i = 1; $i < 4; $i++) { ?>
         <div class="column">

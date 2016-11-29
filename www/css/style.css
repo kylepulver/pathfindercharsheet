@@ -102,13 +102,16 @@ label {
 h1 {
     margin-bottom: 1rem;
     margin-top: 2rem;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: #4a4a4a;
 }
 textarea {
     min-height: 11.3rem;
     resize: vertical;
 }
 select {
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
 
 .squeeze {
@@ -138,7 +141,7 @@ select {
 }
 .skills:hover,
 .highlight:hover {
-    background: #ffA;
+    background: #ffb;
 }
 .row-pc {
     background: #dff;
@@ -188,6 +191,9 @@ footer {
     bottom: 0;
     background: #fff;
 }
+.bottombar a.strong { /* Really dumb */
+    margin-left: 1rem;
+}
 #navbar a {
     padding: 0.1rem;
     display: inline-block;
@@ -211,7 +217,7 @@ footer {
 .selected-text {
     display: inline-block;
     vertical-align: top;
-    width: 75%;
+    width: 66%;
     text-overflow: clip;
     overflow-x: hidden;
     white-space: nowrap;
@@ -233,8 +239,11 @@ footer {
 #rolz-result {
     display: inline-block;
     font-weight: 600;
-    margin: 0 0.5rem;
-    width: 4rem;
+    margin: 0;
+    width: 3rem;
+    text-overflow: clip;
+    vertical-align: top;
+    overflow-x: hidden;
     text-align: center;
     cursor: pointer; cursor: hand;
 }
@@ -290,4 +299,26 @@ p {
     margin-top: 0.6rem;
     font-weight: 500;
     overflow: auto;
+}
+
+.dropdown {
+    position: relative;;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.95);
+    left: -2rem;
+    top: 3rem;
+    min-width: 16rem;
+    padding: 0.25rem;
+    border: #eee solid 0.2rem;
+    border-radius: 0.2rem;
+}
+.dropdown a {
+    display: block;
+    cursor: pointer;
+    cursor: hand;
+    font-weight: 600;
 }

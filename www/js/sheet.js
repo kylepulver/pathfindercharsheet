@@ -4,6 +4,7 @@ var enableLog = false;
 var cachedLoadData = {};
 var cachedIndex = 0;
 var lastClickedText = "";
+var firstLoad = true;
 
 var callbackFinishedLoading = function(){};
 
@@ -24,14 +25,38 @@ $(document).ready(function() {
     $('.reveal').hide();
 
     // Generate nav bar
-    var navbar = $('#navbar');
+    // Replaced with dropdown
+    // var navbar = $('#navbar');
+    // $('h1').each(function() {
+    //     var name = $(this).text();
+    //     var newElement = jQuery('<a/>', {text: name });
+    //     newElement.click(function() {
+    //         scrollTo(name);
+    //     });
+    //     navbar.append(newElement);
+    // });
+
+    // Generate dropdowns
+    var dropdown = $('#dropdown');
     $('h1').each(function() {
-        var name = $(this).text();
-        var newElement = jQuery('<a/>', {text: name });
+        var html = $(this).html();
+        var text = $(this).text();
+        var newElement = jQuery('<a/>', {html: html });
         newElement.click(function() {
-            scrollTo(name);
+            scrollTo(text);
+            dropDown();
         });
-        navbar.append(newElement);
+        dropdown.append(newElement);
+    });
+
+    // Hide dropdown when not clicked on
+    $(document).mouseup(function (e) {
+        if ($('.dropdown-content').is(':visible')) {
+            var container = $(".dropdown");
+            if (!container.is(e.target) // if the target of the click isn't the container...
+                && container.has(e.target).length === 0) // ... nor a descendant of the container
+                dropDown();
+        }
     });
 
     // Rolz
@@ -60,8 +85,6 @@ $(document).ready(function() {
 
     // Loading
     load();
-
-
 
     // Search links
     $('#sheet').mouseup(function() {
@@ -168,6 +191,7 @@ function updateEvents() {
     // Pool Points
     $('#pool-points').change(calculatePoolPoints);
 
+    // Links
     $('#links').change(calculateLinks);
 }
 
@@ -190,6 +214,8 @@ function calculateAll() {
     calculatePoolPoints();
     calculateSpellList();
     calculateLinks();
+
+    firstLoad = false;
 }
 
 function calculateLinks() {
@@ -601,11 +627,21 @@ function calculateHealth() {
     $('#health .column [calc="current"]').text(current);
     $('#health .column [calc="status"]').text(status);
 
+    if (nonlethal < 0) nonlethal = 0;
+    if (current > total) current = total;
     var koWidth = mapRange(nonlethal, 0, total, 0, 100);
     var hpWidth = mapRange(current, 0, total, 0, 100) - koWidth;
     if (hpWidth < 0) koWidth += hpWidth;
     $('[calc="healthbar-ko"]').width(koWidth + '%');
     $('[calc="healthbar-hp"]').width(hpWidth + '%');
+
+    var mode = $('#mode').val();
+    if (mode != "view" && !firstLoad) { // If in edit mode
+        var editid = $('#editid').val();
+        if (editid != "" && typeof editid !== 'undefined') {
+            saveHp();
+        }
+    }
 }
 
 function calculateClass() {
@@ -1033,4 +1069,9 @@ function closeOverlay(element) {
 
 function viewCompact() {
     window.location.href = "/c/" + $('#viewid').val();
+}
+
+function dropDown() {
+
+    $('#dropdown').toggle();
 }

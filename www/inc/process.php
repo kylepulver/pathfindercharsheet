@@ -46,6 +46,9 @@ if ($mode == 'restore')
 if ($mode == 'zip_export')
     zip_export($link);
 
+if ($mode == 'health')
+    health($link);
+
 
 function verify_token() {
     if ($_SESSION['token'] != $_POST['token']) die("-");
@@ -59,6 +62,40 @@ function update($link) {
         if ($filetime < time() - 60 * 5)
             unlink($filename);
     }
+}
+
+function health($link) {
+    verify_token();
+    global $config;
+    global $is_guest;
+
+    if ($is_guest) die("-");
+    if ($_POST['editid'] == "") die("-");
+
+    $hp_total = mysqli_real_escape_string($link, $_POST['total']);
+    $hp_current = mysqli_real_escape_string($link, $_POST['current']);
+    $hp_nonlethal = mysqli_real_escape_string($link, $_POST['nonlethal']);
+    $hp_lethal = mysqli_real_escape_string($link, $_POST['lethal']);
+    $editid = mysqli_real_escape_string($link, $_POST['editid']);
+
+    $query = "UPDATE `" . $config['sql_table'] . "`SET
+        `final_hp_total` = '$hp_total',
+        `final_hp_current` = '$hp_current',
+        `health_nonlethal` = '$hp_nonlethal',
+        `health_lethal` = '$hp_lethal'
+        WHERE editid = '$editid'";
+
+    $result = mysqli_query($link, $query);
+
+    $response = array();
+    if ($result) {
+        $response['message'] = "saved";
+    }
+    else {
+        $response['error'] = mysqli_error($link);
+    }
+
+    echo(respond($response));
 }
 
 function zip_export($link) {
@@ -296,7 +333,7 @@ function save($link) {
         }
     }
     $query = substr($query, 0, -2);
-    $query .= " WHERE editid='" . $editid . "'";
+    $query .= " WHERE editid='" . $editid . "'";  // Sometimes I concat, other times I dont.  I dunno.
     $result = mysqli_query($link, $query);
 
     $response = array();
@@ -776,6 +813,12 @@ function install($link) {
             `final_currency_carried` varchar(128) DEFAULT NULL,
             `final_currency_stored` varchar(128) DEFAULT NULL,
             `creature_type` varchar(128) DEFAULT NULL,
+            `str_size` varchar(128) DEFAULT NULL,
+            `dex_size` varchar(128) DEFAULT NULL,
+            `con_size` varchar(128) DEFAULT NULL,
+            `int_size` varchar(128) DEFAULT NULL,
+            `wis_size` varchar(128) DEFAULT NULL,
+            `cha_size` varchar(128) DEFAULT NULL,
             PRIMARY KEY (`id`),
             UNIQUE KEY `publicid` (`publicid`),
             UNIQUE KEY `editid` (`editid`)
