@@ -199,6 +199,8 @@ $(function() {
         var row = $(this).parent().parent().parent();
         changeType(this, row);
     });
+
+    setInterval(refresh, 5000);
 });
 
 function download() {

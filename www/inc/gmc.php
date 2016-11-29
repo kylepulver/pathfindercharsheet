@@ -154,6 +154,8 @@ $(function() {
     $('select').change(function() {
         changeType(this, $(this).parent().parent());
     })
+
+    setInterval(refresh, 5000);
 });
 
 function refresh() {
