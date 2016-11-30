@@ -36,8 +36,9 @@ $(document).ready(function() {
     //     navbar.append(newElement);
     // });
 
-    // Generate dropdowns
+    // Generate dropdowns and sidenav
     var dropdown = $('#dropdown');
+    var sidenav = $('#sidenav');
     $('h1').each(function() {
         var html = $(this).html();
         var text = $(this).text();
@@ -47,6 +48,12 @@ $(document).ready(function() {
             dropDown();
         });
         dropdown.append(newElement);
+
+        var sideElement = jQuery('<a/>', {html: html });
+        sideElement.click(function() {
+            scrollTo(text);
+        });
+        sidenav.append(sideElement);
     });
 
     // Hide dropdown when not clicked on
@@ -108,6 +115,9 @@ $(document).ready(function() {
 
     // Update events for doing calculations
     updateEvents();
+
+    // Keep session alive
+    setInterval(ping, 15000);
 });
 
 function updateSearchLinks(query, link = "") {
@@ -1072,6 +1082,15 @@ function viewCompact() {
 }
 
 function dropDown() {
-
     $('#dropdown').toggle();
+}
+
+function ping() {
+    $.post("/p", {
+        mode: "ping",
+        token: $('#session-token').val(),
+    },
+    function(data, status) {
+        sendMessage("Session refreshed.");
+    });
 }

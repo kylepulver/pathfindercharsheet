@@ -19,8 +19,9 @@ body {
 
 .container {
     width: 112rem;
-    margin: 0 auto;
+    margin: 0;
     background: #fff;
+    margin-left: 0.5rem;
 }
 /* Fixes for tagging style UGH */
 div.tagsinput {
@@ -168,12 +169,13 @@ input[type="number"].narrow {
 
 footer {
     width: 112rem;
-    margin: 0 auto;
+    margin: 0;
+    margin-left: 0.5rem;
     font-size: 1.2rem;
     height: 12rem;
 }
 .toolbar-under {
-    height: 8rem;
+    height: 7rem;
 }
 .toolbar {
     z-index: 10;
@@ -211,8 +213,8 @@ footer {
     font-weight: 600;
 }
 .d20pfsrd {
-    margin: 0.2rem auto;
-
+    margin: 0.2rem 0;
+    margin-left: 0.5rem;
 }
 .selected-text {
     display: inline-block;
@@ -316,9 +318,26 @@ p {
     border: #eee solid 0.2rem;
     border-radius: 0.2rem;
 }
-.dropdown a {
+.dropdown a,
+.sidenav a {
     display: block;
     cursor: pointer;
     cursor: hand;
     font-weight: 600;
+}
+.sidenav {
+    display: none;
+}
+
+@media screen and (min-width: 1300px) {
+    .sidenav {
+        display: block;
+        position: fixed;
+        left: 113rem;
+        top: 7.5rem;
+        background: #fff;
+    }
+    .sidenav-content {
+        margin: 0 0.5rem;
+    }
 }

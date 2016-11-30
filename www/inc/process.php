@@ -49,6 +49,8 @@ if ($mode == 'zip_export')
 if ($mode == 'health')
     health($link);
 
+if ($mode == 'ping')
+    ping($link);
 
 function verify_token() {
     if ($_SESSION['token'] != $_POST['token']) die("-");
@@ -62,6 +64,11 @@ function update($link) {
         if ($filetime < time() - 60 * 5)
             unlink($filename);
     }
+}
+
+function ping($link) {
+    // I think this happens in index.php, but just in case
+    $_SESSION['last_activity'] = time();
 }
 
 function health($link) {

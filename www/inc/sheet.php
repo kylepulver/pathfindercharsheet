@@ -114,6 +114,11 @@
 
 <div class="toolbar-under"></div>
 
+<div class="sidenav">
+    <div class="sidenav-content" id="sidenav">
+    </div>
+</div>
+
 <div class="container" id="sheet">
     <h1><span class="glyphicon glyphicon-user"></span> Character</h1>
     <div class="row">
