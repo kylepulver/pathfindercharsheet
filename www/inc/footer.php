@@ -1,5 +1,5 @@
 <footer>
-    Pathfinder Character Sheet Manager v0.9.97 by <a href="http://kpulv.com">Kyle Pulver</a> <a href="http://twitter.com/kylepulver">@</a><br />
+    <a target="_blank" href="https://github.com/kylepulver/pathfindercharsheet/">Pathfinder Character Sheet Manager</a> v0.9.98 by <a href="http://kpulv.com">Kyle Pulver</a> <a href="http://twitter.com/kylepulver">@</a><br />
     Use <a href="https://www.google.com/chrome/">Google Chrome</a> for the best experience.<br />
     Dedicated to Aina, Ahis, Zaik, Moriel, Kyrios, Kazan, and Ruimi.
 </footer>

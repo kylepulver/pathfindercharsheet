@@ -21,7 +21,6 @@ body {
     width: 112rem;
     margin: 0 auto;
     background: #fff;
-    /*margin-left: 0.5rem;*/
 }
 /* Fixes for tagging style UGH */
 div.tagsinput {
@@ -169,8 +168,7 @@ input[type="number"].narrow {
 
 footer {
     width: 112rem;
-    margin: 0;
-    margin-left: 0.5rem;
+    margin: 0 auto;
     font-size: 1.2rem;
     height: 12rem;
 }
@@ -213,8 +211,7 @@ footer {
     font-weight: 600;
 }
 .d20pfsrd {
-    margin: 0.2rem 0;
-    margin-left: 0.5rem;
+    margin: 0.2rem auto;
 }
 .selected-text {
     display: inline-block;
@@ -348,14 +345,6 @@ p {
 
 @media screen and (min-width: 1450px) {
     .sidenav {
-        display: block;
-        position: fixed;
-        right: 0.25rem;
-        top: 7.5rem;
         width: auto;
-        background: #fff;
-    }
-    .sidenav-content {
-        margin: 0 0.5rem;
     }
 }
