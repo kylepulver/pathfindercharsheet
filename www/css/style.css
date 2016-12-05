@@ -19,9 +19,9 @@ body {
 
 .container {
     width: 112rem;
-    margin: 0;
+    margin: 0 auto;
     background: #fff;
-    margin-left: 0.5rem;
+    /*margin-left: 0.5rem;*/
 }
 /* Fixes for tagging style UGH */
 div.tagsinput {
@@ -329,12 +329,30 @@ p {
     display: none;
 }
 
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 1200px) {
     .sidenav {
         display: block;
         position: fixed;
-        left: 113rem;
+        right: 0.25rem;
         top: 7.5rem;
+        background: #fff;
+        width: 2.5rem;
+        overflow: hidden;
+        text-overflow: clip;
+        white-space: nowrap;
+    }
+    .sidenav-content {
+        margin: 0 0.5rem;
+    }
+}
+
+@media screen and (min-width: 1450px) {
+    .sidenav {
+        display: block;
+        position: fixed;
+        right: 0.25rem;
+        top: 7.5rem;
+        width: auto;
         background: #fff;
     }
     .sidenav-content {

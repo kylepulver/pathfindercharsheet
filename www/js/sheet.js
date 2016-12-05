@@ -894,6 +894,9 @@ function loadData(data, status, imported = false) {
         $("#viewid").val(publicid);
     }
 
+    $('#publicurl-link').attr('href', 'http://' + domain + "/v/" + publicid);
+    $('#compact-link').attr('href', 'http://' + domain + "/c/" + publicid);
+
     loadingMessage("Crunching Numbers");
 
     updateEvents();
@@ -1091,6 +1094,6 @@ function ping() {
         token: $('#session-token').val(),
     },
     function(data, status) {
-        sendMessage("Session refreshed.");
+        // sendMessage("Session refreshed."); // Eh dont really need this
     });
 }

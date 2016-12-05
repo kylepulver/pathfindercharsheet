@@ -43,7 +43,7 @@
             </div>
             <? if ($mode == "edit") { ?>
             <div class="column column-25">
-                <label>Public Url</label>
+                <label><a target="_blank" id="publicurl-link">Public Url</a> <a target="_blank" id="compact-link"><span class="glyphicon glyphicon-share-alt"></span></a></label>
                 <input type="text" readonly="readonly" onclick="select()" id="publicurl">
             </div>
             <div class="column">
