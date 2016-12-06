@@ -119,6 +119,95 @@
     </div>
 </div>
 
+<div class="quick-look">
+    <div class="quick-look-content" id="quicklook">
+        <div>
+            <strong>AC</strong>
+            <span ref="total-ac"></span>
+        </div>
+        <div>
+            <strong>FLAT</strong>
+            <span ref="flatfoot-ac"></span>
+        </div>
+        <div>
+            <strong>TOUCH</strong>
+            <span ref="touch-ac"></span>
+        </div>
+        <div>
+            <strong>HP</strong>
+            <span ref="final_hp_current"></span>
+        </div>
+        <div>
+            <strong>INIT</strong>
+            <span ref="init-total"></span>
+        </div>
+        <div>
+            <strong>FORT</strong>
+            <span ref="final_fort"></span>
+        </div>
+        <div>
+            <strong>REF</strong>
+            <span ref="final_ref"></span>
+        </div>
+        <div>
+            <strong>WILL</strong>
+            <span ref="final_will"></span>
+        </div>
+        <div>
+            <strong>BAB</strong>
+            <span ref="final_bab"></span>
+        </div>
+        <div>
+            <strong>MELEE</strong>
+            <span ref="final_melee"></span>
+            <strong>RANGE</strong>
+            <span ref="final_ranged"></span>
+        </div>
+        <div>
+            <strong>CMB</strong>
+            <span ref="cmb-total"></span>
+            <strong>CMD</strong>
+            <span ref="cmd-total"></span>
+        </div>
+        <div>
+            <strong>STR</strong>
+            <span ref="str-total"></span> (<span ref="str-mod"></span>)
+        </div>
+        <div>
+            <strong>DEX</strong>
+            <span ref="dex-total"></span> (<span ref="dex-mod"></span>)
+        </div>
+        <div>
+            <strong>CON</strong>
+            <span ref="con-total"></span> (<span ref="con-mod"></span>)
+        </div>
+        <div>
+            <strong>INT</strong>
+            <span ref="int-total"></span> (<span ref="int-mod"></span>)
+        </div>
+        <div>
+            <strong>WIS</strong>
+            <span ref="wis-total"></span> (<span ref="wis-mod"></span>)
+        </div>
+        <div>
+            <strong>CHA</strong>
+            <span ref="cha-total"></span> (<span ref="cha-mod"></span>)
+        </div>
+        <div>
+            <strong>LOAD</strong>
+            <span ref="weight-status"></span>
+        </div>
+        <div>
+            <strong>WEIGHT</strong>
+            <span ref="total-weight"></span>
+        </div>
+        <div>
+            <strong>COIN</strong>
+            <span ref="currency-grand-total"></span>
+        </div>
+    </div>
+</div>
+
 <div class="container" id="sheet">
     <h1><span class="glyphicon glyphicon-user"></span> Character</h1>
     <div class="row">

@@ -441,7 +441,7 @@ function calculateWeight() {
         maxDex = 1;
         checkPenalty = -6;
     }
-    $("[calc='weight-status']").text(status);
+    writeValue("[calc='weight-status']", status);
     writeValue('[calc="max-dex-weight"]', maxDex);
     writeValue('[calc="check-penalty-weight"]', checkPenalty);
     calculateArmor();
@@ -634,8 +634,10 @@ function calculateHealth() {
     if (current < nonlethal) status = "OUT";
     if (current <= -con) status = "DEAD";
 
-    $('#health .column [calc="current"]').text(current);
-    $('#health .column [calc="status"]').text(status);
+    writeValue('#health .column [calc="current"]', current);
+    writeValue('#health .column [calc="status"]', status);
+    // $('#health .column [calc="current"]').text(current);
+    // $('#health .column [calc="status"]').text(status);
 
     if (nonlethal < 0) nonlethal = 0;
     if (current > total) current = total;
@@ -821,15 +823,21 @@ function writeValue(element, data, updateRef = true) {
     if (updateRef) {
         // Update elements that ref this value
         var calcId = $(element).attr("calc");
-        var ref = $('[ref="' + calcId + '"]');
-        if (ref.length) {
-            writeValue('[ref="' + calcId + '"]', data, false); // Write value but dont trigger
-            ref.trigger('change');
-        }
+        var saveId = $(element).attr("saveas");
+        updateRefs(calcId, data);
+        updateRefs(saveId, data);
     }
 }
 function writeValueSelf(element) {
     writeValue(element, parseValue(element));
+}
+
+function updateRefs(element, data) {
+    var ref = $('[ref="' + element + '"]');
+    if (ref.length) {
+        writeValue('[ref="' + element + '"]', data, false); // Write value but dont trigger
+        ref.trigger('change');
+    }
 }
 
 function loadData(data, status, imported = false) {

@@ -325,6 +325,17 @@ p {
 .sidenav {
     display: none;
 }
+.quick-look {
+    display: none;
+    font-size: smaller;
+}
+
+a:hover {
+    text-decoration: none;
+}
+strong {
+    font-weight: 600;
+}
 
 @media screen and (min-width: 1200px) {
     .sidenav {
@@ -341,10 +352,26 @@ p {
     .sidenav-content {
         margin: 0 0.5rem;
     }
+
+
 }
 
 @media screen and (min-width: 1450px) {
     .sidenav {
-        width: auto;
+        width: 15rem;
+    }
+    .quick-look {
+        display: block;
+        position: fixed;
+        left: 0.25rem;
+        top: 7.5rem;
+        background: #fff;
+        width: 15rem;
+        overflow: hidden;
+        text-overflow: clip;
+        white-space: nowrap;
+    }
+    .quick-look-content {
+        margin: 0 0.5rem;
     }
 }
