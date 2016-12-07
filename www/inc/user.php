@@ -3,7 +3,7 @@
     <h1>Logged In</h1>
     <div class="row">
         <div class="column">
-            <h4>Recently Edited Sheets</h4>
+            <strong>Recently Edited Sheets</strong>
             <ul id="recent-links">
                 <li><a></a></li>
             </ul>

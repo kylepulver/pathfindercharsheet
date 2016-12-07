@@ -24,6 +24,8 @@ $(document).ready(function() {
     // Hide elements that should start hidden
     $('.reveal').hide();
 
+    // $('#loading-overlay').hide();
+
     // Generate nav bar
     // Replaced with dropdown
     // var navbar = $('#navbar');
@@ -908,6 +910,9 @@ function loadData(data, status, imported = false) {
     loadingMessage("Crunching Numbers");
 
     updateEvents();
+
+    if (imported) firstLoad = true;
+
     calculateAll();
 
     // Set values of dynamic drop downs
@@ -962,20 +967,21 @@ function loadData(data, status, imported = false) {
         }
     }
 
-    $('.loading-overlay').fadeOut(250);
+    $('#loading-overlay').fadeOut(250);
     log("================");
 }
 
 function loadingMessage(text) {
     // This might work someday...
-    $('.loading-overlay p').text(text);
+    $('#loading-overlay p').text(text);
 }
 
 function load() {
     log("load");
 
-    var loadingOverlay = '<div class="loading-overlay"><div>LOADING<p>Yo</p></div></div>';
-    $('body').prepend(loadingOverlay);
+    var loadingOverlay = $('#loading-overlay');
+    // $('body').prepend(loadingOverlay);
+    loadingOverlay.show();
 
     loadingMessage("Cleaing Up");
 
@@ -1006,7 +1012,7 @@ function sendMessage(message) {
     $('#server-message').fadeIn(1);
     $('#server-message').text(message);
     $('#server-message').delay(5000).fadeOut(2000);
-    $('.loading-overlay p').text(message);
+    $('#loading-overlay p').text(message);
 }
 
 function revealMore(element) {
@@ -1048,6 +1054,8 @@ function scrollTo(h1tag) {
 function sheetExport() {
     log("export");
 
+    $('.importer').fadeOut(250);
+
     var savedata = {};
     $('[saveas]').each(function() {
         var key = $(this).attr("saveas");
@@ -1068,20 +1076,28 @@ function sheetExport() {
 }
 
 function sheetImport() {
+    var mode = $('#mode').val();
+    if (mode == 'view') return;
+
     log("import");
 
     $('.importer').fadeIn(250);
 }
 
 function loadImport(element) {
+    var mode = $('#mode').val();
+    if (mode == 'view') return;
+    
     var data = $('#import-data').val();
     $('.importer').fadeOut(250);
 
-    var loadingOverlay = '<div class="loading-overlay"><div>IMPORTING</div></div>';
-    $('body').prepend(loadingOverlay);
+    var loadingOverlay = $('#loading-overlay');
+    // $('body').prepend(loadingOverlay);
+    loadingOverlay.show();
     $('[extra="true"]').remove();
 
     loadData(data, "success", true);
+    $('#import-data').val('');
 }
 
 function closeOverlay(element) {

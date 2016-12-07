@@ -15,7 +15,7 @@ $result = mysqli_query($link, $query);
         <div class="row">
             <div class="column" align="right">
                 <label>&nbsp;</label>
-                <input type="submit" value="Download All" onclick="download()">
+                <input type="submit" value="Download All" onclick="downloadAll()">
                 <input type="submit" value="View Active" onclick="goTo('/')">
                 <input type="submit" value="View All" onclick="goTo('/all')">
                 <input type="submit" value="Compact View" onclick="goTo('/gmc/')">
@@ -202,17 +202,6 @@ $(function() {
 
     setInterval(refresh, 5000);
 });
-
-function download() {
-    $.post("/p", {
-        token: $('#session-token').val(),
-        mode: "zip_export"
-    },
-    function(data, status) {
-        console.log(data);
-        location.href = data;
-    })
-}
 
 function revealMore(element) {
     var more = $(element).parents('.entry').find('.reveal').slideDown(200);

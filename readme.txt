@@ -38,6 +38,9 @@ For the best results use Google Chrome with Javascript enabled.
 
 === Change Log
 
+= v1.0.00
+    * First 1.0 release
+
 = v0.9.*
     * Released beta version
 

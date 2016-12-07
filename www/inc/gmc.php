@@ -35,10 +35,11 @@ $result = mysqli_query($link, $query);
     <? } ?>
 </div>
 <div class="caps" align="right" row style="width:100%">
-    <a href="/gmc">view active</a>
-    <a href="/gmc/all">view all</a>
-    <a href="/">fancy view</a>
-    <a onclick="refresh()">refresh sheets</a>
+    <a onclick="downloadAll()" class="list">download all</a>
+    <a href="/gmc" class="list">view active</a>
+    <a href="/gmc/all" class="list">view all</a>
+    <a href="/" class="list">fancy view</a>
+    <a onclick="refresh()" class="list">refresh sheets</a>
 </div>
 <? while ($row = mysqli_fetch_assoc($result)) { ?>
 <div row="<?=$row['id']?>" sheet-view="<?=$row['publicid']?>">

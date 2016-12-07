@@ -1,3 +1,14 @@
+function downloadAll() {
+    $.post("/p", {
+        token: $('#session-token').val(),
+        mode: "zip_export"
+    },
+    function(data, status) {
+        console.log(data);
+        location.href = data;
+    });
+}
+
 function changeType(element, row) {
     var id = row.attr('row');
     $.post("/p", {

@@ -1,3 +1,10 @@
+<div class="loading-overlay" id="loading-overlay">
+    <div>
+        LOADING
+        <p></p>
+    </div>
+</div>
+
 <div class="exporter">
     <div class="row">
         <div class="column">
@@ -209,7 +216,7 @@
 </div>
 
 <div class="container" id="sheet">
-    <h1><span class="glyphicon glyphicon-user"></span> Character</h1>
+    <h1 style="margin-top: 2rem"><span class="glyphicon glyphicon-user"></span> Character</h1>
     <div class="row">
         <div class="column">
             <label>Name</label>
@@ -1452,7 +1459,7 @@
                             <input type="number" step="0.25" saveas="gear_<?=$geartype?>_weight" weight>
                         </div>
                         <div class="column column-5">
-                            <input type="checkbox" checked style="margin-top: 1.2rem" saveas="gear_<?=$geartype?>_carried" carried>
+                            <input type="checkbox" checked saveas="gear_<?=$geartype?>_carried" carried>
                         </div>
                         <div class="column column-20" align="right">
                             <input type="submit" value="+" onclick="revealMore(this)">

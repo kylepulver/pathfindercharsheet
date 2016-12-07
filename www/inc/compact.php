@@ -170,7 +170,7 @@
         <span class="clear-if-empty">(<span saveas="weapon_critical"></span>)</span>
     </div>
 </div>
-<div class="entries" savetype="columns">
+<div class="entries" savetype="columns" id="spell-list">
     <div>
         <span class="strong" saveas="casting_class"></span>
         <span class="strong">Spells</span>
@@ -410,6 +410,10 @@ $(function() {
         var spellUrl = decodeToArray(data['spell_list_ref']);
         var dcs = decodeToArray(data['spell_list_dc']);
         var mods = decodeToArray(data['casting_class_mod']);
+
+        if (spellNames.length == 1 && spellNames[0] == '') {
+            $('#spell-list').remove();
+        }
 
         // Make the spell list yahoooooo~
         $('[saveas="casting_class"]').each(function() {
