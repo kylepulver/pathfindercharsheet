@@ -1,5 +1,10 @@
+# Pretty URLs!
 RewriteEngine On
 
+# If your url is not at the base of the domain, you may have to change this:
+RewriteBase /
+
+# Okay now dont touch unless you know what you're doing:
 RewriteRule ^([a-zA-Z0-9]+)$ index.php?mode=$1
 RewriteRule ^([a-zA-Z0-9]+)/$ index.php?mode=$1
 
