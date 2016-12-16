@@ -403,10 +403,11 @@ strong {
     .sidenav {
         display: block;
         position: fixed;
-        right: 0.25rem;
+        right: 0.2rem;
         top: 7rem;
         background: #fff;
-        width: 2.5rem;
+        font-size: 1.2rem;
+        width: 2rem;
         overflow: hidden;
         text-overflow: clip;
         white-space: nowrap;
