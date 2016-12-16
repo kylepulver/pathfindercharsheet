@@ -367,6 +367,7 @@ p {
     background-color: rgba(255, 255, 255, 0.95);
     left: -2rem;
     top: 3rem;
+    font-size: 1.4rem;
     min-width: 16rem;
     padding: 0.25rem;
     border: #eee solid 0.2rem;
@@ -387,7 +388,7 @@ p {
 
 .quick-look {
     display: none;
-    font-size: smaller;
+    font-size: 1.2rem;
 }
 
 a:hover {
@@ -415,22 +416,46 @@ strong {
     }
 }
 
-@media screen and (min-width: 1450px) {
+@media screen and (min-width: 1320px) {
     .sidenav {
-        width: 15rem;
+        width: 9rem;
+        font-size: 1rem;
     }
     .quick-look {
         display: block;
         position: fixed;
         left: 0.25rem;
+        width: 9rem;
         top: 7rem;
         background: #fff;
-        width: 15rem;
+        font-size: 1rem;
         overflow: hidden;
         text-overflow: clip;
         white-space: nowrap;
     }
     .quick-look-content {
         margin: 0 0.5rem;
+    }
+}
+
+@media screen and (min-width: 1380px) {
+    .sidenav {
+        width: 12rem;
+        font-size: 1.2rem;
+    }
+    .quick-look {
+        width: 12rem;
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (min-width: 1450px) {
+    .sidenav {
+        width: 15rem;
+        font-size: 1.4rem;
+    }
+    .quick-look {
+        width: 15rem;
+        font-size: 1.4rem;
     }
 }

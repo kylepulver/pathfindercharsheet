@@ -827,6 +827,8 @@ function install($link) {
             `wis_size` varchar(128) DEFAULT NULL,
             `cha_size` varchar(128) DEFAULT NULL,
             `caster_type` text,
+            `init_misc` varchar(128) DEFAULT NULL,
+            `init_temp` varchar(128) DEFAULT NULL,
             PRIMARY KEY (`id`),
             UNIQUE KEY `publicid` (`publicid`),
             UNIQUE KEY `editid` (`editid`)

@@ -1282,11 +1282,11 @@
                 </div>
                 <div class="column column-25">
                     <label>Misc Bonus</label>
-                    <input sum="init" type="number">
+                    <input sum="init" type="number" saveas="init_misc">
                 </div>
                 <div class="column column-25">
                     <label>Temp Bonus</label>
-                    <input sum="init" type="number" temp>
+                    <input sum="init" type="number" saveas="init_temp" temp>
                 </div>
             </div>
         </div>

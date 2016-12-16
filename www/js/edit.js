@@ -123,7 +123,9 @@ function addRow(element) {
     row.appendTo(rowContainer);
     row.find('input[type!="submit"]').val("");
     row.find('textarea').val("");
-    row.find('select').val("");
+    row.find('select').each(function() {
+        $(this)[0].selectedIndex = 0; // Select first option in drop downs
+    });
     row.attr("extra", "true");
     row.addClass("entry");
 
