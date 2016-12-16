@@ -36,7 +36,26 @@ For the best results use Google Chrome with Javascript enabled.
 
 5.) Make character sheets!
 
+=== Updating
+
+When updating to a new version you may need to add columns to your character
+sheet table that don't already exist.  The easiest way to do this is to
+enable dev mode via your config.php temporarily.  After enabling dev mode
+save a character sheet and the missing columns should be added.
+
+Another option is to export all character sheets and reinstall the application.
+
+To verify that you have all necessary columns check your character tables columns
+against the install script located in process.php.
+
+Sorry this is a pain but hopefully it won't happen too often!
+
 === Change Log
+
+= v1.0.10
+    * Cosmetic fixes for wide screen view
+    * Fixed bug where init misc and temp values were not saved
+    * Fixed bug where adding new rows would blank out drop downs
 
 = v1.0.00
     * First 1.0 release
