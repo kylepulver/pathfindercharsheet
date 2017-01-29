@@ -829,6 +829,10 @@ function install($link) {
             `caster_type` text,
             `init_misc` varchar(128) DEFAULT NULL,
             `init_temp` varchar(128) DEFAULT NULL,
+            `attack_melee_temp` varchar(128) DEFAULT NULL,
+            `attack_melee_misc` varchar(128) DEFAULT NULL,
+            `attack_ranged_temp` varchar(128) DEFAULT NULL,
+            `attack_ranged_misc` varchar(128) DEFAULT NULL,
             PRIMARY KEY (`id`),
             UNIQUE KEY `publicid` (`publicid`),
             UNIQUE KEY `editid` (`editid`)
