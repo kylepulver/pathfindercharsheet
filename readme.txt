@@ -52,6 +52,10 @@ Sorry this is a pain but hopefully it won't happen too often!
 
 === Change Log
 
+= v1.0.11
+    * Fixed bug with floating points in container "Holding" field
+    * Attack and Melee Misc and Temp fields now save properly
+    
 = v1.0.10
     * Cosmetic fixes for wide screen view
     * Fixed bug where init misc and temp values were not saved

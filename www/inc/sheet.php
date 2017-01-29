@@ -1175,11 +1175,11 @@
                 </div>
                 <div class="column">
                     <label>Temp</label>
-                    <input type="number" calc="attack" saveas="attack_<?=$type?>_temp" temp>
+                    <input type="number" calc="attack" saveas="attack_<?=$attack?>_temp" temp>
                 </div>
                 <div class="column">
                     <label>Misc</label>
-                    <input type="number" calc="attack" saveas="attack_<?=$type?>_misc">
+                    <input type="number" calc="attack" saveas="attack_<?=$attack?>_misc">
                 </div>
             </div>
             <? } ?>

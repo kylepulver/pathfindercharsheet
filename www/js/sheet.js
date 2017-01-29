@@ -321,6 +321,7 @@ function calculateWeight() {
         else
             containerWeights[container] += weight;
     });
+    totalWeight = Math.round(totalWeight * 100) / 100;
     writeValue('[calc="total-weight"]', totalWeight);
 
     $('[calc="container-name"]').each(function() {
@@ -328,6 +329,7 @@ function calculateWeight() {
         var value = containerWeights[key];
         var maxWeight = parseValue($(this).parent().parent().parent().find('[calc="container-max"]'));
         var holding = $(this).parent().parent().find('[calc="container-holding"]');
+        value = Math.round(value * 100) / 100;
         writeValue(holding, value);
         if (value > maxWeight) {
             holding.addClass('warning');
@@ -1087,7 +1089,7 @@ function sheetImport() {
 function loadImport(element) {
     var mode = $('#mode').val();
     if (mode == 'view') return;
-    
+
     var data = $('#import-data').val();
     $('.importer').fadeOut(250);
 
