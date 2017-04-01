@@ -1,7 +1,6 @@
 <html>
 <head>
 <link rel="icon" type="image/png" href="/favicon.png" />
-
 <link rel="stylesheet" href="/css/compact/style.css" type="text/css" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -35,6 +34,7 @@
     <span saveas="alignment" class="caps"></span>
     <span saveas="size" class="capitalize"></span>
     (<span saveas="creature_type" class="capitalize"></span>)
+    <span saveas="known_languages"></span>
 </div>
 <div>
     <span class="strong">Init</span>
@@ -479,6 +479,11 @@ $(function() {
                     newRow.appendTo(container)
             }
             row.remove();
+        });
+
+        $('span[saveas="known_languages"]').each(function() {
+            var text = $(this).text().replace(/,/g, ", ");
+            $(this).text(text); // lol
         });
 
         // I'm so lazy

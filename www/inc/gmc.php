@@ -3,17 +3,48 @@ $show_all = false;
 if ($info == "all")
     $show_all = true;
 
+$campaign_id = $_SESSION['campaign'];
+if ($campaign_id == 0)
+    $campaign_id = 1; // default campaign
+
+$query = "SELECT * FROM `" . $config['sql_campaigns'] . "` ORDER BY date ASC";
+$resultcampaign = mysqli_query($link, $query);
+
+// god I hate doing all of this here but whatever
+// if has password
+$query = "SELECT * FROM `" . $config['sql_campaigns'] . "` WHERE id='$campaign_id'";
+$result = mysqli_query($link, $query);
+$campaign_data = mysqli_fetch_assoc($result);
+
+$has_password = $campaign_data['password'] !== "";
+
+$enter_password = false;
+if ($has_password) {
+    if ($_SESSION['campaign_access'][$campaign_id])
+        $enter_password = false;
+    else
+        $enter_password = true;
+}
+
+if ($enter_password) {
+    header('Location: /gm');
+}
+
 if ($show_all)
-    $query = "SELECT * FROM `" . $config['sql_table'] . "` ORDER BY sheet_type, charname";
+    $query = "SELECT * FROM `" . $config['sql_table'] . "` WHERE campaign='$campaign_id' ORDER BY sheet_type, charname";
 else
-    $query = "SELECT * FROM `" . $config['sql_table'] . "` WHERE `is_retired` IS NULL OR `is_retired` <> 1 ORDER BY sheet_type, charname";
+    $query = "SELECT * FROM `" . $config['sql_table'] . "` WHERE (`is_retired` IS NULL OR `is_retired` <> 1) AND campaign='$campaign_id' ORDER BY sheet_type, charname";
 
 $result = mysqli_query($link, $query);
+
+$query = "SELECT * FROM `" . $config['sql_campaigns'] . "` ORDER BY date ASC";
+$resultcampaign = mysqli_query($link, $query);
 ?>
 <html>
 <head>
 
 <link rel="stylesheet" href="/css/compact/style.css" type="text/css" />
+<link rel="icon" type="image/png" href="/favicon.png" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="/js/jquery.tagsinput.min.js"></script>
@@ -33,23 +64,35 @@ $result = mysqli_query($link, $query);
     <? } else { ?>
     active characters
     <? } ?>
+
+    <select id="campaign_choice">
+        <? while ($row = mysqli_fetch_assoc($resultcampaign)) { ?>
+        <option value="<?=$row['id']?>"><?=$row['name']?></option>
+        <? } mysqli_data_seek($resultcampaign, 0); ?>
+    </select>
 </div>
 <div class="caps" align="right" row style="width:100%">
-    <a onclick="downloadAll()" class="list">download all</a>
     <a href="/gmc" class="list">view active</a>
     <a href="/gmc/all" class="list">view all</a>
-    <a href="/" class="list">fancy view</a>
+    <a href="/gm" class="list">fancy view</a>
     <a onclick="refresh()" class="list">refresh sheets</a>
 </div>
 <? while ($row = mysqli_fetch_assoc($result)) { ?>
 <div row="<?=$row['id']?>" sheet-view="<?=$row['publicid']?>">
     <div class="bg0 strong caps">
         <span saveas="charname" class="list"></span>
+        <span saveas="sheetname" class="list" style="color: #999"></span>
         <select saveas="sheet_type" class="strong list">
             <option value="4"></option>
             <option value="0-pc">Player</option>
             <option value="1-npc">NPC</option>
             <option value="3-enemy">Enemy</option>
+        </select>
+        <select data="campaign">
+            <option>Send to Campaign...</option>
+            <? while($rowc = mysqli_fetch_assoc($resultcampaign)) { ?>
+                <option value="<?=$rowc['id']?>"><?=$rowc['name']?></option>
+            <? } mysqli_data_seek($resultcampaign, 0); ?>
         </select>
         <a href="/c/<?=$row['publicid']?>" class="list">view</a>
         <a href="/e/<?=$row['editid']?>" class="list">edit</a>
@@ -62,6 +105,7 @@ $result = mysqli_query($link, $query);
         <span saveas="size" class="capitalize"></span>
         <span saveas="gender"></span>
         <span saveas="race"></span>
+        <span saveas="known_languages"></span>
     </div>
     <div>
         <span class="list">
@@ -156,6 +200,19 @@ $(function() {
         changeType(this, $(this).parent().parent());
     })
 
+    $('#campaign_choice').change(function() {
+        $.post("/p", {
+            mode: "set_campaign",
+            token: $('#session-token').val(),
+            id: $(this).val()
+        },
+        function(data, status) {
+            location.reload();
+        });
+    });
+
+    $('#campaign_choice').val(<?=$campaign_id?>);
+
     setInterval(refresh, 5000);
 });
 
@@ -204,8 +261,39 @@ function refresh() {
                 row.removeClass('retired');
                 row.find('[action="retire"]').show();
                 row.find('[action="restore"]').hide();
-                row.find('[action="delete"]').hide();
+                row.find('[action="delete"]s').hide();
             }
+
+            $('span[saveas="known_languages"]').each(function() {
+                var text = $(this).text();
+                text = text.replace(/,/g, ", ");
+                $(this).text(text); // lol
+            });
+
+            var campaignSelect = row.find('select[data="campaign"]');
+            campaignSelect.off();
+            campaignSelect.change(function() {
+                var c = campaignSelect.val();
+                if (c == 0)
+                    return;
+                if (c == <?=$campaign_id?>)
+                    return;
+
+                var id = row.attr('row');
+
+                // do the post stuff
+                $.post("/p", {
+                    mode: "change_campaign",
+                    token: $('#session-token').val(),
+                    id: id,
+                    campaign: c
+                },
+                function(data, status) {
+                    console.log("change campaign to " + c);
+                    // hide character.
+                    row.remove();
+                });
+            });
 
         });
     });

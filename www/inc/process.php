@@ -1,9 +1,8 @@
 <?
-update($link); // Always run this
-
 // Everything here is AJAXed or whatever.
 $mode = $_POST['mode'];
 
+// I don't know why I did all these if statements but sometimes we make strange choices in life.
 if ($mode == 'create')
     createNew($link);
 
@@ -52,18 +51,148 @@ if ($mode == 'health')
 if ($mode == 'ping')
     ping($link);
 
+if ($mode == 'add_campaign')
+    add_campaign($link);
+
+if ($mode == 'delete_campaign')
+    delete_campaign($link);
+
+if ($mode == 'update_campaigns')
+    update_campaigns($link);
+
+if ($mode == 'set_campaign')
+    set_campaign();
+
+if ($mode == 'change_campaign')
+    change_campaign($link);
+
+if ($mode == "campaign_passkey")
+    campaign_passkey($link);
+
 function verify_token() {
     if ($_SESSION['token'] != $_POST['token']) die("-");
 }
 
-function update($link) {
-    // Remove character zip file if it's expired.
-    $filename = "characters_json.zip";
-    if (file_exists($filename)) {
-        $filetime = filemtime($filename);
-        if ($filetime < time() - 60 * 5)
-            unlink($filename);
+function campaign_passkey($link) {
+    verify_token();
+    global $config;
+    global $is_gm;
+
+    if (!$is_gm) die("-");
+
+    $passkey = mysqli_real_escape_string($link, $_POST['passkey']);
+    $id = mysqli_real_escape_string($link, $_POST['id']);
+
+    $query = "SELECT password FROM `" . $config['sql_campaigns'] . "`WHERE id='$id' LIMIT 1";
+    $result = mysqli_query($link, $query);
+    $campaign_passkey = mysqli_fetch_assoc($result)['password'];
+
+    // I'm only storing these as plaintext because who cares
+    // This app should be used amongst of trusted friends, not internet randos
+    // and this is just to access campaign characters, not credit card info or whatever
+    if ($passkey == $campaign_passkey) {
+        $_SESSION['campaign_access'][$id] = true;
+        echo(true);
     }
+    else {
+        echo(false);
+    }
+}
+
+function change_campaign($link) {
+    verify_token();
+    global $config;
+    global $is_gm;
+
+    if (!$is_gm) die("-");
+
+    $campaign_id = mysqli_real_escape_string($link, $_POST['campaign']);
+    $id = mysqli_real_escape_string($link, $_POST['id']);
+
+    $query = "UPDATE `" . $config['sql_table'] . "` SET campaign='$campaign_id' WHERE id='$id' LIMIT 1";
+    $result = mysqli_query($link, $query);
+}
+
+function set_campaign() {
+    verify_token();
+
+    $id = intval($_POST['id']);
+    $_SESSION['campaign'] = $id;
+    echo($id);
+}
+
+function update_campaigns($link) {
+    verify_token();
+    global $config;
+    global $is_god;
+
+    if (!$is_god) die("-");
+
+    $names = $_POST['names'];
+    $passwords = $_POST['passwords'];
+    foreach($names as $key => $value) {
+        $id = mysqli_real_escape_string($link, $key);
+        $name = mysqli_real_escape_string($link, $value);
+        $password = mysqli_real_escape_string($link, $passwords[$key]); // assume this should be the same key
+        if ($id == 1) // dont change default campaign
+            continue;
+
+        $query = "UPDATE `" . $config['sql_campaigns'] . "` SET name='$name', password='$password' WHERE id='$id' LIMIT 1";
+        $result = mysqli_query($link, $query);
+    }
+
+    echo(true);
+}
+
+function delete_campaign($link) {
+    verify_token();
+    global $config;
+    global $is_god;
+
+    if (!$is_god) die("-");
+
+    // delete the campaign
+    $campaign_id = mysqli_real_escape_string($link, $_POST['id']);
+    $query = "DELETE FROM `" . $config['sql_campaigns'] . "` WHERE id=$campaign_id";
+    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+
+    // convert orphaned characters to default campaign
+    $query = "
+        UPDATE `" . $config['sql_table'] . "`
+        SET campaign=1
+        WHERE campaign=$campaign_id";
+
+    $result = mysqli_query($link, $query);
+    if ($result) echo(true);
+
+    // dont look at deleted campaigns
+    $_SESSION['campaign'] = 1;
+}
+
+function add_campaign($link) {
+    verify_token();
+    global $config;
+    global $is_god;
+
+    if (!$is_god) die("-");
+
+    $query = "INSERT INTO `" . $config['sql_campaigns'] . "` (name, date, password) VALUES('New Campaign', now(), '')";
+    $result = mysqli_query($link, $query);
+
+    $query = "SELECT max(id) FROM `" . $config['sql_campaigns'] . "`";
+    $resultid = mysqli_query($link, $query);
+    $id = mysqli_fetch_assoc($resultid)['max(id)'];
+
+    $response = array();
+    if ($result) {
+        $response['message'] = "added";
+        $response['id'] = $id;
+    }
+    else {
+        $response['error'] = mysqli_error($link);
+    }
+
+    echo(respond($response));
 }
 
 function ping($link) {
@@ -120,6 +249,11 @@ function zip_export($link) {
 
     $query = "SELECT * FROM " . $config['sql_table'];
     $result = mysqli_query($link, $query);
+
+    if (mysqli_num_rows($result) == 0) {
+        die(false);
+    }
+
     while($row = mysqli_fetch_assoc($result)) {
         unset($row['id']);
         unset($row['ip']);
@@ -128,6 +262,8 @@ function zip_export($link) {
         unset($row['editid']);
         unset($row['publicid']);
         unset($row['sheet_type']);
+        unset($row['campaign']);
+
         $json = json_encode($row);
         $localname = $row['sheetname'];
         if ($localname == "") $localname = $row['id'];
@@ -197,8 +333,9 @@ function new_password($link) {
     $reset_token = mysqli_real_escape_string($link, $_POST['reset_token']);
     $pc_password = mysqli_real_escape_string($link, $_POST['pc_password']);
     $gm_password = mysqli_real_escape_string($link, $_POST['gm_password']);
-    if ($pc_password == "" && $gm_password == "") {
-        $data['error'] = "Both fields can't be blank!";
+    $admin_password = mysqli_real_escape_string($link, $_POST['admin_password']);
+    if ($pc_password == "" && $gm_password == "" && $admin_password == "") {
+        $data['error'] = "All fields can't be blank!";
         echo(respond($data));
         return;
     }
@@ -236,6 +373,12 @@ function new_password($link) {
         $result2 = mysqli_query($link, $query);
     }
 
+    if ($admin_password != "") {
+        $admin_password_hash = password_hash($admin_password, PASSWORD_DEFAULT);
+        $query = "UPDATE `" . $config['sql_users'] . "` SET pass = '$admin_password_hash' WHERE permission=1000";
+        $result2 = mysqli_query($link, $query);
+    }
+
     $data['status'] = true;
 
     // Clear out password resets
@@ -266,9 +409,17 @@ function delete_row($link) {
     if (!$is_gm) die("-");
 
     $id = mysqli_real_escape_string($link, $_POST['id']);
-    $query = "DELETE FROM `" . $config['sql_table'] . "` WHERE id = '$id'";
+
+    $query = "SELECT * FROM `" . $config['sql_table'] . "` WHERE id = '$id' AND is_retired = '1'";
     $result = mysqli_query($link, $query);
-    if ($result) echo(true);
+    if (mysqli_num_rows($result) == 0) {
+        echo(false);
+    }
+    else {
+        $query = "DELETE FROM `" . $config['sql_table'] . "` WHERE id = '$id'";
+        $result = mysqli_query($link, $query);
+        if ($result) echo(true);
+    }
 }
 
 function login($link) {
@@ -286,7 +437,13 @@ function login($link) {
 
     if (password_verify($password, $hash)) {
         // Login
-        $_SESSION['permission'] = $data['permission'];
+        $permission = $data['permission'];
+        $_SESSION['permission'] = $permission;
+        if ($permission >= 100) {
+            // GM and Admins have campaign choice
+            $_SESSION['campaign'] = 1;
+            $_SESSION['campaign_access'] = array();
+        }
         echo(true);
     }
     else {
@@ -312,7 +469,7 @@ function save($link) {
     $data = $_POST['data'];
 
     $blacklist = array( // Forbidden fields to change by players
-        'id', 'publicid', 'editid', 'ip', 'sheet_type', 'is_retired', 'date'
+        'id', 'publicid', 'editid', 'ip', 'sheet_type', 'is_retired', 'date', 'campaign'
     );
 
     $editid = mysqli_real_escape_string($link, $_POST['editid']);
@@ -409,7 +566,7 @@ function createNew($link) {
         $result = mysqli_query($link, "SELECT * FROM `" . $config['sql_table'] . "` WHERE editid = '$edit_id'");
     }
 
-    $result = mysqli_query($link, "INSERT INTO `" . $config['sql_table'] . "` (date, publicid, editid, ip) VALUES (now(), '$view_id', '$edit_id', '$ip')");
+    $result = mysqli_query($link, "INSERT INTO `" . $config['sql_table'] . "` (date, publicid, editid, ip, campaign) VALUES (now(), '$view_id', '$edit_id', '$ip', '1')");
 
     if ($result) {
         $id = mysqli_insert_id($link);
@@ -454,15 +611,18 @@ function install($link) {
 
     $pc_username = mysqli_real_escape_string($link, $_POST['pc_username']);
     $gm_username = mysqli_real_escape_string($link, $_POST['gm_username']);
+    $admin_username = mysqli_real_escape_string($link, $_POST['admin_username']);
     $pc_password = mysqli_real_escape_string($link, $_POST['pc_password']);
     $gm_password = mysqli_real_escape_string($link, $_POST['gm_password']);
-    if ($pc_username == "" || $pc_password == "" || $gm_username == "" || $gm_password == "") {
+    $admin_password = mysqli_real_escape_string($link, $_POST['admin_password']);
+    if ($pc_username == "" || $pc_password == "" || $gm_username == "" || $gm_password == "" || $admin_password == "" || $admin_username == "") {
         $data['error'] = "Fill out all the fields!";
         echo(respond($data));
         return;
     }
-    if ($pc_username == $gm_username) {
-        $data['error'] = "Player name and GM name can't be the same!";
+    $names = array($pc_username, $gm_username, $admin_username);
+    if (count($names) !== count(array_unique($names))) { // fancy way to check if all names are unique
+        $data['error'] = "Can't use the same name for multiple logins!";
         echo(respond($data));
         return;
     }
@@ -475,6 +635,7 @@ function install($link) {
             `editid` varchar(256) NOT NULL,
             `ip` varchar(128) NOT NULL,
             `date` datetime NOT NULL,
+            `campaign` int(11) NOT NULL,
             `sheetname` varchar(128) DEFAULT NULL,
             `charname` varchar(128) DEFAULT NULL,
             `playername` varchar(128) DEFAULT NULL,
@@ -833,6 +994,11 @@ function install($link) {
             `attack_melee_misc` varchar(128) DEFAULT NULL,
             `attack_ranged_temp` varchar(128) DEFAULT NULL,
             `attack_ranged_misc` varchar(128) DEFAULT NULL,
+            `armor_dex_override` varchar(128) DEFAULT NULL,
+            `init_ability` varchar(128) DEFAULT NULL,
+            `melee_ability` varchar(128) DEFAULT NULL,
+            `ranged_ability` varchar(128) DEFAULT NULL,
+            `point_maximum` varchar(128) DEFAULT NULL,
             PRIMARY KEY (`id`),
             UNIQUE KEY `publicid` (`publicid`),
             UNIQUE KEY `editid` (`editid`)
@@ -857,6 +1023,7 @@ function install($link) {
 
     $pc_password_hash = password_hash($pc_password, PASSWORD_DEFAULT);
     $gm_password_hash = password_hash($gm_password, PASSWORD_DEFAULT);
+    $admin_password_hash = password_hash($admin_password, PASSWORD_DEFAULT);
 
     $query = "
         INSERT INTO `" . $config['sql_users'] . "` (permission, name, pass)
@@ -875,6 +1042,33 @@ function install($link) {
     if ($result4) $data[3] = "Game master login data created.";
 
     $query = "
+        INSERT INTO `" . $config['sql_users'] . "` (permission, name, pass)
+        VALUES ('1000', '$admin_username', '$admin_password_hash')
+    ";
+
+    $result5 = mysqli_query($link, $query);
+    if ($result5) $data[4] = "Admin login data created.";
+
+    $query = "
+        CREATE TABLE IF NOT EXISTS `" . $config['sql_campaigns'] . "` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `name` varchar(128) NOT NULL,
+            `date` datetime NOT NULL,
+            `password` varchar(128) NOT NULL,
+            PRIMARY KEY (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
+
+    $result6 = mysqli_query($link, $query);
+    if ($result6) $data[5] = "Campaigns data created.";
+
+    $query = "
+        INSERT INTO `" . $config['sql_campaigns'] . "` (name, date, password) VALUES('Default', now(), '')
+    ";
+
+    $result7 = mysqli_query($link, $query);
+    if ($result7) $data[6] = "Reset password table created.";
+
+    $query = "
         CREATE TABLE `" . $config['sql_reset'] . "` (
             `id` INT NOT NULL AUTO_INCREMENT ,
             `date` DATETIME NOT NULL ,
@@ -883,8 +1077,8 @@ function install($link) {
             PRIMARY KEY (`id`)
         ) ENGINE = MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;";
 
-    $result5 = mysqli_query($link, $query);
-    if ($result5) $data[4] = "Reset password table created.";
+    $result8 = mysqli_query($link, $query);
+    if ($result8) $data[7] = "Reset password table created.";
 
     $data['status'] = true;
     echo(respond($data));

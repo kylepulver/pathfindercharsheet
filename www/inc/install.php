@@ -17,21 +17,33 @@ foreach($config as $key=>$value) {
     <div class="row">
         <div class="column">
             <label>Player Username</label>
-            <input type="text" id="player-username">
+            <input type="text" id="player-username" value="pc">
 
             <label>Player Password</label>
             <input type="password" id="player-password">
 
             <label>Game Master Username</label>
-            <input type="text" id="gm-username">
+            <input type="text" id="gm-username" value="gm">
 
             <label>Game Master Password</label>
             <input type="password" id="gm-password">
+
+            <label>Super Admin Username</label>
+            <input type="text" id="admin-username" value="admin">
+
+            <label>Super Admin Password</label>
+            <input type="password" id="admin-password">
 
             <input type="submit" value="Install" onclick="install()">
         </div>
     </div>
     <? } ?>
+
+    <div class="row">
+        <div class="column">
+            <p id="message" class="warning"></p>
+        </div>
+    </div>
 </div>
 <script>
 $(function() {
@@ -41,6 +53,7 @@ $(function() {
             install();
         }
     });
+    $('#message').hide();
 });
 function install() {
     $.post("/p", {
@@ -50,6 +63,8 @@ function install() {
         pc_password: $('#player-password').val(),
         gm_username: $('#gm-username').val(),
         gm_password: $('#gm-password').val(),
+        admin_username: $('#admin-username').val(),
+        admin_password: $('#admin-password').val(),
     },
     function(data, status) {
         var response = JSON.parse(data);
@@ -57,7 +72,9 @@ function install() {
             window.location.href = "/";
         }
         else {
-            alert(response['error']);
+            // alert(response['error']);
+            $('#message').show();
+            $('#message').text(response['error']);
         }
     });
 }

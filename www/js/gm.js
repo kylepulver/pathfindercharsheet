@@ -1,14 +1,3 @@
-function downloadAll() {
-    $.post("/p", {
-        token: $('#session-token').val(),
-        mode: "zip_export"
-    },
-    function(data, status) {
-        console.log(data);
-        location.href = data;
-    });
-}
-
 function changeType(element, row) {
     var id = row.attr('row');
     $.post("/p", {
@@ -54,12 +43,17 @@ function deleteRow(id) {
         if (data == true) {
             $('[row="' + id + '"]').remove();
         }
+        else {
+            alert("Cannot delete non-retired sheet.");
+        }
     });
 }
 
 function retireRow(id) {
     var c = window.confirm("Are you sure you want to retire this sheet?");
     if (!c) return;
+
+    console.log("retire?");
 
     $.post("/p", {
         mode: "retire",

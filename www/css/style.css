@@ -137,6 +137,10 @@ select:disabled {
     background: 0;
 }
 
+h1[onclick] {
+    cursor: pointer; cursor: hand;
+}
+
 #spell-list input[type="checkbox"],
 #gear input[type="checkbox"] {
     margin-top: 1.5rem;
@@ -151,22 +155,30 @@ select:disabled {
     font-size: 1.2rem;
 }
 
+.row.skills {
+    border-bottom: 1px solid #DDD;
+}
+#skills-quick {
+    font-size: smaller;
+    margin-top: 0.5rem;
+}
+
 .skills input[type="text"],
 .skills input[type="number"],
 .skills select {
     padding: 0.2rem;
     padding-left: 0.3em;
-    height: 3rem;
+    height: 2rem;
     /*margin-bottom: 0.5rem;*/
     background: transparent;
 }
 
 .skills input[type="checkbox"] {
-    margin: 0.5rem 0.5rem 0rem 0.5rem;
+    margin: 0 0.5rem 0 0.5rem;
 }
 
 .skills span {
-    padding-top: 0.4rem;
+    padding-top: 0;
     display: inline-block;
 }
 
@@ -179,6 +191,13 @@ select:disabled {
 .skills:hover,
 .highlight:hover {
     background: #ffb;
+}
+
+select.compact,
+select:focus.compact {
+    background: none;
+    padding: 0.2rem;
+    padding-left: 0.3em;
 }
 
 .row-pc {

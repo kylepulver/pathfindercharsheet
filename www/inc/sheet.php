@@ -81,6 +81,8 @@
             <div class="column">
                 <input type="submit" value="Compact View" onclick="viewCompact()">
                 <input type="submit" value="Clear All Temps" onclick="clearTemp()">
+                <input type="submit" value="Hide Sections" onclick="hideAll()">
+                <input type="submit" value="Show Sections" onclick="showAll()">
             </div>
         </div>
     </div>
@@ -212,11 +214,19 @@
             <strong>COIN</strong>
             <span ref="currency-grand-total"></span>
         </div>
+        <div id="skills-quick">
+            <div class="entry">
+                <strong>ACROBATICS</strong>
+                <span>1</span>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="container" id="sheet">
-    <h1 style="margin-top: 2rem"><span class="glyphicon glyphicon-user"></span> Character</h1>
+    <h1 onclick="toggleSection(this)" style="margin-top: 2rem"><span class="glyphicon glyphicon-user"></span> Character</h1>
+
+    <section>
     <div class="row">
         <div class="column">
             <label>Name</label>
@@ -334,9 +344,11 @@
             </select>
         </div>
     </div>
+    </section>
 
-    <h1><span class="glyphicon glyphicon-th-list"></span> Ability Scores</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-th-list"></span> Ability Scores</h1>
 
+    <section id="ability-scores">
     <div class="row">
         <div class="column">
             <label>Type</label>
@@ -392,7 +404,7 @@
             <h4 saveas="final_<?=$type?>_mod" class="calc-result" calc="<?=$type?>-mod">0</h4>
         </div>
         <div class="column">
-            <input type="number" sum="<?=$type?>" saveas="<?=$type?>_base">
+            <input type="number" sum="<?=$type?>" saveas="<?=$type?>_base" calc="<?=$type?>-base">
         </div>
         <div class="column">
             <input type="number" sum="<?=$type?>" saveas="<?=$type?>_level">
@@ -424,8 +436,34 @@
     </div>
     <? } ?>
 
-    <h1><span class="glyphicon glyphicon-knight"></span> Class</h1>
+    <div class="row">
+        <div class="column column-10">
+            <label>Point Max</label>
+            <input type="number" saveas="point_maximum" calc="point-max" id="points-max"/>
+        </div>
+        <div class="column column-15">
+            <label>Fantasy</label>
+            <h4 calc="fantasy-type">CUSTOM</h4>
+        </div>
+        <div class="column">
+            <label>Points</label>
+            <h4 calc="point-total" class="strong"></h4>
+        </div>
+        <div class="column">&nbsp;</div>
+        <div class="column">&nbsp;</div>
+        <div class="column">&nbsp;</div>
+        <? foreach(array("str", "dex", "con", "int", "wis", "cha") as $type) { ?>
+        <div class="column">
+            <label><?=strtoupper($type)?></label>
+            <h4 calc="<?=$type?>-points">0</h4>
+        </div>
+        <? } ?>
+    </div>
+    </section>
 
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-knight"></span> Class</h1>
+
+    <section>
     <div class="row" calc="classes-total">
         <div class="column column-20">
             <label>Favored Class</label>
@@ -522,15 +560,15 @@
         </div>
     </div>
     <? } ?>
+    </section>
 
     <div class="row">
         <div class="column column-50">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-education"></span> Skills</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-education"></span> Skills</h1>
+
+
+            <section>
             <div class="row" calc="skills">
                 <div class="column">
                     <label>Total Skill Points</label>
@@ -656,13 +694,15 @@
                 </div>
             </div>
             <? } ?>
+            </section>
         </div>
 
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1><span class="glyphicon glyphicon-star"></span> Feats</h1>
+                    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-star"></span> Feats</h1>
 
+                    <section>
                     <div class="row">
                         <div class="column column-40">
                             <label>Feat</label>
@@ -711,9 +751,11 @@
                         </div>
                     </div>
                     <? } ?>
+                    </section>
 
-                    <h1><span class="glyphicon glyphicon-star-empty"></span> Special Abilities</h1>
+                    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-star-empty"></span> Special Abilities</h1>
 
+                    <section>
                     <div class="row">
                         <div class="column column-33">
                             <label>Ability</label>
@@ -779,14 +821,16 @@
                         </div>
                     </div>
                     <? } ?>
+                    </section>
 
                 </div>
             </div>
         </div>
     </div>
 
-    <h1><span class="glyphicon glyphicon-heart"></span> Health</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-heart"></span> Health</h1>
 
+    <section>
     <div class="row" id="health">
         <input type="hidden" ref="con-total">
         <div class="column column-10">
@@ -799,7 +843,7 @@
         </div>
         <div class="column column-20">
             <label>Status</label>
-            <h4 calc="status">GOOD</h4>
+            <h4 calc="status"></h4>
         </div>
         <div class="column column-10">
             <label>Base</label>
@@ -847,9 +891,11 @@
             </div>
         </div>
     </div>
+    </section>
 
-    <h1><span class="glyphicon glyphicon-tower"></span> Armor</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-tower"></span> Armor</h1>
 
+    <section>
     <div class="row" calc="armor-class">
         <input type="hidden" ref="dex-mod"> <!-- So armor updates when dex mod changes -->
         <div class="column">
@@ -940,33 +986,43 @@
     <? } ?>
 
     <div class="row">
-        <div class="column column-20">
-            <label>Armor Check Penalty</label>
+        <div class="column column-10">
+            <label>Penalty</label>
             <h4 ref="penalty-total">0</h4>
             <input type="hidden" calc="penalty-total">
         </div>
-        <div class="column column-20">
-            <label>Maximum DEX Bonus</label>
+        <div class="column column-10">
+            <label>Max Dex</label>
             <h4 calc="max-dex-total">0</h4>
         </div>
-        <div class="column column-20">
-            <label>Spell Failure Chance</label>
+        <div class="column column-10">
+            <label>Spell Fail</label>
             <h4 calc="spell-fail-total">0%</h4>
+        </div>
+        <div class="column column-10" calc="armor-class">
+            <label>Dex Mod</label>
+            <select saveas="armor_dex_override" calc="armor-dex-override">
+                <option value="str">STR</option>
+                <option value="dex" selected="selected">DEX</option>
+                <option value="con">CON</option>
+                <option value="int">INT</option>
+                <option value="wis">WIS</option>
+                <option value="cha">CHA</option>
+            </select>
         </div>
         <div class="column">
             <label>Notes</label>
             <input type="text" saveas="armor_notes">
         </div>
     </div>
+    </section>
 
     <div class="row">
         <div class="column">
-            <div class="row">
-                <div class="column0">
-                    <h1><span class="glyphicon glyphicon-flash"></span> Saves</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-flash"></span> Saves</h1>
+
+            <section>
             <div class="row">
                 <div class="column column-15">
                     <label>Type</label>
@@ -1021,15 +1077,14 @@
                 </div>
             </div>
             <? } ?>
+            </section>
         </div>
 
         <div class="column">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-heart-empty"></span> Resistance</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-heart-empty"></span> Resistance</h1>
+
+            <section>
             <div class="row">
                 <div class="column column-20">
                     <label>Spell Resist</label>
@@ -1047,11 +1102,13 @@
                     <input type="text" id="resistance-tags" saveas="other_resistance">
                 </div>
             </div>
+            </section>
         </div>
     </div>
 
-    <h1><span class="glyphicon glyphicon-scissors"></span> Weapons</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-scissors"></span> Weapons</h1>
 
+    <section>
     <div class="row">
         <div class="column column-20">
             <label>Weapon Name</label>
@@ -1143,55 +1200,64 @@
         </div>
     </div>
     <? } ?>
+    </section>
 
     <div class="row">
         <div class="column column-50">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-warning-sign"></span> Attacks</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-warning-sign"></span> Attacks</h1>
+
+            <section>
             <?
             $type = array("str", "dex");
             foreach(array("melee", "ranged") as $index=>$attack) {
             ?>
             <div class="row" calc="attacks">
-                <div class="column column-20">
+                <div class="column column-15">
                     <label><?=ucfirst($attack)?></label>
-                    <h4 class="calc-result" calc="result-total" saveas="final_<?=$attack?>">0</h4>
+                    <h4 class="calc-result" calc="<?=$attack?>-total" saveas="final_<?=$attack?>">0</h4>
                 </div>
                 <div class="column">
                     <label>BAB</label>
-                    <h4 ref="bab" calc="attack">0</h4>
+                    <h4 sum="attack-<?=$attack?>" ref="bab">0</h4>
                 </div>
                 <div class="column">
                     <label>Ability</label>
-                    <h4 ref="<?=$type[$index]?>-mod" calc="attack">0</h4>
+                    <h4 sum="attack-<?=$attack?>" calc="<?=$attack?>-ability">0</h4>
                 </div>
-                <div class="column">
+                <div class="column column-20">
+                    <label>Type</label>
+                    <select calc="<?=$attack?>-type" saveas="<?=$attack?>_ability">
+                        <option value="str"<? if ($type[$index] == "str") { ?> selected="selected"<? } ?>>STR</option>
+                        <option value="dex"<? if ($type[$index] == "dex") { ?> selected="selected"<? } ?>>DEX</option>
+                        <option value="con">CON</option>
+                        <option value="int">INT</option>
+                        <option value="wis">WIS</option>
+                        <option value="cha">CHA</option>
+                    </select>
+                </div>
+                <div class="column column-10">
                     <label>Size</label>
-                    <h4 ref="size-mod" calc="attack">0</h4>
+                    <h4 sum="attack-<?=$attack?>" ref="size-mod" calc="attack">0</h4>
                 </div>
                 <div class="column">
                     <label>Temp</label>
-                    <input type="number" calc="attack" saveas="attack_<?=$attack?>_temp" temp>
+                    <input sum="attack-<?=$attack?>" type="number" calc="attack" saveas="attack_<?=$attack?>_temp" temp>
                 </div>
                 <div class="column">
                     <label>Misc</label>
-                    <input type="number" calc="attack" saveas="attack_<?=$attack?>_misc">
+                    <input sum="attack-<?=$attack?>" type="number" calc="attack" saveas="attack_<?=$attack?>_misc">
                 </div>
             </div>
             <? } ?>
+            </section>
 
         </div>
         <div class="column column-50">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-record"></span> Maneuvers</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-record"></span> Maneuvers</h1>
+
+            <section>
             <div class="row" calc="maneuvers">
                 <div class="column column-20">
                     <label>CMB Total</label>
@@ -1260,43 +1326,54 @@
                     <input sum="cmd" type="number" saveas="cmd_misc">
                 </div>
             </div>
+            </section>
 
         </div>
     </div>
 
     <div class="row">
         <div class="column column-50">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-alert"></span> Initiative</h1>
-                </div>
-            </div>
+
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-alert"></span> Initiative</h1>
+
+            <section>
             <div class="row" calc="initiative">
-                <div class="column column-25">
-                    <label>Initivative Total</label>
+                <div class="column column-20">
+                    <label>Initivative</label>
                     <h4 class="calc-result" calc="init-total" saveas="final_init">0</h4>
                 </div>
-                <div class="column column-25">
-                    <label>DEX Modifier</label>
-                    <h4 ref="dex-mod" sum="init" >0</h4>
+                <div class="column column-20">
+                    <label>Ability</label>
+                    <h4 calc="init-mod" sum="init">0</h4>
                 </div>
-                <div class="column column-25">
-                    <label>Misc Bonus</label>
+                <div class="column column-20">
+                    <label>Misc</label>
                     <input sum="init" type="number" saveas="init_misc">
                 </div>
-                <div class="column column-25">
-                    <label>Temp Bonus</label>
+                <div class="column column-20">
+                    <label>Temp</label>
                     <input sum="init" type="number" saveas="init_temp" temp>
                 </div>
+                <div class="column column-20">
+                    <label>Type</label>
+                    <select calc="init-type" saveas="init_ability">
+                        <option value="str">STR</option>
+                        <option value="dex" selected="selected">DEX</option>
+                        <option value="con">CON</option>
+                        <option value="int">INT</option>
+                        <option value="wis">WIS</option>
+                        <option value="cha">CHA</option>
+                    </select>
+                </div>
             </div>
+            </section>
         </div>
 
         <div class="column column-50">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-dashboard"></span> Movement</h1>
-                </div>
-            </div>
+
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-dashboard"></span> Movement</h1>
+
+            <section>
             <div class="row">
                 <div class="column">
                     <label>Speed</label>
@@ -1323,16 +1400,16 @@
                     <input type="number" saveas="movement_misc">
                 </div>
             </div>
+            </section>
         </div>
     </div>
 
     <div class="row">
         <div class="column column-50">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-bookmark"></span> Experience</h1>
-                </div>
-            </div>
+
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-bookmark"></span> Experience</h1>
+
+            <section>
             <div class="row" id="experience">
                 <div class="column column-33">
                     <label>Rate</label>
@@ -1362,15 +1439,14 @@
                     </div>
                 </div>
             </div>
+            </section>
         </div>
 
         <div class="column column-50">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-tasks"></span> Pool Points</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-tasks"></span> Pool Points</h1>
+
+            <section>
             <div class="row">
                 <div class="column column-33">
                     <label>Type</label>
@@ -1417,18 +1493,17 @@
                 </div>
             </div>
             <? } ?>
+            </section>
 
         </div>
     </div>
 
     <div class="row">
         <div class="column column-50" id="gear">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-shopping-cart"></span> Gear</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-shopping-cart"></span> Gear</h1>
+
+            <section>
             <? foreach(array("quantity", "uses") as $geartype) { ?>
             <div class="row">
                 <div class="column column-40">
@@ -1558,15 +1633,15 @@
                 </div>
             </div>
             <? } ?>
+            </section>
+
         </div>
 
         <div class="column column-50">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-gift"></span> Magic Items</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-gift"></span> Magic Items</h1>
+
+            <section>
             <div class="row">
                 <div class="column column-30">
                     <label>Slot</label>
@@ -1614,18 +1689,17 @@
                 </div>
             </div>
             <? } ?>
+            </section>
 
         </div>
     </div>
 
     <div class="row">
         <div class="column">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-piggy-bank"></span> Currency</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-piggy-bank"></span> Currency</h1>
+
+            <section>
             <div class="row" calc="currency">
                 <div class="column column-25">
                     <label>Carried</label>
@@ -1683,15 +1757,14 @@
                     <input type="hidden" ref="currency-weight" weight>
                 </div>
             </div>
+            </section>
 
         </div>
         <div class="column" id="weight">
-            <div class="row">
-                <div class="column">
-                    <h1><span class="glyphicon glyphicon-scale"></span> Weight</h1>
-                </div>
-            </div>
 
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-scale"></span> Weight</h1>
+
+            <section>
             <div class="row">
                 <input type="hidden" calc="max-dex-weight">
                 <input type="hidden" calc="check-penalty-weight">
@@ -1759,11 +1832,13 @@
                     </select>
                 </div>
             </div>
+            </section>
         </div>
     </div>
 
-    <h1><span class="glyphicon glyphicon-fire"></span> Casting</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-fire"></span> Casting</h1>
 
+    <section>
     <div id="casting-class" class="entries" savetype="columns">
         <div class="spaced">
             <div class="row">
@@ -1915,9 +1990,11 @@
         </div>
         <? } ?>
     </div>
+    </section>
 
-    <h1><span class="glyphicon glyphicon-list-alt"></span> Spell List</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-list-alt"></span> Spell List</h1>
 
+    <section>
     <div class="row">
         <div class="column">
             <label>Lv</label>
@@ -2024,8 +2101,11 @@
         </div>
     </div>
     <? } ?>
+    </section>
 
-    <h1><span class="glyphicon glyphicon-file"></span> Notes</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-file"></span> Notes</h1>
+
+    <section>
     <div class="row">
         <? for($i = 1; $i < 4; $i++) { ?>
         <div class="column">
@@ -2083,7 +2163,7 @@
         </div>
     </div>
     <? } ?>
-
+    </section>
 
 </div>
 <? if ($mode == "edit") { ?>

@@ -24,20 +24,6 @@ $(document).ready(function() {
     // Hide elements that should start hidden
     $('.reveal').hide();
 
-    // $('#loading-overlay').hide();
-
-    // Generate nav bar
-    // Replaced with dropdown
-    // var navbar = $('#navbar');
-    // $('h1').each(function() {
-    //     var name = $(this).text();
-    //     var newElement = jQuery('<a/>', {text: name });
-    //     newElement.click(function() {
-    //         scrollTo(name);
-    //     });
-    //     navbar.append(newElement);
-    // });
-
     // Generate dropdowns and sidenav
     var dropdown = $('#dropdown');
     var sidenav = $('#sidenav');
@@ -117,9 +103,6 @@ $(document).ready(function() {
 
     // Update events for doing calculations
     updateEvents();
-
-    // Keep session alive
-    setInterval(ping, 15000);
 });
 
 function updateSearchLinks(query, link = "") {
@@ -157,8 +140,12 @@ function updateEvents() {
     $.each(types, function(i, type) {
         $('#' + type).change(function() {
             calculateAbility(type);
+            calculatePoints();
         });
     });
+
+    // Point Buy
+    $('#points-max').change(calculatePoints);
 
     // Health
     $('#health').change(calculateHealth);
@@ -208,8 +195,30 @@ function updateEvents() {
 }
 
 function calculateAll() {
+    // I was testing timeouts but I dont think it does anything for this
+    // The sheet is just INTENSE and that's all there is to it
+    // setTimeout(calculateSize, 50);
+    // setTimeout(calculateAllAbilities, 50);
+    // setTimeout(calculatePoints, 50);
+    // setTimeout(calculateClass, 50);
+    // setTimeout(calculateHealth, 50);
+    // setTimeout(calculateAttacks, 50);
+    // setTimeout(calculateCurrency, 50);
+    // setTimeout(calculateContainers, 50);
+    // setTimeout(calculateWeight, 50);
+    // setTimeout(calculateArmor, 50);
+    // setTimeout(calculateSaves, 50);
+    // setTimeout(calculateManeuvers, 50);
+    // setTimeout(calculateInit, 50);
+    // setTimeout(calculateSkills, 50);
+    // setTimeout(calculateCasting, 50);
+    // setTimeout(calculateExperience, 50);
+    // setTimeout(calculatePoolPoints, 50);
+    // setTimeout(calculateSpellList, 50);
+    // setTimeout(calculateLinks, 50);
     calculateSize();
     calculateAllAbilities();
+    calculatePoints();
     calculateClass();
     calculateHealth();
     calculateAttacks();
@@ -247,6 +256,36 @@ function calculateLinks() {
     });
 }
 
+function calculatePoints() {
+    log("calc points");
+
+    var pointMax = parseValue("#points-max");
+    var hasPointMax = !isNaN(pointMax);
+    if (hasPointMax) {
+        var fantasy = "CUSTOM";
+        if (pointMax == 0)
+            fantasy = "";
+        if (pointMax == 10)
+            fantasy = "LOW";
+        if (pointMax == 15)
+            fantasy = "STANDARD";
+        if (pointMax == 20)
+            fantasy = "HIGH";
+        if (pointMax == 25)
+            fantasy = "EPIC";
+
+        writeValue('[calc="fantasy-type"]', fantasy);
+    }
+
+    var currentPoints = parseValue('[calc="point-total"]');
+    $('[calc="point-total"]').removeClass("error");
+    if (!isNaN(currentPoints) && pointMax != 0) {
+        if (currentPoints > pointMax) {
+            $('[calc="point-total"]').addClass("error");
+        }
+    }
+}
+
 function calculateAllAbilities() {
     var types = ["str", "dex", "con", "wis", "int", "cha"];
     $.each(types, function(i, type) {
@@ -262,6 +301,33 @@ function calculateAbility(type) {
     var mod = Math.floor((total - 10) / 2);
     $('[calc="' + type + '-mod"]').text(mod);
     writeValue($('[calc="' + type + '-mod"]'), mod);
+
+    var pointArray = [-4, -4, -4, -4, -4, -4, -4, -4, -2, -1, 0, 1, 2, 3, 5, 7, 10, 13, 17]
+    var types = ["str", "dex", "con", "wis", "int", "cha"];
+    var points = 0;
+    var invalidPoints = false;
+    $.each(types, function(i, t) {
+        var score = parseValue('[calc="' + t + '-base"]');
+        var invalidAttribute = false;
+        if (isNaN(score)) score = 0;
+        if (score < 0) score = 0;
+        if (score > 18) {
+            score = 18;
+            invalidPoints = true;
+            invalidAttribute = true;
+        }
+        if (score < 7) {
+            invalidPoints = true;
+            invalidAttribute = true;
+        }
+        points += pointArray[score];
+        if (invalidAttribute)
+            writeValue('[calc="' + t + '-points"]', '*');
+        else
+            writeValue('[calc="' + t + '-points"]', pointArray[score]);
+    });
+    if (invalidPoints) points = '*';
+    writeValue("[calc='point-total']", points)
 }
 
 function calculateExperience() {
@@ -337,7 +403,6 @@ function calculateWeight() {
         else {
             holding.removeClass('warning');
         }
-
     });
 
     var carryingCapacityTable = [
@@ -501,6 +566,10 @@ function calculateManeuvers() {
 function calculateInit() {
     log("calc init");
 
+    var type = $('[calc="init-type"]').val();
+    var ability = parseValue('[calc="' + type + '-mod"]');
+    writeValue('[calc="init-mod"]', ability);
+
     var total = sumValues('[sum="init"]');
     writeValue('[calc="init-total"]', total);
 }
@@ -545,11 +614,33 @@ function calculateSkills() {
 
     var totalRanks = sumValues('[calc="skill-ranks"]');
     writeValue('[calc="skill-used"]', totalRanks);
+    var skillMax = parseValue('[calc="skill"]');
+    if (totalRanks > skillMax)
+        $('[calc="skill-used"]').addClass("error");
+    else
+        $('[calc="skill-used"]').removeClass("error");
+
+    // Quick look for skills
+    $('#skills-quick').empty();
+    $('[calc="skills"]').each(function() {
+        var name = $(this).find('[calc="skill-name"]').text();
+        if (name == "") {
+            name = $(this).find('input[type="text"]').val();
+        }
+        if (typeof name != 'undefined') { // I think this happens when it loads before custom skills are loaded??
+            name = name.replace(' *', '').toUpperCase();
+            var total = $(this).find('[calc="skill-total"]').text();
+            var html = '<div>\n<strong>' + name + '</strong>\n<span>' + total + '</span></div>\n';
+            if (name != '')
+                $('#skills-quick').append(html);
+        }
+    })
 }
 
 function calculateArmor() {
     log("calc armor");
 
+    // warning this gets really dumb
     var maxDexWeight = parseValue('[calc="max-dex-weight"]');
     var checkPenaltyWeight = parseValue('[calc="check-penalty-weight"]');
     log("max dex weight " + maxDexWeight + " check penalty weight " + checkPenaltyWeight);
@@ -568,19 +659,29 @@ function calculateArmor() {
     if (armorCheckPenalty > checkPenaltyWeight) armorCheckPenalty = checkPenaltyWeight;
     writeValue('[calc="penalty-total"]', armorCheckPenalty);
 
-    var dexMod = parseValue('[calc="dex-mod"]');
+    // grab ability set in dropdown
+    var dexAttribute = readValue('[calc="armor-dex-override"]');
+    var dexMod = parseValue('[calc="' + dexAttribute + '-mod"]');
 
     var maxDexArmor = parseInt($('[calc="armor-max-dex"]').val());
-    if (isNaN(maxDexArmor)) maxDexArmor = dexMod;
-    var maxDexShield = parseInt($('[calc="shield-max-dex"]').val());
-    if (isNaN(maxDexShield)) maxDexShield = dexMod;
+    var maxDexArmorBlank = isNaN(maxDexArmor);
+    if (maxDexArmorBlank) maxDexArmor = dexMod;
 
-    maxDexBonus += dexMod;
-    maxDexBonus = Math.min(maxDexBonus, maxDexArmor, maxDexShield);
-    if (maxDexBonus < 0) maxDexBonus = 0;
-    if (maxDexBonus > maxDexWeight) maxDexBonus = maxDexWeight;
-    writeValue('[calc="max-dex-total"]', maxDexBonus);
+    var maxDexShield = parseInt($('[calc="shield-max-dex"]').val());
+    var maxDexShieldBlank = isNaN(maxDexShield);
+    if (maxDexShieldBlank) maxDexShield = dexMod;
+
+    var hasMaxDex = true;
+    maxDexBonus = Math.min(maxDexBonus, maxDexArmor, maxDexShield, dexMod, maxDexWeight);
+    if (maxDexWeight == 9999 && maxDexArmorBlank && maxDexShieldBlank) { // why am I using 9999 lol
+        hasMaxDex = false;
+    }
     writeValue('[calc="max-dex-bonus"]', maxDexBonus);
+    if (hasMaxDex)
+        writeValue('[calc="max-dex-total"]', maxDexBonus);
+    else {
+        writeValue('[calc="max-dex-total"]', '*');
+    }
 
     // Sum up everything
     var total = sumValues('[sum="armor-total"]') + 10;
@@ -633,10 +734,13 @@ function calculateHealth() {
     var con = parseValue($('#health').find('[ref="con-total"]'));
 
     var current = total - lethal;
-    var status = "GOOD";
-    if (current == nonlethal) status = "DISABLE";
+    var status = "ALIVE";
+    if (current == nonlethal) status = "DISABLED";
     if (current < nonlethal) status = "OUT";
     if (current <= -con) status = "DEAD";
+    if (current <= -con*2) status = "VERY DEAD";
+    if (current <= -con*4) status = "ULTRA DEAD";
+    if (total == 0) status = "";
 
     writeValue('#health .column [calc="current"]', current);
     writeValue('#health .column [calc="status"]', status);
@@ -689,13 +793,21 @@ function calculateSize() {
 function calculateAttacks() {
     log("calc attacks");
 
-    $('[calc="attacks"]').each(function () {
-        var total = 0;
-        $(this).find('[calc="attack"]').each(function () {
-            total += parseValue(this);
-        });
-        writeValue($(this).find('[calc="result-total"]'), total);
-    });
+    // Melee
+    var type = $('[calc="melee-type"]').val();
+    var ability = parseValue('[calc="' + type + '-mod"]');
+    writeValue('[calc="melee-ability"]', ability);
+
+    var total = sumValues('[sum="attack-melee"]');
+    writeValue('[calc=melee-total]', total);
+
+    // Ranged
+    type = $('[calc="ranged-type"]').val();
+    ability = parseValue('[calc="' + type + '-mod"]');
+    writeValue('[calc="ranged-ability"]', ability);
+
+    total = sumValues('[sum="attack-ranged"]');
+    writeValue('[calc=ranged-total]', total);
 }
 
 function calculateCasting() {
@@ -1114,12 +1226,14 @@ function dropDown() {
     $('#dropdown').toggle();
 }
 
-function ping() {
-    $.post("/p", {
-        mode: "ping",
-        token: $('#session-token').val(),
-    },
-    function(data, status) {
-        // sendMessage("Session refreshed."); // Eh dont really need this
-    });
+function toggleSection(element) {
+    $(element).nextAll('section').eq(0).toggle();
+}
+
+function hideAll() {
+    $('section').hide();
+}
+
+function showAll() {
+    $('section').show();
 }

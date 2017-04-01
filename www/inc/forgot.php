@@ -11,6 +11,9 @@ $reset_token = $info;
             <label>Game Master Password (Leave blank to not change)</label>
             <input type="password" id="gm-password">
 
+            <label>Super Admin Password (Leave blank to not change)</label>
+            <input type="password" id="admin-password">
+
             <input type="submit" value="Update Passwords" onclick="newPassword()" id="new-password">
         </div>
     </div>
@@ -30,7 +33,8 @@ function newPassword() {
         token: $('#session-token').val(),
         reset_token: '<?=$reset_token?>',
         pc_password: $('#pc-password').val(),
-        gm_password: $('#gm-password').val()
+        gm_password: $('#gm-password').val(),
+        admin_password: $('#admin-password').val()
     },
     function(data, status) {
         var response = JSON.parse(data);

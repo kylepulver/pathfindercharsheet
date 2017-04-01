@@ -1,5 +1,22 @@
+// This is included in all pages!
+
+$(function() {
+    // Keep session alive
+    setInterval(ping, 20000);
+});
+
 function goTo(page) {
     window.location.href = page;
+}
+
+function ping() {
+    $.post("/p", {
+        mode: "ping",
+        token: $('#session-token').val(),
+    },
+    function(data, status) {
+        // sendMessage("Session refreshed."); // Eh dont really need this
+    });
 }
 
 function logout() {

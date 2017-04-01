@@ -11,8 +11,11 @@
     </div>
     <div class="row">
         <div class="column">
+            <? if ($is_god) { ?>
+            <input type="submit" value="Admin View" onclick="goTo('/admin')">
+            <? } ?>
             <? if ($is_gm) { ?>
-            <input type="submit" value="GM Page" onclick="goTo('/gm')">
+            <input type="submit" value="GM View" onclick="goTo('/gm')">
             <? } ?>
             <input type="submit" value="New Sheet" onclick="createNew()">
             <input type="submit" value="Log Out" onclick="logout()">
