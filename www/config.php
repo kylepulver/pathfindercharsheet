@@ -47,6 +47,6 @@ $config['email']            = "";
 // DO NOT LEAVE THIS TRUE WHEN LIVE!!  Risky business.
 // Set this to true when updating to a new version.
 // Always set back to false after the update is done and working!
-$is_dev = true;
+$is_dev = false;
 
 ?>
