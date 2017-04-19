@@ -212,13 +212,15 @@ function health($link) {
     $hp_current = mysqli_real_escape_string($link, $_POST['current']);
     $hp_nonlethal = mysqli_real_escape_string($link, $_POST['nonlethal']);
     $hp_lethal = mysqli_real_escape_string($link, $_POST['lethal']);
+    $hp_temp = mysqli_real_escape_string($link, $_POST['temp']);
     $editid = mysqli_real_escape_string($link, $_POST['editid']);
 
-    $query = "UPDATE `" . $config['sql_table'] . "`SET
+    $query = "UPDATE `" . $config['sql_table'] . "` SET
         `final_hp_total` = '$hp_total',
         `final_hp_current` = '$hp_current',
         `health_nonlethal` = '$hp_nonlethal',
-        `health_lethal` = '$hp_lethal'
+        `health_lethal` = '$hp_lethal',
+        `health_temp` = '$hp_temp'
         WHERE editid = '$editid'";
 
     $result = mysqli_query($link, $query);
@@ -999,6 +1001,26 @@ function install($link) {
             `melee_ability` varchar(128) DEFAULT NULL,
             `ranged_ability` varchar(128) DEFAULT NULL,
             `point_maximum` varchar(128) DEFAULT NULL,
+            `magic_item_belt_weight` varchar(128) DEFAULT NULL,
+            `magic_item_body_weight` varchar(128) DEFAULT NULL,
+            `magic_item_chest_weight` varchar(128) DEFAULT NULL,
+            `magic_item_eyes_weight` varchar(128) DEFAULT NULL,
+            `magic_item_feet_weight` varchar(128) DEFAULT NULL,
+            `magic_item_hands_weight` varchar(128) DEFAULT NULL,
+            `magic_item_head_weight` varchar(128) DEFAULT NULL,
+            `magic_item_headband_weight` varchar(128) DEFAULT NULL,
+            `magic_item_neck_weight` varchar(128) DEFAULT NULL,
+            `magic_item_ring1_weight` varchar(128) DEFAULT NULL,
+            `magic_item_ring2_weight` varchar(128) DEFAULT NULL,
+            `magic_item_shoulders_weight` varchar(128) DEFAULT NULL,
+            `magic_item_wrist_weight` varchar(128) DEFAULT NULL,
+            `weight_total` varchar(128) DEFAULT NULL,
+            `weight_status` varchar(128) DEFAULT NULL,
+            `fort_ability` varchar(128) DEFAULT NULL,
+            `ref_ability` varchar(128) DEFAULT NULL,
+            `will_ability` varchar(128) DEFAULT NULL,
+            `save_notes` varchar(128) DEFAULT NULL,
+            `resistance_notes` varchar(128) DEFAULT NULL,
             PRIMARY KEY (`id`),
             UNIQUE KEY `publicid` (`publicid`),
             UNIQUE KEY `editid` (`editid`)

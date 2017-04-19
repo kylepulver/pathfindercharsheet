@@ -55,6 +55,20 @@ Sorry this is a pain but hopefully it won't happen too often!
 
 === Change Log
 
+= v1.2.50
+    * Enable dev mode and save a character sheet to update to this version.
+    * Disable dev mode when completed.  (This adds the proper columns.)
+
+    * You can now select different abilities to use for saving throws.
+    * Weight and weight status now displays on compact view.
+    * Magic Items with links and descriptions now display on compact view.
+    * Magic Items now have a weight field in their drop down.
+    * There are now "apply damage" fields for making taking damage easier.
+    * Applying lethal damage will subtract from temporary health first.
+    * Tried to make regular gear vs magic gear more apparent in gear section.
+    * Added notes to Saves and Resistance sections.
+    * Various minor, and cosmetic fixes.
+
 = v1.2.00
     * Warning: This version might not upgrade cleanly!
     * Use caution when upgrading and remember to back up your stuff first!

@@ -851,7 +851,7 @@
         </div>
         <div class="column column-10">
             <label>Temp</label>
-            <input type="number" calc="total" saveas="health_temp" temp>
+            <input type="number" calc="total" saveas="health_temp" temp id="health-temp">
         </div>
         <div class="column column-10">
             <label>Misc</label>
@@ -863,32 +863,32 @@
         </div>
         <div class="column column-10" calc="lethal">
             <label>Lethal</label>
-            <input type="number" calctype="subtract" saveas="health_lethal">
+            <input type="number" calctype="subtract" saveas="health_lethal" id="health-lethal">
         </div>
         <div class="column column-10" calc="nonlethal">
             <label>Nonlethal</label>
-            <input type="number" saveas="health_nonlethal">
+            <input type="number" saveas="health_nonlethal" id="health-nonlethal">
         </div>
     </div>
 
     <div class="row">
-        <div class="column">
-            <div class="row">
-                <div class="column">
-                    <label>Health Bar</label>
-                    <div class="health-bar bar-container">
-                        <div class="bar ko" calc="healthbar-ko"></div><div class="bar health" calc="healthbar-hp"></div>
-                    </div>
-                </div>
+        <div class="column column-40">
+            <label>Health Bar</label>
+            <div class="health-bar bar-container">
+                <div class="bar ko" calc="healthbar-ko"></div><div class="bar health" calc="healthbar-hp"></div>
             </div>
         </div>
-        <div class="column">
-            <div class="row">
-                <div class="column">
-                    <label>Conditions</label>
-                    <input type="text" id="conditions-tags" saveas="health_conditions">
-                </div>
-            </div>
+        <div class="column column-40">
+            <label>Conditions</label>
+            <input type="text" id="conditions-tags" saveas="health_conditions">
+        </div>
+        <div class="column column-10">
+            <label>Damage</label>
+            <input type="number" id="damage-lethal">
+        </div>
+        <div class="column column-10">
+            <label>Damage</label>
+            <input type="number" id="damage-nonlethal">
         </div>
     </div>
     </section>
@@ -1064,7 +1064,7 @@
                     <h4 sum="save" ref="<?=$saves[$index]?>">0</h4>
                 </div>
                 <div class="column">
-                    <h4 sum="save" ref="<?=$abilities[$index]?>-mod">0</h4>
+                    <h4 sum="save" calc="save-ability">0</h4>
                 </div>
                 <div class="column">
                     <input sum="save" type="number" saveas="<?=$save?>_enhance">
@@ -1077,6 +1077,46 @@
                 </div>
             </div>
             <? } ?>
+
+            <div class="row" calc="saves-more">
+                <div class="column column">
+                    <label>Fort</label>
+                    <select calc="fort-type" saveas="fort_ability">
+                        <option value="str">STR</option>
+                        <option value="dex">DEX</option>
+                        <option value="con" selected="selected">CON</option>
+                        <option value="int">INT</option>
+                        <option value="wis">WIS</option>
+                        <option value="cha">CHA</option>
+                    </select>
+                </div>
+                <div class="column column">
+                    <label>Ref</label>
+                    <select calc="ref-type" saveas="ref_ability">
+                        <option value="str">STR</option>
+                        <option value="dex" selected="selected">DEX</option>
+                        <option value="con">CON</option>
+                        <option value="int">INT</option>
+                        <option value="wis">WIS</option>
+                        <option value="cha">CHA</option>
+                    </select>
+                </div>
+                <div class="column column">
+                    <label>Will</label>
+                    <select calc="will-type" saveas="will_ability">
+                        <option value="str">STR</option>
+                        <option value="dex">DEX</option>
+                        <option value="con">CON</option>
+                        <option value="int">INT</option>
+                        <option value="wis" selected="selected">WIS</option>
+                        <option value="cha">CHA</option>
+                    </select>
+                </div>
+                <div class="column column-50">
+                    <label>Notes</label>
+                    <input type="text" saveas="save_notes">
+                </div>
+            </div>
             </section>
         </div>
 
@@ -1100,6 +1140,13 @@
                 <div class="column">
                     <label>Other Resistances</label>
                     <input type="text" id="resistance-tags" saveas="other_resistance">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column">
+                    <label>Notes</label>
+                    <input type="text" saveas="resistance_notes">
                 </div>
             </div>
             </section>
@@ -1505,9 +1552,13 @@
 
             <section>
             <? foreach(array("quantity", "uses") as $geartype) { ?>
+
             <div class="row">
                 <div class="column column-40">
-                    <label>Description</label>
+                    <label>
+                        <? if ($geartype == "quantity") { ?>Equipment<? } ?>
+                        <? if ($geartype == "uses") { ?>Magical Items<? } ?>
+                    </label>
                 </div>
                 <div class="column">
                     <label><?=ucfirst($geartype)?></label>
@@ -1570,7 +1621,7 @@
 
             <div class="row">
                 <div class="column column-40">
-                    <label>Container Name</label>
+                    <label>Container</label>
                 </div>
                 <div class="column">
                     <label>Holding</label>
@@ -1681,6 +1732,9 @@
                     <div class="column column-30">
                         <label>Reference URL</label>
                         <input type="url" saveas="magic_item_<?=$slot_save[$index]?>_url" onclick="select()">
+
+                        <label>Weight</label>
+                        <input type="number" step="0.25" saveas="magic_item_<?=$slot_save[$index]?>_weight" weight>
                     </div>
                         <div class="column">
                         <label>Additional Notes</label>
@@ -1772,7 +1826,7 @@
                 <input type="hidden" ref="size">
                 <div class="column">
                     <label>Total</label>
-                    <h4 class="calc-result" calc="total-weight">0</h4>
+                    <h4 class="calc-result" calc="total-weight" saveas="weight_total">0</h4>
                 </div>
                 <div class="column">
                     <label>Misc</label>
@@ -1795,7 +1849,7 @@
             <div class="row">
                 <div class="column column-40">
                     <label>Load Status</label>
-                    <h4 calc="weight-status">LIGHT</h4>
+                    <h4 calc="weight-status" saveas="weight_status">LIGHT</h4>
                 </div>
                 <div class="column">
                     <label>Above Head</label>

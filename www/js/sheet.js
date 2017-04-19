@@ -54,6 +54,11 @@ $(document).ready(function() {
         }
     });
 
+    // Enforce max length for text fields
+    $('input[type="text"]').each(function(e) {
+        $(this).attr('maxlength', 128);
+    });
+
     // Rolz
     $('#rolz').click(function() {
         $('#rolz-result').text('?');
@@ -160,7 +165,8 @@ function updateEvents() {
     $('[calc="armor-class"]').change(calculateArmor);
 
     // Saves
-    $('[calc="saves"]').change(calculateSaves)
+    $('[calc="saves"]').change(calculateSaves);
+    $('[calc="saves-more"]').change(calculateSaves);
 
     // Maneuvers
     $('[calc="maneuvers"]').change(calculateManeuvers)
@@ -711,6 +717,9 @@ function calculateSaves() {
 
     $('[calc="saves"]').each(function() {
         var type = $(this).find('[calc="save-type"]').val();
+        var ability = $(this).parent().find('[calc="' + type + '-type"]').val();
+        var abilityMod = parseValue('[calc="' + ability + '-mod"]');
+        writeValue($(this).find('[calc="save-ability"]'), abilityMod);
         var total = sumValues($(this).find('[sum="save"]'));
         writeValue($(this).find('[calc="save-total"]'), total);
     });

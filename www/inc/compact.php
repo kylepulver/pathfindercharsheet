@@ -262,12 +262,25 @@
     </span>
 </div>
 <div>
+    <span class="strong">Magic Items</span>
+    <span class="entries list">
+        <? foreach(array("belt", "body", "chest", "eyes", "feet", "hands", "head", "headband", "neck", "ring", "ring2", "shoulders", "wrist") as $type) { ?>
+        <span class="entry clear-if-empty"><a saveas="magic_item_<?=$type?>" magic-item="<?=$type?>"></a>&nbsp;</span>
+        <? } ?>
+    </span>
+</div>
+<div>
     <span class="list clear-if-empty">
         <span saveas="final_currency_carried"></span>g&nbsp;carried
     </span>
     <span class="list clear-if-empty">
         <span saveas="final_currency_stored"></span>g&nbsp;stored
     </span>
+</div>
+<div>
+    <span class="strong">Weight</span>
+    <span saveas="weight_total"></span>
+    (<span saveas="weight_status"></span>)
 </div>
 <div class="header">
     special abilities
@@ -346,6 +359,15 @@ $(function() {
         $('.comma-list').each(function() {
             var text = $(this).text().replace(/,/g, ', ');
             $(this).text(text);
+        });
+
+        $('[magic-item]').each(function(i, e) {
+            var slot = $(this).attr('magic-item');
+            var description = data['magic_item_' + slot + '_notes'];
+            var url = data['magic_item_' + slot + '_url'];
+
+            $(this).attr('href', url);
+            $(this).attr('title', description);
         });
 
         // Add hover over stuff and links to everything

@@ -98,6 +98,10 @@ input, h4, select, textarea {
     margin-top: 0.2rem;
 }
 
+select {
+    padding: 0 0 0 1rem;
+}
+
 h4 {
     margin-bottom: 0;
 }
@@ -115,8 +119,10 @@ h1 {
 }
 
 textarea {
-    min-height: 11.3rem;
+    min-height: 10.5rem;
     resize: vertical;
+    font-size: smaller;
+    line-height: 120%;
 }
 
 input[type="text"],

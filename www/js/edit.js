@@ -10,7 +10,54 @@ $(document).ready(function() {
             }
         }
     });
+
+    $('#damage-lethal').keyup(function (e) {
+        if (e.keyCode === 13) {
+            applyDamage($(this).val(), '#health-lethal');
+
+            var damage = parseInt($(this).val());
+            if (isNaN(damage))
+                damage = 0;
+
+            if (damage > 0) {
+                var tempHealth = parseInt($('#health-temp').val());
+                if (isNaN(tempHealth))
+                    tempHealth = 0;
+
+                if (tempHealth > 0) {
+                    var healthLethal = parseInt($('#health-lethal').val());
+                    var subtract = Math.min(tempHealth, healthLethal);
+                    healthLethal -= subtract;
+                    tempHealth -= subtract;
+                    $('#health-temp').val(tempHealth);
+                    $('#health-lethal').val(healthLethal);
+                    $('#health-lethal').trigger("change");
+                }
+            }
+
+            $(this).val("");
+
+        }
+    });
+
+    $('#damage-nonlethal').keyup(function (e) {
+        if (e.keyCode === 13) {
+            applyDamage($(this).val(), '#health-nonlethal');
+            $(this).val("");
+        }
+    });
 });
+
+function applyDamage(amount, element) {
+    var h = $(element).val();
+    if (isNaN(parseInt(h)))
+        h = 0;
+
+    var total = parseInt(h) + parseInt(amount);
+    if (total < 0) total = 0;
+    $(element).val(total);
+    $(element).trigger("change");
+}
 
 function saveHp() {
     sendMessage("Updating health...");
@@ -19,6 +66,7 @@ function saveHp() {
     var finalHpCurrent = readValue('#health [saveas="final_hp_current"]');
     var healthNonlethal = readValue('#health [saveas="health_nonlethal"]');
     var healthLethal = readValue('#health [saveas="health_lethal"]');
+    var healthTemp = readValue('#health [saveas="health_temp"]');
 
     var canPost = true;
 
@@ -33,6 +81,7 @@ function saveHp() {
             current: finalHpCurrent,
             nonlethal: healthNonlethal,
             lethal: healthLethal,
+            temp: healthTemp,
             editid: editid
         },
         function(data, status) {
@@ -55,6 +104,11 @@ function save() {
     $('[saveas]').each(function() {
         var key = $(this).attr("saveas");
         var value = readValue(this);
+
+        // I was going to put in a check for varchar(128) limits here,
+        // but it would mess a lot of things up I think.  So I just
+        // limit the text input fields to 128 characters in the client
+        // and hopefully that will be enough to stop overflowing.
 
         savedata[key] = value;
         savetype[key] = "varchar(128)";
