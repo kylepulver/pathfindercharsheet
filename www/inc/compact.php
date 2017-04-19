@@ -235,10 +235,6 @@
     </span>
 </div>
 <div>
-    <span class="strong">Languages</span>
-    <span saveas="known_languages" class="comma-list"></span>
-</div>
-<div>
     <span class="strong">Abilities</span>
     <span class="entries" savetype="columns">
         <span class="list">
@@ -270,6 +266,7 @@
     </span>
 </div>
 <div>
+    <span class="strong">Coin</span>
     <span class="list clear-if-empty">
         <span saveas="final_currency_carried"></span>g&nbsp;carried
     </span>
