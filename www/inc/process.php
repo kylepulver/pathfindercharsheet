@@ -1021,6 +1021,7 @@ function install($link) {
             `will_ability` varchar(128) DEFAULT NULL,
             `save_notes` varchar(128) DEFAULT NULL,
             `resistance_notes` varchar(128) DEFAULT NULL,
+            `container_add_weight` text,
             PRIMARY KEY (`id`),
             UNIQUE KEY `publicid` (`publicid`),
             UNIQUE KEY `editid` (`editid`)
