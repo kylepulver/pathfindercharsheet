@@ -55,6 +55,16 @@ Sorry this is a pain but hopefully it won't happen too often!
 
 === Change Log
 
+= v1.3.00
+    * Enable dev mode and save a character sheet to update to this version.
+    * Disable dev mode when completed.  (This adds the proper columns.)
+
+    * Containers can now add to total weight or not.
+    * Added a button for showing only prepped spells on spell list.
+    * Compressing the style of areas where long lists are expected.
+    * Set refresh time of GM view to 2.5 seconds (was 5 seconds.)
+    * Minor bug fixes.
+
 = v1.2.50
     * Enable dev mode and save a character sheet to update to this version.
     * Disable dev mode when completed.  (This adds the proper columns.)

@@ -344,7 +344,7 @@ $(function() {
 
     $('#campaign_choice').val(<?=$campaign_id?>);
 
-    setInterval(refresh, 5000);
+    setInterval(refresh, 2500);
 });
 
 function revealMore(element) {

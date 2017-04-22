@@ -27,7 +27,7 @@ div.tagsinput { /* Fixes for tagging style UGH */
     border: 0.1rem solid #d1d1d1;
     border-radius: 0.4rem;
     height: 2.4rem;
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 0.5rem;
     font-size: 1.6rem;
     line-height: 1.15;
     margin-top: 0.2rem;
@@ -134,7 +134,10 @@ input[type="password"]:focus,
 input[type="url"],
 input[type="url"]:focus {
     border-bottom: #222 solid 1px;
+    padding: 0.6rem 0.5rem;
 }
+
+
 
 input:read-only,
 select:disabled {
@@ -147,10 +150,30 @@ h1[onclick] {
     cursor: pointer; cursor: hand;
 }
 
-#spell-list input[type="checkbox"],
-#gear input[type="checkbox"] {
+#spell-list input[type="checkbox"] {
     margin-top: 1.5rem;
     margin-left: 0.25rem;
+}
+
+#gear input[type="text"],
+#gear input[type="number"],
+#gear input[type="submit"],
+#spell-list input[type="text"],
+#spell-list input[type="number"],
+#spell-list input[type="submit"],
+#spell-list select {
+    height: 2.5rem;
+}
+
+#gear input[type="checkbox"],
+#spell-list input[type="checkbox"] {
+    margin-left: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+#gear input[type="submit"],
+#spell-list input[type="submit"] {
+    line-height: 100%;
 }
 
 .squeeze {

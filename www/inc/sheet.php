@@ -83,6 +83,8 @@
                 <input type="submit" value="Clear All Temps" onclick="clearTemp()">
                 <input type="submit" value="Hide Sections" onclick="hideAll()">
                 <input type="submit" value="Show Sections" onclick="showAll()">
+                <input type="submit" value="Prepped Spells" onclick="showPreppedSpells()">
+                <input type="submit" value="All Spells" onclick="showAllSpells()">
             </div>
         </div>
     </div>
@@ -919,7 +921,7 @@
             <h4 sum="armor-total" calc="shield-gear" saveas="final_shield">0</h4>
         </div>
         <div class="column">
-            <label>Dex</label>
+            <label>DEX</label>
             <h4 sum="armor-total" calc="max-dex-bonus" saveas="final_dex_armor">0</h4>
         </div>
         <div class="column">
@@ -963,7 +965,7 @@
             <input type="number" calc="<?=$armor?>-enhance-bonus" saveas="armor_<?=$armor?>_enhance">
         </div>
         <div class="column column-10">
-            <label>Max Dex</label>
+            <label>Max DEX</label>
             <input type="number" calc="<?=$armor?>-max-dex" saveas="armor_<?=$armor?>_max_dex">
         </div>
         <div class="column column-10">
@@ -992,7 +994,7 @@
             <input type="hidden" calc="penalty-total">
         </div>
         <div class="column column-10">
-            <label>Max Dex</label>
+            <label>Max DEX</label>
             <h4 calc="max-dex-total">0</h4>
         </div>
         <div class="column column-10">
@@ -1000,7 +1002,7 @@
             <h4 calc="spell-fail-total">0%</h4>
         </div>
         <div class="column column-10" calc="armor-class">
-            <label>Dex Mod</label>
+            <label>DEX Mod</label>
             <select saveas="armor_dex_override" calc="armor-dex-override">
                 <option value="str">STR</option>
                 <option value="dex" selected="selected">DEX</option>
@@ -1136,12 +1138,16 @@
                 </div>
             </div>
 
+            <div class="row" style="height: 0.925rem"></div> <!-- purely to line up with the rows in saves lol -->
+
             <div class="row">
                 <div class="column">
                     <label>Other Resistances</label>
                     <input type="text" id="resistance-tags" saveas="other_resistance">
                 </div>
             </div>
+
+            <div class="row" style="height: 0.925rem"></div> <!-- purely to line up with the rows in saves lol -->
 
             <div class="row">
                 <div class="column">
@@ -1646,7 +1652,7 @@
                             <input type="text" calc="container-name" saveas="container_name">
                         </div>
                         <div class="column">
-                            <h4 calc="container-holding">0</h4>
+                            <span calc="container-holding">0</span>
                         </div>
                         <div class="column">
                             <input type="number" step="0.25" saveas="container_weight" weight>
@@ -1666,8 +1672,17 @@
                             <label>Reference URL</label>
                             <input type="url" saveas="container_url" onclick="select()">
 
-                            <label>Max Weight</label>
-                            <input calc="container-max" type="number" step="0.25" saveas="container_max_weight">
+                            <div class="row">
+                                <div class="column column-50">
+                                    <label>Max Weight</label>
+                                    <input calc="container-max" type="number" step="0.25" saveas="container_max_weight">
+                                </div>
+                                <div class="column column-50">
+                                    <label title="Determines if the weight in this container should be added to your carried weight.">Add Weight</label>
+                                    <input type="checkbox" checked style="margin-top: 1.2rem" saveas="container_add_weight" carried>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="column">
                             <label>Additional Notes</label>
@@ -2088,7 +2103,7 @@
                     <input type="number" calc="spell-list-level" class="narrow strong" saveas="spell_list_level">
                 </div>
                 <div class="column">
-                    <input type="number" class="narrow" saveas="spell_list_prep">
+                    <input type="number" class="narrow" saveas="spell_list_prep" calc="prep">
                 </div>
                 <div class="column">
                     <input type="number" class="narrow" saveas="spell_list_used">

@@ -393,16 +393,18 @@ function calculateWeight() {
         else
             containerWeights[container] += weight;
     });
-    totalWeight = Math.round(totalWeight * 100) / 100;
-    writeValue('[calc="total-weight"]', totalWeight);
 
     $('[calc="container-name"]').each(function() {
         var key = $(this).val();
         var value = containerWeights[key];
         var maxWeight = parseValue($(this).parent().parent().parent().find('[calc="container-max"]'));
         var holding = $(this).parent().parent().find('[calc="container-holding"]');
+        var addWeight = $(this).parent().parent().parent().find('[carried]').is(':checked');
         value = Math.round(value * 100) / 100;
         writeValue(holding, value);
+        if (addWeight) {
+            totalWeight += value;
+        }
         if (value > maxWeight) {
             holding.addClass('warning');
         }
@@ -410,6 +412,9 @@ function calculateWeight() {
             holding.removeClass('warning');
         }
     });
+
+    totalWeight = Math.round(totalWeight * 100) / 100;
+    writeValue('[calc="total-weight"]', totalWeight);
 
     var carryingCapacityTable = [
         [0,0,0], // 0
@@ -1245,4 +1250,15 @@ function hideAll() {
 
 function showAll() {
     $('section').show();
+}
+
+function showPreppedSpells() {
+    $('#spell-list .entry').each(function() {
+        var prepped = parseValue($(this).find('[calc="prep"]'));
+        if (prepped == 0) $(this).hide();
+    });
+}
+
+function showAllSpells() {
+    $('#spell-list .entry').show();
 }
