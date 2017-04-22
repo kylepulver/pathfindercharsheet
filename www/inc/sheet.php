@@ -2134,8 +2134,8 @@
                 <div class="column column-15" align="right">
                     <input type="submit" value="+" onclick="revealMore(this)">
                     <? if ($mode == "edit") { ?>
-                    <input type="submit" value="⇑" onclick="moveUpRow(this)">
-                    <input type="submit" value="⇓" onclick="moveDownRow(this)">
+                    <input type="submit" value="⇑" onclick="moveUpRow(this)" hide-prep>
+                    <input type="submit" value="⇓" onclick="moveDownRow(this)" hide-prep>
                     <input type="submit" value="X" onclick="deleteRow(this)">
                     <? } ?>
                 </div>

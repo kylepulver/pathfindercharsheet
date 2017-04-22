@@ -1257,8 +1257,10 @@ function showPreppedSpells() {
         var prepped = parseValue($(this).find('[calc="prep"]'));
         if (prepped == 0) $(this).hide();
     });
+    $('[hide-prep]').hide();
 }
 
 function showAllSpells() {
     $('#spell-list .entry').show();
+    $('[hide-prep]').show();
 }

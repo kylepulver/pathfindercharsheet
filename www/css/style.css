@@ -165,6 +165,11 @@ h1[onclick] {
     height: 2.5rem;
 }
 
+#gear .reveal input[type="number"],
+#spell-list .reveal select {
+    height: 3.6rem;
+}
+
 #gear input[type="checkbox"],
 #spell-list input[type="checkbox"] {
     margin-left: 0.25rem;
