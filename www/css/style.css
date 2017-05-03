@@ -2,6 +2,9 @@ body {
     background: #EEE;
 }
 
+hr {
+    margin: 0.1rem 0;
+}
 .exporter,
 .importer {
     display: none;
@@ -194,7 +197,10 @@ h1[onclick] {
 }
 #skills-quick {
     font-size: smaller;
-    margin-top: 0.5rem;
+    margin: 0 0.5rem;
+}
+.quick-look-content {
+    margin: 0 0.5rem;
 }
 
 .skills input[type="text"],
@@ -435,7 +441,8 @@ p {
     font-weight: 600;
 }
 
-.sidenav {
+.sidenav,
+.quick-look-again {
     display: none;
 }
 
@@ -472,14 +479,14 @@ strong {
 
 @media screen and (min-width: 1320px) {
     .sidenav {
-        width: 9rem;
+        width: 10rem;
         font-size: 1rem;
     }
     .quick-look {
         display: block;
         position: fixed;
         left: 0.25rem;
-        width: 9rem;
+        width: 10rem;
         top: 7rem;
         background: #fff;
         font-size: 1rem;
@@ -487,9 +494,20 @@ strong {
         text-overflow: clip;
         white-space: nowrap;
     }
-    .quick-look-content {
-        margin: 0 0.5rem;
+
+    .quick-look-again {
+        display: block;
+        position: fixed;
+        left: 0.25rem;
+        width: 10rem;
+        top: 45rem;
+        background: #fff;
+        font-size: 1rem;
+        overflow: hidden;
+        text-overflow: clip;
+        white-space: nowrap;
     }
+
 }
 
 @media screen and (min-width: 1380px) {
@@ -501,15 +519,71 @@ strong {
         width: 12rem;
         font-size: 1.1rem;
     }
+    .quick-look-again {
+        width: 12rem;
+        font-size: 1.1rem;
+        top: 47rem;
+    }
+
 }
 
-@media screen and (min-width: 1450px) {
+@media screen and (min-width: 1560px) {
     .sidenav {
-        width: 15rem;
-        font-size: 1.4rem;
+        width: 20rem;
+        font-size: 1.6rem;
+    }
+    .quick-look {
+        width: 10rem;
+    }
+    .quick-look-again {
+        left: 10.75rem;
+        width: 10rem;
+        top: 7rem;
+    }
+}
+
+@media screen and (min-width: 1680px) {
+    .sidenav {
+        width: 26rem;
+    }
+    .quick-look {
+        width: 13rem;
+        font-size: 1.3rem;
+    }
+    .quick-look-again {
+        left: 13.75rem;
+        width: 13rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (min-width: 1750px) {
+    .sidenav {
+        width: 30rem;
+        font-size: 1.8rem;
     }
     .quick-look {
         width: 15rem;
         font-size: 1.4rem;
+    }
+    .quick-look-again {
+        width: 15rem;
+        left: 15.75rem;
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .sidenav {
+        width: 36rem;
+        font-size: 1.8rem;
+    }.quick-look {
+        width: 18rem;
+        font-size: 1.5rem;
+    }
+    .quick-look-again {
+        left: 18.75rem;
+        width: 18rem;
+        font-size: 1.5rem;
     }
 }

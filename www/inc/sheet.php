@@ -144,14 +144,17 @@
             <strong>TOUCH</strong>
             <span ref="touch-ac"></span>
         </div>
+        <hr/>
         <div>
             <strong>HP</strong>
             <span ref="final_hp_current"></span>
         </div>
+        <hr/>
         <div>
             <strong>INIT</strong>
             <span ref="init-total"></span>
         </div>
+        <hr/>
         <div>
             <strong>FORT</strong>
             <span ref="final_fort"></span>
@@ -164,6 +167,7 @@
             <strong>WILL</strong>
             <span ref="final_will"></span>
         </div>
+        <hr/>
         <div>
             <strong>BAB</strong>
             <span ref="final_bab"></span>
@@ -171,15 +175,21 @@
         <div>
             <strong>MELEE</strong>
             <span ref="final_melee"></span>
-            <strong>RANGE</strong>
+        </div>
+        <div>
+            <strong>RANGED</strong>
             <span ref="final_ranged"></span>
         </div>
+        <hr/>
         <div>
             <strong>CMB</strong>
             <span ref="cmb-total"></span>
+        </div>
+        <div>
             <strong>CMD</strong>
             <span ref="cmd-total"></span>
         </div>
+        <hr/>
         <div>
             <strong>STR</strong>
             <span ref="str-total"></span> (<span ref="str-mod"></span>)
@@ -204,6 +214,7 @@
             <strong>CHA</strong>
             <span ref="cha-total"></span> (<span ref="cha-mod"></span>)
         </div>
+        <hr/>
         <div>
             <strong>LOAD</strong>
             <span ref="weight-status"></span>
@@ -212,15 +223,19 @@
             <strong>WEIGHT</strong>
             <span ref="total-weight"></span>
         </div>
+        <hr/>
         <div>
             <strong>COIN</strong>
             <span ref="currency-grand-total"></span>
         </div>
-        <div id="skills-quick">
-            <div class="entry">
-                <strong>ACROBATICS</strong>
-                <span>1</span>
-            </div>
+
+    </div>
+</div>
+<div class="quick-look-again">
+    <div id="skills-quick">
+        <div class="entry">
+            <strong>ACROBATICS</strong>
+            <span>1</span>
         </div>
     </div>
 </div>
