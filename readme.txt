@@ -55,6 +55,10 @@ Sorry this is a pain but hopefully it won't happen too often!
 
 === Change Log
 
+= v1.3.20
+    * Fixed bug where container weight would not calculate correctly
+    * Fixed bug where ability score related things wouldn't update correctly.
+
 = v1.3.00
     * Enable dev mode and save a character sheet to update to this version.
     * Disable dev mode when completed.  (This adds the proper columns.)

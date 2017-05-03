@@ -1679,7 +1679,7 @@
                                 </div>
                                 <div class="column column-50">
                                     <label title="Determines if the weight in this container should be added to your carried weight.">Add Weight</label>
-                                    <input type="checkbox" checked style="margin-top: 1.2rem" saveas="container_add_weight" carried>
+                                    <input type="checkbox" checked style="margin-top: 1.2rem" saveas="container_add_weight" calc="container-add-weight">
                                 </div>
                             </div>
 

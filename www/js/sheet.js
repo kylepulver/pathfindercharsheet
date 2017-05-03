@@ -182,6 +182,7 @@ function updateEvents() {
 
     // Weight
     $('#weight, #gear, [weight], [quantity], [carried], [container]').change(calculateWeight);
+    $('#weight input').change(calculateWeight);
     $('[calc="container-name"]').change(calculateContainers);
 
     // Spell Casting
@@ -297,6 +298,7 @@ function calculateAllAbilities() {
     $.each(types, function(i, type) {
         calculateAbility(type);
     });
+
 }
 
 function calculateAbility(type) {
@@ -334,6 +336,12 @@ function calculateAbility(type) {
     });
     if (invalidPoints) points = '*';
     writeValue("[calc='point-total']", points)
+
+    // Should figure out a way better way to do these dependent calcs
+    calculateAttacks();
+    calculateSaves();
+    calculateInit();
+    calculateArmor();
 }
 
 function calculateExperience() {
@@ -399,7 +407,7 @@ function calculateWeight() {
         var value = containerWeights[key];
         var maxWeight = parseValue($(this).parent().parent().parent().find('[calc="container-max"]'));
         var holding = $(this).parent().parent().find('[calc="container-holding"]');
-        var addWeight = $(this).parent().parent().parent().find('[carried]').is(':checked');
+        var addWeight = $(this).parent().parent().parent().find('[calc="container-add-weight"]').is(':checked');
         value = Math.round(value * 100) / 100;
         writeValue(holding, value);
         if (addWeight) {
