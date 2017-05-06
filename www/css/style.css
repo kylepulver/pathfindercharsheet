@@ -201,6 +201,7 @@ h1[onclick] {
 }
 .quick-look-content {
     margin: 0 0.5rem;
+    text-transform: uppercase;
 }
 
 .skills input[type="text"],

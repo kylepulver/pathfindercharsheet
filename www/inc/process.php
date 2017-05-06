@@ -323,7 +323,7 @@ function forgot($link) {
     @mail($to, $subject, $message); // Mail is a pain :I
 
     $data = array();
-    $data['message'] = "Check your config email for a link.  (It may be in your spam folder!)";
+    $data['message'] = say('reset_success');
     echo(respond($data));
 }
 
@@ -337,7 +337,7 @@ function new_password($link) {
     $gm_password = mysqli_real_escape_string($link, $_POST['gm_password']);
     $admin_password = mysqli_real_escape_string($link, $_POST['admin_password']);
     if ($pc_password == "" && $gm_password == "" && $admin_password == "") {
-        $data['error'] = "All fields can't be blank!";
+        $data['error'] = say('error_blank');
         echo(respond($data));
         return;
     }
@@ -345,7 +345,7 @@ function new_password($link) {
     $query = "SELECT * FROM `" . $config['sql_reset'] . "` WHERE reset_token = '$reset_token'";
     $result = mysqli_query($link, $query);
     if (mysqli_num_rows($result) != 1) {
-        $data['error'] = "Invalid request!";
+        $data['error'] = say('error_invalid');
         echo(respond($data));
         return;
     }
@@ -353,7 +353,7 @@ function new_password($link) {
     // todo: fix timezone error :(
     $date_issued = strtotime(mysqli_fetch_assoc($result)['date']);
     if (time() - $date_issued > 60 * 60 * 12) { // 12 hour expiration
-        $data['error'] = "Reset token expired!";
+        $data['error'] = say('error_expired');
 
         // Clear out password resets
         $query = "TRUNCATE TABLE `" . $config['sql_reset'] . "`";
@@ -618,13 +618,13 @@ function install($link) {
     $gm_password = mysqli_real_escape_string($link, $_POST['gm_password']);
     $admin_password = mysqli_real_escape_string($link, $_POST['admin_password']);
     if ($pc_username == "" || $pc_password == "" || $gm_username == "" || $gm_password == "" || $admin_password == "" || $admin_username == "") {
-        $data['error'] = "Fill out all the fields!";
+        $data['error'] = say('error_blank');
         echo(respond($data));
         return;
     }
     $names = array($pc_username, $gm_username, $admin_username);
     if (count($names) !== count(array_unique($names))) { // fancy way to check if all names are unique
-        $data['error'] = "Can't use the same name for multiple logins!";
+        $data['error'] = say('error_unique');
         echo(respond($data));
         return;
     }

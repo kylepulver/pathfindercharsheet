@@ -9,32 +9,32 @@ foreach($config as $key=>$value) {
 ?>
 
 <div class="container">
-    <h1>Install</h1>
+    <h1><?=say('install')?></h1>
     <? if ($error != "") { ?>
         <h2 class="error"><?=$error?></h2>
     <? } else { ?>
-    <p>To install the Pathfinder Character Sheet Manager enter the following information.</p>
+    <p><?=say('install_hint_1')?></p>
     <div class="row">
         <div class="column">
-            <label>Player Username</label>
+            <label><?=say('inst_pc_user')?></label>
             <input type="text" id="player-username" value="pc">
 
-            <label>Player Password</label>
+            <label><?=say('inst_pc_pass')?></label>
             <input type="password" id="player-password">
 
-            <label>Game Master Username</label>
+            <label><?=say('inst_gm_user')?></label>
             <input type="text" id="gm-username" value="gm">
 
-            <label>Game Master Password</label>
+            <label><?=say('inst_gm_pass')?></label>
             <input type="password" id="gm-password">
 
-            <label>Super Admin Username</label>
+            <label><?=say('inst_god_user')?></label>
             <input type="text" id="admin-username" value="admin">
 
-            <label>Super Admin Password</label>
+            <label><?=say('inst_god_pass')?></label>
             <input type="password" id="admin-password">
 
-            <input type="submit" value="Install" onclick="install()">
+            <input type="submit" value="<?=say('install')?>" onclick="install()">
         </div>
     </div>
     <? } ?>

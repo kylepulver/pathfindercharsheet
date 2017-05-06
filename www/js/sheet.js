@@ -269,17 +269,17 @@ function calculatePoints() {
     var pointMax = parseValue("#points-max");
     var hasPointMax = !isNaN(pointMax);
     if (hasPointMax) {
-        var fantasy = "CUSTOM";
+        var fantasy = $('#js-fantasy-custom').val();
         if (pointMax == 0)
             fantasy = "";
         if (pointMax == 10)
-            fantasy = "LOW";
+            fantasy = $('#js-fantasy-low').val();
         if (pointMax == 15)
-            fantasy = "STANDARD";
+            fantasy = $('#js-fantasy-standard').val();
         if (pointMax == 20)
-            fantasy = "HIGH";
+            fantasy = $('#js-fantasy-high').val();
         if (pointMax == 25)
-            fantasy = "EPIC";
+            fantasy = $('#js-fantasy-epic').val();
 
         writeValue('[calc="fantasy-type"]', fantasy);
     }
@@ -511,21 +511,21 @@ function calculateWeight() {
     writeValue('[calc="weight-off-ground"]', heavy * 2);
     writeValue('[calc="weight-drag"]', heavy * 5);
 
-    var status = "LIGHT";
+    var status = $('#js-weight-light').val();
     var maxDex = 9999;
     var checkPenalty = 0;
     if (totalWeight > light) {
-        status = "MEDIUM";
+        status = $('#js-weight-medium').val();
         maxDex = 3;
         checkPenalty = -3;
     }
     if (totalWeight > medium) {
-        status = "HEAVY";
+        status = $('#js-weight-heavy').val();
         maxDex = 1;
         checkPenalty = -6;
     }
     if (totalWeight > heavy) {
-        status = "OVER";
+        status = $('#js-weight-over').val();
         maxDex = 1;
         checkPenalty = -6;
     }
@@ -756,18 +756,16 @@ function calculateHealth() {
     var con = parseValue($('#health').find('[ref="con-total"]'));
 
     var current = total - lethal;
-    var status = "ALIVE";
-    if (current == nonlethal) status = "DISABLED";
-    if (current < nonlethal) status = "OUT";
-    if (current <= -con) status = "DEAD";
-    if (current <= -con*2) status = "VERY DEAD";
-    if (current <= -con*4) status = "ULTRA DEAD";
+    var status = $('#js-health-alive').val();
+    if (current == nonlethal) status = $('#js-health-disabled').val();
+    if (current < nonlethal) status = $('#js-health-out').val();
+    if (current <= -con) status = $('#js-health-dead').val();
+    if (current <= -con*2) status = $('#js-health-very-dead').val();
+    if (current <= -con*4) status = $('#js-health-ultra-dead').val();
     if (total == 0) status = "";
 
     writeValue('#health .column [calc="current"]', current);
     writeValue('#health .column [calc="status"]', status);
-    // $('#health .column [calc="current"]').text(current);
-    // $('#health .column [calc="status"]').text(status);
 
     if (nonlethal < 0) nonlethal = 0;
     if (current > total) current = total;
@@ -979,7 +977,7 @@ function updateRefs(element, data) {
 }
 
 function loadData(data, status, imported = false) {
-    loadingMessage("Loading Data");
+    // loadingMessage("Loading Data");
 
     $('.reveal').hide();
     cachedIndex = 0;
@@ -1038,12 +1036,11 @@ function loadData(data, status, imported = false) {
         var publicid = data['publicid'];
         $("#publicurl").val(domain + "/v/" + publicid);
         $("#viewid").val(publicid);
+        $('#publicurl-link').attr('href', 'http://' + domain + "/v/" + publicid);
+        $('#compact-link').attr('href', 'http://' + domain + "/c/" + publicid);
     }
 
-    $('#publicurl-link').attr('href', 'http://' + domain + "/v/" + publicid);
-    $('#compact-link').attr('href', 'http://' + domain + "/c/" + publicid);
-
-    loadingMessage("Crunching Numbers");
+    // loadingMessage("Crunching Numbers");
 
     updateEvents();
 
@@ -1067,7 +1064,7 @@ function loadData(data, status, imported = false) {
 
     document.title = $('.sheet').val() + " Pathfinder Character Sheet";
 
-    loadingMessage("Wrapping Up");
+    // loadingMessage("Wrapping Up");
 
     // When viewing replace all form fields with static stuff
     var mode = $('#mode').val();
@@ -1119,7 +1116,7 @@ function load() {
     // $('body').prepend(loadingOverlay);
     loadingOverlay.show();
 
-    loadingMessage("Cleaing Up");
+    // loadingMessage("Cleaing Up");
 
     $('[extra="true"]').remove();
 
@@ -1127,7 +1124,7 @@ function load() {
     var viewid = $('#viewid').val();
     var mode = $('#mode').val();
 
-    loadingMessage("Fetching Data");
+    // loadingMessage("Fetching Data");
 
     $.post("/p", {
         mode: "load",
@@ -1137,7 +1134,7 @@ function load() {
     },
     function(data, status) {
         if (data == "-")
-            sendMessage("Validation error :(")
+            sendMessage($('#message-validation-error').val());
         else
             loadData(data, status);
     });

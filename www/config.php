@@ -41,6 +41,10 @@ $config['sql_reset']        = "pf_reset";
 // Example "hello@gmail.com"
 $config['email']            = "";
 
+// The language to use when rendering the sheets.
+// Example "en" for English.  See the lang folder for more.
+$config['language']         = "en";
+
 
 
 // Dev mode

@@ -1,9 +1,9 @@
 <div class="toolbar-under"></div>
 <div class="container">
-    <h1>Logged In</h1>
+    <h1><?=say("logged_in")?></h1>
     <div class="row">
         <div class="column">
-            <strong>Recently Edited Sheets</strong>
+            <strong><?=say('recent_sheets')?></strong>
             <ul id="recent-links">
                 <li><a></a></li>
             </ul>
@@ -12,18 +12,18 @@
     <div class="row">
         <div class="column">
             <? if ($is_god) { ?>
-            <input type="submit" value="Admin View" onclick="goTo('/admin')">
+            <input type="submit" value="<?=say('admin_view')?>" onclick="goTo('/admin')">
             <? } ?>
             <? if ($is_gm) { ?>
-            <input type="submit" value="GM View" onclick="goTo('/gm')">
+            <input type="submit" value="<?=say('gm_view')?>" onclick="goTo('/gm')">
             <? } ?>
-            <input type="submit" value="New Sheet" onclick="createNew()">
-            <input type="submit" value="Log Out" onclick="logout()">
+            <input type="submit" value="<?=say('new_sheet')?>" onclick="createNew()">
+            <input type="submit" value="<?=say('log_out')?>" onclick="logout()">
         </div>
     </div>
     <div class="row">
         <div class="column">
-            <p>If you lost your edit url your game master can let you know what it is!</p>
+            <p><?=say('if_lost')?></p>
         </div>
     </div>
 </div>

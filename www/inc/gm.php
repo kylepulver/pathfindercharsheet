@@ -34,7 +34,7 @@ if ($enter_password) {
     <div class="container">
         <div class="row">
             <div class="column column-40">
-                <label>Select Campaign</label>
+                <label><?=say('select_campaign')?></label>
                 <select id="campaign_choice">
                     <? while ($row = mysqli_fetch_assoc($resultcampaign)) { ?>
                     <option value="<?=$row['id']?>"><?=$row['name']?></option>
@@ -46,13 +46,13 @@ if ($enter_password) {
 </div>
 <div class="toolbar-under"></div>
 <div class="container">
-    <h1>Campaign Passkey Required</h1>
+    <h1><?=say('passkey_required')?></h1>
     <div class="column">
-        <label>Passkey</label>
+        <label><?=say('passkey')?></label>
         <input type="text" data="passkey" />
     </div>
     <div class="column" align="right">
-        <input type="submit" value="Submit" onclick="passkey()"/>
+        <input type="submit" value="<?=say('submit')?>" onclick="passkey()"/>
     </div>
     <div class="row">
         <div class="column">
@@ -82,7 +82,7 @@ function passkey() {
         if (data == true)
             location.reload();
         else {
-            $("#message").text("Invalid passkey!");
+            $("#message").text("<?=say('invald_passkey')?>");
             $('#message').show();
         }
     });
@@ -119,7 +119,7 @@ $result = mysqli_query($link, $query);
     <div class="container">
         <div class="row">
             <div class="column column-40">
-                <label>Select Campaign</label>
+                <label><?=say('select_campaign')?></label>
                 <select id="campaign_choice">
                     <? while ($row = mysqli_fetch_assoc($resultcampaign)) { ?>
                     <option value="<?=$row['id']?>"><?=$row['name']?></option>
@@ -128,10 +128,10 @@ $result = mysqli_query($link, $query);
             </div>
             <div class="column" align="right">
                 <label>&nbsp;</label>
-                <input type="submit" value="View Active" onclick="goTo('/gm')">
-                <input type="submit" value="View All" onclick="goTo('/all')">
-                <input type="submit" value="Compact View" onclick="goTo('/gmc/')">
-                <input type="submit" value="Refresh Sheets" onclick="refresh()">
+                <input type="submit" value="<?=say('view_active')?>" onclick="goTo('/gm')">
+                <input type="submit" value="<?=say('view_all')?>" onclick="goTo('/all')">
+                <input type="submit" value="<?=say('button_compact')?>" onclick="goTo('/gmc/')">
+                <input type="submit" value="<?=say('button_refresh')?>" onclick="refresh()">
             </div>
         </div>
     </div>
@@ -140,9 +140,9 @@ $result = mysqli_query($link, $query);
 <div class="container">
     <h1>
         <? if ($show_all) { ?>
-        All Characters
+        <?=say('all_chars')?>
         <? } else { ?>
-        Active Characters
+        <?=say('active_chars')?>
         <? } ?>
     </h1>
     <? while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -165,135 +165,135 @@ $result = mysqli_query($link, $query);
                 <div class="column column-10">
                     <select saveas="sheet_type">
                         <option value="4"></option>
-                        <option value="0-pc">Player</option>
-                        <option value="1-npc">NPC</option>
-                        <option value="3-enemy">Enemy</option>
+                        <option value="0-pc"><?=say('player')?></option>
+                        <option value="1-npc"><?=say('npc')?></option>
+                        <option value="3-enemy"><?=say('enemy')?></option>
                     </select>
                 </div>
                 <div class="column" align="right">
-                    <input type="submit" value="View" onclick="goTo('/v/<?=$row['publicid']?>')">
-                    <input type="submit" value="Edit" onclick="goTo('/e/<?=$row['editid']?>')">
+                    <input type="submit" value="<?=say('button_view')?>" onclick="goTo('/v/<?=$row['publicid']?>')">
+                    <input type="submit" value="<?=say('button_edit')?>" onclick="goTo('/e/<?=$row['editid']?>')">
                     <input type="submit" value="+" onclick="revealMore(this)">
                 </div>
             </div>
             <div class="row">
                 <div class="column">
-                    <label>Init</label>
+                    <label><?=say('init')?></label>
                     <h4 loadvalue="final_init"></h4>
                 </div>
                 <div class="column">
-                    <label>AC</label>
+                    <label><?=say('ac')?></label>
                     <h4 loadvalue="final_ac"></h4>
                 </div>
                 <div class="column">
-                    <label>Touch</label>
+                    <label><?=say('touch')?></label>
                     <h4 loadvalue="final_touch"></h4>
                 </div>
                 <div class="column">
-                    <label>Flat</label>
+                    <label><?=say('flat')?></label>
                     <h4 loadvalue="final_flatfoot"></h4>
                 </div>
                 <div class="column">
-                    <label>HP</label>
+                    <label><?=say('hp')?></label>
                     <h4 loadvalue="final_hp_current" class="strong"></h4>
                 </div>
                 <div class="column">
-                    <label>NonL</label>
+                    <label><?=say('nonl')?></label>
                     <h4 loadvalue="health_nonlethal"></h4>
                 </div>
                 <div class="column">
-                    <label>Fort</label>
+                    <label><?=say('fort')?></label>
                     <h4 loadvalue="final_fort"></h4>
                 </div>
                 <div class="column">
-                    <label>Ref</label>
+                    <label><?=say('ref')?></label>
                     <h4 loadvalue="final_ref"></h4>
                 </div><div class="column">
-                    <label>Will</label>
+                    <label><?=say('will')?></label>
                     <h4 loadvalue="final_will"></h4>
                 </div>
                 <div class="column">
-                    <label>Perc</label>
+                    <label><?=say('perc')?></label>
                     <h4 loadvalue="final_skill" loadsearch="skill_name" loadmatch="Perception"></h4>
                 </div>
                 <div class="column">
-                    <label>Stealth</label>
+                    <label><?=say('stealth')?></label>
                     <h4 loadvalue="final_skill" loadsearch="skill_name" loadmatch="Stealth"></h4>
                 </div>
                 <div class="column">
-                    <label>Melee</label>
+                    <label><?=say('melee')?></label>
                     <h4 loadvalue="final_melee"></h4>
                 </div>
                 <div class="column">
-                    <label>Range</label>
+                    <label><?=say('range')?></label>
                     <h4 loadvalue="final_ranged"></h4>
                 </div>
                 <div class="column">
-                    <label>CMB</label>
+                    <label><?=say('cmb')?></label>
                     <h4 loadvalue="final_cmb"></h4>
                 </div>
                 <div class="column">
-                    <label>CMD</label>
+                    <label><?=say('cmd')?></label>
                     <h4 loadvalue="final_cmd"></h4>
                 </div>
             </div>
             <div class="row reveal" style="padding-bottom:0">
                 <div class="column">
-                    <label>STR</label>
+                    <label><?=say('str')?></label>
                     <h4 loadvalue="final_str_total">0</h4>
                 </div>
                 <div class="column">
-                    <label>DEX</label>
+                    <label><?=say('dex')?></label>
                     <h4 loadvalue="final_dex_total">0</h4>
                 </div>
                 <div class="column">
-                    <label>CON</label>
+                    <label><?=say('con')?></label>
                     <h4 loadvalue="final_con_total">0</h4>
                 </div>
                 <div class="column">
-                    <label>INT</label>
+                    <label><?=say('int')?></label>
                     <h4 loadvalue="final_int_total">0</h4>
                 </div>
                 <div class="column">
-                    <label>WIS</label>
+                    <label><?=say('wis')?></label>
                     <h4 loadvalue="final_wis_total">0</h4>
                 </div>
                 <div class="column">
-                    <label>CHA</label>
+                    <label><?=say('cha')?></label>
                     <h4 loadvalue="final_cha_total">0</h4>
                 </div>
                 <div class="column">
-                    <label>BAB</label>
+                    <label><?=say('bab')?></label>
                     <h4 loadvalue="final_bab">0</h4>
                 </div>
                 <div class="column">
-                    <label>Bluff</label>
+                    <label><?=say('bluff')?></label>
                     <h4 loadvalue="final_skill" loadsearch="skill_name" loadmatch="Bluff"></h4>
                 </div>
                 <div class="column">
-                    <label>Sen Mo</label>
+                    <label><?=say('senmo')?></label>
                     <h4 loadvalue="final_skill" loadsearch="skill_name" loadmatch="Sense%20Motive"></h4>
                 </div>
                 <div class="column">
-                    <label>Disguise</label>
+                    <label><?=say('disguise')?></label>
                     <h4 loadvalue="final_skill" loadsearch="skill_name" loadmatch="Disguise"></h4>
                 </div>
                 <div class="column">
-                    <label>Sp&nbsp;Craft</label>
+                    <label><?=say('sp_craft')?></label>
                     <h4 loadvalue="final_skill" loadsearch="skill_name" loadmatch="Spellcraft"></h4>
                 </div>
             </div>
             <div class="row reveal">
                 <div class="column">
-                    <label>Languages</label>
+                    <label><?=say('languages')?></label>
                     <select data="languages">
                         <option>Common</option>
                     </select>
                 </div>
                 <div class="column column-40">
-                    <label>Campaign</label>
+                    <label><?=say('campaign')?></label>
                     <select data="campaign">
-                        <option value="0">Send to Campaign...</option>
+                        <option value="0"><?=say('send_campaign')?></option>
                         <? while ($rowc = mysqli_fetch_assoc($resultcampaign)) { ?>
                         <option value="<?=$rowc['id']?>"><?=$rowc['name']?></option>
                         <? } mysqli_data_seek($resultcampaign, 0); ?>
@@ -301,9 +301,9 @@ $result = mysqli_query($link, $query);
                 </div>
                 <div class="column column-30" align="right">
                     <label>&nbsp;</label>
-                    <input type="submit" value="Retire" onclick="retireRow('<?=$row['id']?>')">
-                    <input type="submit" value="Restore" onclick="restoreRow('<?=$row['id']?>')">
-                    <input type="submit" value="Delete" onclick="deleteRow('<?=$row['id']?>')">
+                    <input type="submit" value="<?=say('button_retire')?>" onclick="retireRow('<?=$row['id']?>')" data="retire">
+                    <input type="submit" value="<?=say('button_restore')?>" onclick="restoreRow('<?=$row['id']?>')" data="restore">
+                    <input type="submit" value="<?=say('button_delete')?>" onclick="deleteRow('<?=$row['id']?>')" data="delete">
                 </div>
             </div>
         </div>
@@ -311,14 +311,17 @@ $result = mysqli_query($link, $query);
     <div class="row">
         <div class="column">
             <? if ($is_god) { ?>
-            <input type="submit" value="Admin View" onclick="goTo('/admin')">
+            <input type="submit" value="<?=say('admin_view')?>" onclick="goTo('/admin')">
             <? } ?>
-            <input type="submit" value="User View" onclick="goTo(/user/)">
-            <input type="submit" value="New Sheet" onclick="createNew()">
-            <input type="submit" value="Log Out" onclick="logout()">
+            <input type="submit" value="<?=say('user_view')?>" onclick="goTo(/user/)">
+            <input type="submit" value="<?=say('new_sheet')?>" onclick="createNew()">
+            <input type="submit" value="<?=say('log_out')?>" onclick="logout()">
         </div>
     </div>
 </div>
+<input type="hidden" id="message-sheet-delete" value="<?=say('sheet_delete')?>" />
+<input type="hidden" id="message-sheet-cant-delete" value="<?=say('sheet_cant_delete')?>" />
+<input type="hidden" id="message-sheet-retire" value="<?=say('sheet_retire')?>" />
 <script src="/js/gm.js"></script>
 <script>
 $(function() {
@@ -399,15 +402,15 @@ function refresh() {
 
             if (json['is_retired'] == '1') {
                 row.addClass('retired');
-                row.find('[value="Retire"]').hide();
-                row.find('[value="Restore"]').show();
-                row.find('[value="Delete"]').show();
+                row.find('[data="retire"]').hide();
+                row.find('[data="restore"]').show();
+                row.find('[data="delete"]').show();
             }
             else {
                 row.removeClass('retired');
-                row.find('[value="Retire"]').show();
-                row.find('[value="Restore"]').hide();
-                row.find('[value="Delete"]').hide();
+                row.find('[data="retire"]').show();
+                row.find('[data="restore"]').hide();
+                row.find('[data="delete"]').hide();
             }
 
             var campaignSelect = row.find('select[data="campaign"]');
@@ -429,7 +432,6 @@ function refresh() {
                     campaign: c
                 },
                 function(data, status) {
-                    console.log("change campaign to " + c);
                     // hide character.
                     row.remove();
                 });

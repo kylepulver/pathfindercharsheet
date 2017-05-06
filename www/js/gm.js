@@ -31,7 +31,7 @@ function restoreRow(id) {
 }
 
 function deleteRow(id) {
-    var c = window.confirm("Are you sure you want to delete this sheet?\n\nTHIS CANNOT BE UNDONE!");
+    var c = window.confirm($('#message-sheet-delete').val());
     if (!c) return;
 
     $.post("/p", {
@@ -44,16 +44,14 @@ function deleteRow(id) {
             $('[row="' + id + '"]').remove();
         }
         else {
-            alert("Cannot delete non-retired sheet.");
+            alert($('#message-sheet-cant-delete').val());
         }
     });
 }
 
 function retireRow(id) {
-    var c = window.confirm("Are you sure you want to retire this sheet?");
+    var c = window.confirm($('#message-sheet-retire').val());
     if (!c) return;
-
-    console.log("retire?");
 
     $.post("/p", {
         mode: "retire",

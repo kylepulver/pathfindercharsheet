@@ -1,23 +1,23 @@
 <div class="toolbar-under"></div>
 <div class="container">
-    <h1>Log In</h1>
+    <h1><?=say("log_in")?></h1>
     <div class="row">
         <div class="column">
-            <label>Username</label>
+            <label><?=say('username')?></label>
             <input type="text" id="username">
 
-            <label>Password</label>
+            <label><?=say('password')?></label>
             <input type="password" id="password">
 
-            <input type="submit" value="Log In" onclick="login()" id="login-submit">
-            <input type="submit" value="Reset Passwords" onclick="forgotPassword()" id="reset-password">
+            <input type="submit" value="<?=say('log_in')?>" onclick="login()" id="login-submit">
+            <input type="submit" value="<?=say('reset_pass')?>" onclick="forgotPassword()" id="reset-password">
         </div>
     </div>
     <div class="row">
         <div class="column">
             <p id="message" class="warning"></p>
-            <p>Log in to gain access to editing character sheets.</p>
-            <p>If you are the game master you can access all character sheets to edit and view.</p>
+            <p><?=say('log_in_hint_1')?></p>
+            <p><?=say('log_in_hint_2')?></p>
         </div>
     </div>
 </div>

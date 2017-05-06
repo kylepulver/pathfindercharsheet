@@ -60,9 +60,9 @@ $resultcampaign = mysqli_query($link, $query);
 <input type="hidden" saveas="sheetname" class="sheet">
 <div class="caps strong" row style="float: left">
     <? if ($show_all) { ?>
-    all characters
+    <?=say('all_chars')?>
     <? } else { ?>
-    active characters
+    <?=say('active_chars')?>
     <? } ?>
 
     <select id="campaign_choice">
@@ -72,10 +72,10 @@ $resultcampaign = mysqli_query($link, $query);
     </select>
 </div>
 <div class="caps" align="right" row style="width:100%">
-    <a href="/gmc" class="list">view active</a>
-    <a href="/gmc/all" class="list">view all</a>
-    <a href="/gm" class="list">fancy view</a>
-    <a onclick="refresh()" class="list">refresh sheets</a>
+    <a href="/gmc" class="list"><?=say('view_active')?></a>
+    <a href="/gmc/all" class="list"><?=say('view_all')?></a>
+    <a href="/gm" class="list"><?=say('fancy_view')?></a>
+    <a onclick="refresh()" class="list"><?=say('button_refresh')?></a>
 </div>
 <? while ($row = mysqli_fetch_assoc($result)) { ?>
 <div row="<?=$row['id']?>" sheet-view="<?=$row['publicid']?>">
@@ -84,21 +84,21 @@ $resultcampaign = mysqli_query($link, $query);
         <span saveas="sheetname" class="list" style="color: #999"></span>
         <select saveas="sheet_type" class="strong list">
             <option value="4"></option>
-            <option value="0-pc">Player</option>
-            <option value="1-npc">NPC</option>
-            <option value="3-enemy">Enemy</option>
+            <option value="0-pc"><?=say('player')?></option>
+            <option value="1-npc"><?=say('npc')?></option>
+            <option value="3-enemy"><?=say('enemy')?></option>
         </select>
         <select data="campaign">
-            <option>Send to Campaign...</option>
+            <option><?=say('send_campaign')?></option>
             <? while($rowc = mysqli_fetch_assoc($resultcampaign)) { ?>
                 <option value="<?=$rowc['id']?>"><?=$rowc['name']?></option>
             <? } mysqli_data_seek($resultcampaign, 0); ?>
         </select>
-        <a href="/c/<?=$row['publicid']?>" class="list">view</a>
-        <a href="/e/<?=$row['editid']?>" class="list">edit</a>
-        <a onclick="retireRow('<?=$row['id']?>')" action="retire" class="list">retire</a>
-        <a onclick="restoreRow('<?=$row['id']?>')" action="restore" class="list">restore</a>
-        <a onclick="deleteRow('<?=$row['id']?>')" action="delete" class="list">delete</a>
+        <a href="/c/<?=$row['publicid']?>" class="list"><?=say('button_view')?></a>
+        <a href="/e/<?=$row['editid']?>" class="list"><?=say('button_edit')?></a>
+        <a onclick="retireRow('<?=$row['id']?>')" action="retire" class="list"><?=say('button_retire')?></a>
+        <a onclick="restoreRow('<?=$row['id']?>')" action="restore" class="list"><?=say('button_restore')?></a>
+        <a onclick="deleteRow('<?=$row['id']?>')" action="delete" class="list"><?=say('button_delete')?></a>
     </div>
     <div>
         <span saveas="alignment" class="caps"></span>
@@ -109,82 +109,82 @@ $resultcampaign = mysqli_query($link, $query);
     </div>
     <div>
         <span class="list">
-            <span class="strong">Init</span>&nbsp;<span saveas="final_init"></span>
+            <span class="strong"><?=say('init')?></span>&nbsp;<span saveas="final_init"></span>
         </span>
         <span class="list">
-            <span class="strong">AC</span>&nbsp;<span saveas="final_ac"></span>
+            <span class="strong"><?=say('ac')?></span>&nbsp;<span saveas="final_ac"></span>
         </span>
         <span class="list">
-            <span class="strong">Touch</span>&nbsp;<span saveas="final_touch"></span>
+            <span class="strong"><?=say('touch')?></span>&nbsp;<span saveas="final_touch"></span>
         </span>
         <span class="list">
-            <span class="strong">Flat</span>&nbsp;<span saveas="final_flatfoot"></span>
+            <span class="strong"><?=say('flat')?></span>&nbsp;<span saveas="final_flatfoot"></span>
         </span>
         <span class="list">
-            <span class="strong">HP</span>&nbsp;<span saveas="final_hp_current"></span>
+            <span class="strong"><?=say('hp')?></span>&nbsp;<span saveas="final_hp_current"></span>
         </span>
         <span class="list">
-            <span class="strong">NonL</span>&nbsp;<span saveas="health_nonlethal"></span>
+            <span class="strong"><?=say('nonl')?></span>&nbsp;<span saveas="health_nonlethal"></span>
         </span>
         <span class="list">
-            <span class="strong">Fort</span>&nbsp;<span saveas="final_fort"></span>
+            <span class="strong"><?=say('fort')?></span>&nbsp;<span saveas="final_fort"></span>
         </span>
         <span class="list">
-            <span class="strong">Ref</span>&nbsp;<span saveas="final_ref"></span>
+            <span class="strong"><?=say('ref')?></span>&nbsp;<span saveas="final_ref"></span>
         </span>
         <span class="list">
-            <span class="strong">Will</span>&nbsp;<span saveas="final_will"></span>
+            <span class="strong"><?=say('will')?></span>&nbsp;<span saveas="final_will"></span>
         </span>
         <span class="list">
-            <span class="strong">Perc</span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Perception"></span>
+            <span class="strong"><?=say('perc')?></span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Perception"></span>
         </span>
         <span class="list">
-            <span class="strong">Stealth</span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Stealth"></span>
+            <span class="strong"><?=say('stealth')?></span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Stealth"></span>
         </span>
         <span class="list">
-            <span class="strong">Melee</span>&nbsp;<span saveas="final_melee"></span>
+            <span class="strong"><?=say('melee')?></span>&nbsp;<span saveas="final_melee"></span>
         </span>
         <span class="list">
-            <span class="strong">Range</span>&nbsp;<span saveas="final_ranged"></span>
+            <span class="strong"><?=say('ranged')?></span>&nbsp;<span saveas="final_ranged"></span>
         </span>
         <span class="list">
-            <span class="strong">CMB</span>&nbsp;<span saveas="final_cmb"></span>
+            <span class="strong"><?=say('cmb')?></span>&nbsp;<span saveas="final_cmb"></span>
         </span>
         <span class="list">
-            <span class="strong">CMD</span>&nbsp;<span saveas="final_cmd"></span>
+            <span class="strong"><?=say('cmd')?></span>&nbsp;<span saveas="final_cmd"></span>
         </span>
         <span class="list">
-            <span class="strong">STR</span>&nbsp;<span saveas="final_str_total"></span>
+            <span class="strong"><?=say('str')?></span>&nbsp;<span saveas="final_str_total"></span>
         </span>
         <span class="list">
-            <span class="strong">DEX</span>&nbsp;<span saveas="final_dex_total"></span>
+            <span class="strong"><?=say('dex')?></span>&nbsp;<span saveas="final_dex_total"></span>
         </span>
         <span class="list">
-            <span class="strong">CON</span>&nbsp;<span saveas="final_con_total"></span>
+            <span class="strong"><?=say('con')?></span>&nbsp;<span saveas="final_con_total"></span>
         </span>
         <span class="list">
-            <span class="strong">INT</span>&nbsp;<span saveas="final_int_total"></span>
+            <span class="strong"><?=say('int')?></span>&nbsp;<span saveas="final_int_total"></span>
         </span>
         <span class="list">
-            <span class="strong">WIS</span>&nbsp;<span saveas="final_wis_total"></span>
+            <span class="strong"><?=say('wis')?></span>&nbsp;<span saveas="final_wis_total"></span>
         </span>
         <span class="list">
-            <span class="strong">CHA</span>&nbsp;<span saveas="final_cha_total"></span>
+            <span class="strong"><?=say('cha')?></span>&nbsp;<span saveas="final_cha_total"></span>
         </span>
         <span class="list">
-            <span class="strong">BAB</span>&nbsp;<span saveas="final_bab"></span>
+            <span class="strong"><?=say('bab')?></span>&nbsp;<span saveas="final_bab"></span>
         </span>
         <span class="list">
-            <span class="strong">Bluff</span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Bluff"></span>
+            <span class="strong"><?=say('bluff')?></span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Bluff"></span>
         </span>
         <span class="list">
-            <span class="strong">Sense Motive</span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Sense%20Motive"></span>
+            <span class="strong"><?=say('sense_motive')?></span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Sense%20Motive"></span>
         </span>
         <span class="list">
-            <span class="strong">Disguise</span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Disguise"></span>
+            <span class="strong"><?=say('disguise')?></span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Disguise"></span>
         </span>
         <span class="list">
-            <span class="strong">Spellcraft</span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Spellcraft"></span>
+            <span class="strong"><?=say('spellcraft')?></span>&nbsp;<span saveas="final_skill" loadsearch="skill_name" loadmatch="Spellcraft"></span>
         </span>
     </div>
 </div>
@@ -261,7 +261,7 @@ function refresh() {
                 row.removeClass('retired');
                 row.find('[action="retire"]').show();
                 row.find('[action="restore"]').hide();
-                row.find('[action="delete"]s').hide();
+                row.find('[action="delete"]').hide();
             }
 
             $('span[saveas="known_languages"]').each(function() {
@@ -289,7 +289,6 @@ function refresh() {
                     campaign: c
                 },
                 function(data, status) {
-                    console.log("change campaign to " + c);
                     // hide character.
                     row.remove();
                 });

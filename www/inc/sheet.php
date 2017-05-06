@@ -1,20 +1,19 @@
 <div class="loading-overlay" id="loading-overlay">
     <div>
-        LOADING
+        <?=say('loading')?>
         <p></p>
     </div>
 </div>
-
 <div class="exporter">
     <div class="row">
         <div class="column">
-            <h4>Export Data</h4>
+            <h4><?=say('export_data')?></h4>
             <textarea id="export-data" onclick="select()" style="height: 20rem"></textarea>
         </div>
     </div>
     <div class="row">
         <div class="column">
-            <input type="submit" value="Close" onclick="closeOverlay(this)">
+            <input type="submit" value="<?=say('close')?>" onclick="closeOverlay(this)">
         </div>
     </div>
 </div>
@@ -22,14 +21,14 @@
 <div class="importer">
     <div class="row">
         <div class="column">
-            <h4>Import Data</h4>
+            <h4><?=say('import_data')?></h4>
             <textarea id="import-data" style="height: 20rem"></textarea>
         </div>
     </div>
     <div class="row">
         <div class="column">
-            <input type="submit" value="Load" onclick="loadImport(this)">
-            <input type="submit" value="Close" onclick="closeOverlay(this)">
+            <input type="submit" value="<?=say('button_load')?>" onclick="loadImport(this)">
+            <input type="submit" value="<?=say('button_close')?>" onclick="closeOverlay(this)">
         </div>
     </div>
 </div>
@@ -45,16 +44,16 @@
                 </div>
             </div>
             <div class="column column-20">
-                <label>Sheet Name</label>
+                <label><?=say('sheet_name')?></label>
                 <input type="text" saveas="sheetname" class="sheet">
             </div>
             <? if ($mode == "edit") { ?>
             <div class="column column-25">
-                <label><a target="_blank" id="publicurl-link">Public Url</a> <a target="_blank" id="compact-link"><span class="glyphicon glyphicon-share-alt"></span></a></label>
+                <label><a target="_blank" id="publicurl-link"><?=say('public_url')?></a> <a target="_blank" id="compact-link"><span class="glyphicon glyphicon-share-alt"></span></a></label>
                 <input type="text" readonly="readonly" onclick="select()" id="publicurl">
             </div>
             <div class="column">
-                <label>Message</label>
+                <label><?=say('message')?></label>
                 <span id="server-message"></span>
             </div>
             <? } else { ?>
@@ -65,13 +64,13 @@
             <div class="column column-33" align="right">
                 <label>&nbsp;</label>
                 <? if ($mode == "edit") { ?>
-                <input type="submit" value="Save" onclick="save()">
-                <input type="submit" value="Import" onclick="sheetImport()">
+                <input type="submit" value="<?=say('button_save')?>" onclick="save()">
+                <input type="submit" value="<?=say('button_import')?>" onclick="sheetImport()">
                 <? } else { ?>
-                <input type="submit" value="Compact View" onclick="viewCompact()">
+                <input type="submit" value="<?=say('button_compact')?>" onclick="viewCompact()">
                 <? } ?>
-                <input type="submit" value="Export" onclick="sheetExport()">
-                <input type="submit" value="Home" onclick="goTo('/')">
+                <input type="submit" value="<?=say('button_export')?>" onclick="sheetExport()">
+                <input type="submit" value="<?=say('button_home')?>" onclick="goTo('/')">
                 <? if ($mode == "edit") { ?>
                 <input type="submit" id="more-tools-button" value="+" onclick="revealTools()">
                 <? } ?>
@@ -79,12 +78,12 @@
         </div>
         <div class="row more-tools" id="more-tools" align="right">
             <div class="column">
-                <input type="submit" value="Compact View" onclick="viewCompact()">
-                <input type="submit" value="Clear All Temps" onclick="clearTemp()">
-                <input type="submit" value="Hide Sections" onclick="hideAll()">
-                <input type="submit" value="Show Sections" onclick="showAll()">
-                <input type="submit" value="Prepped Spells" onclick="showPreppedSpells()">
-                <input type="submit" value="All Spells" onclick="showAllSpells()">
+                <input type="submit" value="<?=say('button_compact')?>" onclick="viewCompact()">
+                <input type="submit" value="<?=say('button_clear')?>" onclick="clearTemp()">
+                <input type="submit" value="<?=say('button_hide')?>" onclick="hideAll()">
+                <input type="submit" value="<?=say('button_show')?>" onclick="showAll()">
+                <input type="submit" value="<?=say('button_prep')?>" onclick="showPreppedSpells()">
+                <input type="submit" value="<?=say('button_spells')?>" onclick="showAllSpells()">
             </div>
         </div>
     </div>
@@ -99,15 +98,15 @@
                 </div>
                 <a class="strong" id="search-d20" target="pfsearch" href="http://www.d20pfsrd.com/">
                     <span class="glyphicon glyphicon-search"></span>
-                    D20PFSRD
+                    <?=say('d20pfsrd')?>
                 </a>
                 <a class="strong" id="search-prd" target="pfsearch" href="http://paizo.com/pathfinderRPG/prd/">
                     <span class="glyphicon glyphicon-search"></span>
-                    Paizo PRD
+                    <?=say('paizo_prd')?>
                 </a>
             </div>
             <div class="column rolz">
-                <a href="http://rolz.org" target="pfsearch">Rolz.org</a> Dice Roller:
+                <a href="http://rolz.org" target="pfsearch">Rolz.org</a> <?=say('dice_roller')?>:
                 <input type="text" style="width: 10rem;" id="rolz-input">
                 <input type="submit" value="Roll" id="rolz">
                 <span class="glyphicon glyphicon-arrow-right"></span>
@@ -133,99 +132,99 @@
 <div class="quick-look">
     <div class="quick-look-content" id="quicklook">
         <div>
-            <strong>AC</strong>
+            <strong><?=say('ac')?></strong>
             <span ref="total-ac"></span>
         </div>
         <div>
-            <strong>FLAT</strong>
+            <strong><?=say('flat')?></strong>
             <span ref="flatfoot-ac"></span>
         </div>
         <div>
-            <strong>TOUCH</strong>
+            <strong><?=say('touch')?></strong>
             <span ref="touch-ac"></span>
         </div>
         <hr/>
         <div>
-            <strong>HP</strong>
+            <strong><?=say('hp')?></strong>
             <span ref="final_hp_current"></span>
         </div>
         <hr/>
         <div>
-            <strong>INIT</strong>
+            <strong><?=say('init')?></strong>
             <span ref="init-total"></span>
         </div>
         <hr/>
         <div>
-            <strong>FORT</strong>
+            <strong><?=say('fort')?></strong>
             <span ref="final_fort"></span>
         </div>
         <div>
-            <strong>REF</strong>
+            <strong><?=say('ref')?></strong>
             <span ref="final_ref"></span>
         </div>
         <div>
-            <strong>WILL</strong>
+            <strong><?=say('will')?></strong>
             <span ref="final_will"></span>
         </div>
         <hr/>
         <div>
-            <strong>BAB</strong>
+            <strong><?=say('bab')?></strong>
             <span ref="final_bab"></span>
         </div>
         <div>
-            <strong>MELEE</strong>
+            <strong><?=say('melee')?></strong>
             <span ref="final_melee"></span>
         </div>
         <div>
-            <strong>RANGED</strong>
+            <strong><?=say('ranged')?></strong>
             <span ref="final_ranged"></span>
         </div>
         <hr/>
         <div>
-            <strong>CMB</strong>
+            <strong><?=say('cmb')?></strong>
             <span ref="cmb-total"></span>
         </div>
         <div>
-            <strong>CMD</strong>
+            <strong><?=say('cmd')?></strong>
             <span ref="cmd-total"></span>
         </div>
         <hr/>
         <div>
-            <strong>STR</strong>
+            <strong><?=say('str')?></strong>
             <span ref="str-total"></span> (<span ref="str-mod"></span>)
         </div>
         <div>
-            <strong>DEX</strong>
+            <strong><?=say('dex')?></strong>
             <span ref="dex-total"></span> (<span ref="dex-mod"></span>)
         </div>
         <div>
-            <strong>CON</strong>
+            <strong><?=say('con')?></strong>
             <span ref="con-total"></span> (<span ref="con-mod"></span>)
         </div>
         <div>
-            <strong>INT</strong>
+            <strong><?=say('int')?></strong>
             <span ref="int-total"></span> (<span ref="int-mod"></span>)
         </div>
         <div>
-            <strong>WIS</strong>
+            <strong><?=say('wis')?></strong>
             <span ref="wis-total"></span> (<span ref="wis-mod"></span>)
         </div>
         <div>
-            <strong>CHA</strong>
+            <strong><?=say('cha')?></strong>
             <span ref="cha-total"></span> (<span ref="cha-mod"></span>)
         </div>
         <hr/>
         <div>
-            <strong>LOAD</strong>
+            <strong><?=say('load')?></strong>
             <span ref="weight-status"></span>
         </div>
         <div>
-            <strong>WEIGHT</strong>
+            <strong><?=say('weight')?></strong>
             <span ref="total-weight"></span>
         </div>
         <hr/>
         <div>
-            <strong>COIN</strong>
+            <strong><?=say('coin')?></strong>
             <span ref="currency-grand-total"></span>
         </div>
 
@@ -234,45 +233,45 @@
 <div class="quick-look-again">
     <div id="skills-quick">
         <div class="entry">
-            <strong>ACROBATICS</strong>
-            <span>1</span>
+            <strong></strong>
+            <span></span>
         </div>
     </div>
 </div>
 
 <div class="container" id="sheet">
-    <h1 onclick="toggleSection(this)" style="margin-top: 2rem"><span class="glyphicon glyphicon-user"></span> Character</h1>
+    <h1 onclick="toggleSection(this)" style="margin-top: 2rem"><span class="glyphicon glyphicon-user"></span> <?=say('character')?></h1>
 
     <section>
     <div class="row">
         <div class="column">
-            <label>Name</label>
+            <label><?=say('name')?></label>
             <input type="text" saveas="charname">
         </div>
         <div class="column">
-            <label>Player</label>
+            <label><?=say('player')?></label>
             <input type="text" saveas="playername">
         </div>
         <div class="column">
-            <label>Race</label>
+            <label><?=say('race')?></label>
             <input type="text" saveas="race">
         </div>
         <div class="column">
-            <label>Deity</label>
+            <label><?=say('deity')?></label>
             <input type="text" saveas="deity">
         </div>
         <div class="column">
-            <label>Alignment</label>
+            <label><?=say('alignment')?></label>
             <select saveas="alignment" calc="alignment">
-                <option value="n" selected="selected">Neutral</option>
-                <option value="ng">Neutral Good</option>
-                <option value="ne">Neutral Evil</option>
-                <option value="lg">Lawful Good</option>
-                <option value="ln">Lawful Neutral</option>
-                <option value="le">Lawful Evil</option>
-                <option value="cg">Chaotic Good</option>
-                <option value="cn">Chaotic Neutral</option>
-                <option value="ce">Chaotic Evil</option>
+                <option value="ng"><?=say('alignment_ng')?></option>
+                <option value="n" selected="selected"><?=say('alignment_n')?></option>
+                <option value="ne"><?=say('alignment_ne')?></option>
+                <option value="lg"><?=say('alignment_lg')?></option>
+                <option value="ln"><?=say('alignment_ln')?></option>
+                <option value="le"><?=say('alignment_le')?></option>
+                <option value="cg"><?=say('alignment_cg')?></option>
+                <option value="cn"><?=say('alignment_cn')?></option>
+                <option value="ce"><?=say('alignment_ce')?></option>
             </select>
         </div>
 
@@ -280,131 +279,131 @@
 
     <div class="row">
         <div class="column column-15">
-            <label>Homeland</label>
+            <label><?=say('homeland')?></label>
             <input type="text" saveas="homeland">
         </div>
 
         <div class="column column-15">
-            <label>Size</label>
+            <label><?=say('size')?></label>
             <select saveas="size" calc="size">
-                <option value="fine" mod="8">Fine</option>
-                <option value="diminutive" mod="4">Diminutive</option>
-                <option value="tiny" mod="2">Tiny</option>
-                <option value="small" mod="1">Small</option>
-                <option value="medium" mod="0" selected="selected">Medium</option>
-                <option value="large" mod="-1">Large</option>
-                <option value="huge" mod="-2">Huge</option>
-                <option value="gargantuan" mod="-4">Gargantuan</option>
-                <option value="colossal" mod="-8">Colossal</option>
+                <option value="fine" mod="8"><?=say('fine')?></option>
+                <option value="diminutive" mod="4"><?=say('diminutive')?></option>
+                <option value="tiny" mod="2"><?=say('tiny')?></option>
+                <option value="small" mod="1"><?=say('small')?></option>
+                <option value="medium" mod="0" selected="selected"><?=say('medium')?></option>
+                <option value="large" mod="-1"><?=say('large')?></option>
+                <option value="huge" mod="-2"><?=say('huge')?></option>
+                <option value="gargantuan" mod="-4"><?=say('gargantuan')?></option>
+                <option value="colossal" mod="-8"><?=say('colossal')?></option>
             </select>
             <input type="hidden" calc="size-mod">
             <input type="hidden" calc="size-mod-special">
         </div>
 
         <div class="column column-10">
-            <label>Gender</label>
+            <label><?=say('gender')?></label>
             <input type="text" saveas="gender">
         </div>
 
         <div class="column column-10">
-            <label>Age</label>
+            <label><?=say('age')?></label>
             <input type="number" saveas="age">
         </div>
 
         <div class="column column-10">
-            <label>Weight</label>
+            <label><?=say('weight')?></label>
             <input type="number" saveas="weight">
         </div>
 
         <div class="column column-10">
-            <label>Height</label>
+            <label><?=say('height')?></label>
             <input type="text" saveas="height">
         </div>
 
         <div class="column column-10">
-            <label>Hair</label>
+            <label><?=say('hair')?></label>
             <input type="text" saveas="hair">
         </div>
 
         <div class="column column-10">
-            <label>Eyes</label>
+            <label><?=say('eyes')?></label>
             <input type="text" saveas="eyes">
         </div>
 
         <div class="column column-10">
-            <label>Skin</label>
+            <label><?=say('skin')?></label>
             <input type="text" saveas="skin">
         </div>
     </div>
 
     <div class="row">
         <div class="column column-80">
-            <label>Languages</label>
+            <label><?=say('languages')?></label>
             <input type="text" saveas="known_languages" id="language-tags">
         </div>
         <div class="column">
-            <label>Creature Type</label>
+            <label><?=say('creature_type')?></label>
             <select saveas="creature_type">
-                <option value="aberration">Abberations</option>
-                <option value="animal">Animal</option>
-                <option value="construct">Construct</option>
-                <option value="dragon">Dragon</option>
-                <option value="fey">Fey</option>
-                <option value="humanoid" selected>Humanoid</option>
-                <option value="magical_beast">Magical Beast</option>
-                <option value="monsterous_humanoid">Monsterous Humanoid</option>
-                <option value="ooze">Ooze</option>
-                <option value="outsider">Outsider</option>
-                <option value="plant">Plant</option>
-                <option value="undead">Undead</option>
-                <option value="vermin">Vermin</option>
+                <option value="aberration"><?=say('aberration')?></option>
+                <option value="animal"><?=say('animal')?></option>
+                <option value="construct"><?=say('construct')?></option>
+                <option value="dragon"><?=say('dragon')?></option>
+                <option value="fey"><?=say('fey')?></option>
+                <option value="humanoid" selected><?=say('humanoid')?></option>
+                <option value="magical_beast"><?=say('magical_beast')?></option>
+                <option value="monsterous_humanoid"><?=say('monsterous_humanoid')?></option>
+                <option value="ooze"><?=say('ooze')?></option>
+                <option value="outsider"><?=say('outsider')?></option>
+                <option value="plant"><?=say('plant')?></option>
+                <option value="undead"><?=say('undead')?></option>
+                <option value="vermin"><?=say('vermin')?></option>
             </select>
         </div>
     </div>
     </section>
 
-    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-th-list"></span> Ability Scores</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-th-list"></span> <?=say('ability_scores')?></h1>
 
     <section id="ability-scores">
     <div class="row">
         <div class="column">
-            <label>Type</label>
+            <label><?=say('type')?></label>
         </div>
         <div class="column">
-            <label>Total</label>
+            <label><?=say('total')?></label>
         </div>
         <div class="column">
-            <label>Modifier</label>
+            <label><?=say('modifier')?></label>
         </div>
         <div class="column">
-            <label>Base</label>
+            <label><?=say('base')?></label>
         </div>
         <div class="column">
-            <label>Level</label>
+            <label><?=say('level')?></label>
         </div>
         <div class="column">
-            <label>Race</label>
+            <label><?=say('race')?></label>
         </div>
         <div class="column">
-            <label>Enhance</label>
+            <label><?=say('enhance')?></label>
         </div>
         <div class="column">
-            <label>Size</label>
+            <label><?=say('size')?></label>
         </div>
         <div class="column">
-            <label>Damage</label>
+            <label><?=say('damage')?></label>
         </div>
         <div class="column">
-            <label>Drain</label>
+            <label><?=say('drain')?></label>
         </div>
         <div class="column">
-            <label>Age</label>
+            <label><?=say('age')?></label>
         </div>
         <div class="column">
-            <label>Misc</label>
+            <label><?=say('misc')?></label>
         </div>
         <div class="column">
-            <label>Temp</label>
+            <label><?=say('temp')?></label>
         </div>
     </div>
 
@@ -412,7 +411,7 @@
 
     <div class="row" id="<?=$type?>">
         <div class="column">
-            <h4><?=strtoupper($type)?></h4>
+            <h4><?=strtoupper(say($type))?></h4>
         </div>
         <div class="column">
             <h4 saveas="final_<?=$type?>_total" class="calc-result" calc="<?=$type?>-total">0</h4>
@@ -455,15 +454,15 @@
 
     <div class="row">
         <div class="column column-10">
-            <label>Point Max</label>
+            <label><?=say('point_max')?></label>
             <input type="number" saveas="point_maximum" calc="point-max" id="points-max"/>
         </div>
         <div class="column column-15">
-            <label>Fantasy</label>
+            <label><?=say('fantasy')?></label>
             <h4 calc="fantasy-type">CUSTOM</h4>
         </div>
         <div class="column">
-            <label>Points</label>
+            <label><?=say('points')?></label>
             <h4 calc="point-total" class="strong"></h4>
         </div>
         <div class="column">&nbsp;</div>
@@ -471,47 +470,47 @@
         <div class="column">&nbsp;</div>
         <? foreach(array("str", "dex", "con", "int", "wis", "cha") as $type) { ?>
         <div class="column">
-            <label><?=strtoupper($type)?></label>
+            <label><?=strtoupper(say($type))?></label>
             <h4 calc="<?=$type?>-points">0</h4>
         </div>
         <? } ?>
     </div>
     </section>
 
-    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-knight"></span> Class</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-knight"></span> <?=say('class')?></h1>
 
     <section>
     <div class="row" calc="classes-total">
         <div class="column column-20">
-            <label>Favored Class</label>
+            <label><?=say('favored_class')?></label>
             <select saveas="favored_class" calc="favored-class"></select>
         </div>
         <div class="column">
-            <label>Levels</label>
+            <label><?=say('levels')?></label>
             <h4 class="calc-result" calc="levels">0</h4>
         </div>
         <div class="column">
-            <label>BAB</label>
+            <label><?=say('bab')?></label>
             <h4 saveas="final_bab" class="calc-result" calc="bab">0</h4>
         </div>
         <div class="column">
-            <label>Skill</label>
+            <label><?=say('skill')?></label>
             <h4 class="calc-result" calc="skill">0</h4>
         </div>
         <div class="column">
-            <label>HP Bonus</label>
+            <label><?=say('hp_bonus')?></label>
             <h4 class="calc-result" calc="hpbonus">0</h4>
         </div>
         <div class="column">
-            <label>Fortitude</label>
+            <label><?=say('fortitude')?></label>
             <h4 class="calc-result" calc="fortitude">0</h4>
         </div>
         <div class="column">
-            <label>Reflex</label>
+            <label><?=say('reflex')?></label>
             <h4 class="calc-result" calc="reflex">0</h4>
         </div>
         <div class="column">
-            <label>Will</label>
+            <label><?=say('will')?></label>
             <h4 class="calc-result" calc="will">0</h4>
         </div>
         <div class="column column-10"></div>
@@ -519,7 +518,7 @@
 
     <div class="row">
         <div class="column">
-            <label>Class Name</label>
+            <label><?=say('class_name')?></label>
         </div>
     </div>
 
@@ -559,11 +558,11 @@
             </div>
             <div class="row reveal">
                 <div class="column column-20">
-                    <label>Reference URL</label>
+                    <label><?=say('reference_url')?></label>
                     <input type="url" saveas="class_url" onclick="select()">
                 </div>
                 <div class="column">
-                    <label>Additional Notes</label>
+                    <label><?=say('additional_notes')?></label>
                     <textarea saveas="class_notes"></textarea>
                 </div>
             </div>
@@ -573,7 +572,7 @@
     <? if ($mode == "edit") { ?>
     <div class="row">
         <div class="column">
-            <input type="submit" value="Add" onclick="addRow(this)">
+            <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
         </div>
     </div>
     <? } ?>
@@ -582,45 +581,45 @@
     <div class="row">
         <div class="column column-50">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-education"></span> Skills</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-education"></span> <?=say('skills')?></h1>
 
 
             <section>
             <div class="row" calc="skills">
                 <div class="column">
-                    <label>Total Skill Points</label>
+                    <label><?=say('total_skill')?></label>
                     <h4 ref="skill">0</h4>
                 </div>
                 <div class="column">
-                    <label>Used Skill Points</label>
+                    <label><?=say('used_skill')?></label>
                     <h4 calc="skill-used">0</h4>
                 </div>
                 <div class="column">
-                    <label>Armor Check Penalty</label>
+                    <label><?=say('armor_check_penalty')?></label>
                     <h4 ref="penalty-total">0</h4>
                 </div>
             </div>
 
             <div class="row">
                 <div class="column column-30">
-                    <label>Type</label>
+                    <label><?=say('type')?></label>
                 </div>
                 <div class="column">
-                    <label>Total</label>
+                    <label><?=say('total')?></label>
                 </div>
                 <div class="column">
-                    <label>Ability</label>
+                    <label><?=say('ability')?></label>
                 </div>
                 <div class="column">
                 </div>
                 <div class="column">
-                    <label>Train</label>
+                    <label><?=say('train')?></label>
                 </div>
                 <div class="column">
-                    <label>Ranks</label>
+                    <label><?=say('ranks')?></label>
                 </div>
                 <div class="column">
-                    <label>Misc</label>
+                    <label><?=say('misc')?></label>
                 </div>
             </div>
 
@@ -637,6 +636,12 @@
                     "Perception *", "Ride *", "Sense Motive *", "Sleight of Hand",
                     "Spellcraft", "Stealth *", "Survival *", "Swim *", "Use Magic Device"
                 );
+                $skills_lang = array(
+                    "acrobatics", "appraise", "bluff", "climb", "diplomacy", "disable_device",
+                    "disguise", "escape_artist", "fly", "handle_animal", "heal", "intimidate",
+                    "linguistics", "perception", "ride", "sense_motive", "sleight_of_hand",
+                    "spellcraft", "stealth", "survival", "swim", "use_magic_device"
+                );
                 $abilities = array(
                     "dex", "int", "cha", "str", "cha", "dex", "cha", "dex",
                     "dex", "cha", "wis", "cha", "int", "wis", "dex", "wis",
@@ -647,13 +652,13 @@
                 ?>
                 <div class="row skills" calc="skills" train="<?=$skill_needs_train?>">
                     <div class="column column-30">
-                        <span calc="skill-name" saveas="skill_name" load="no"><?=$skill?></span>
+                        <span calc="skill-name" saveas="skill_name" load="no"><?=say($skills_lang[$index])?></span>
                     </div>
                     <div class="column">
                         <span calc="skill-total" class="calc-result" saveas="final_skill">0</span>
                     </div>
                     <div class="column">
-                        <span calc="skill-type" saveas="skill_ability" load="no"><?=strtoupper($abilities[$index])?></span>
+                        <span calc="skill-type" saveas="skill_ability" load="no"><?=strtoupper(say($abilities[$index]))?></span>
                     </div>
                     <div class="column">
                         <span sum="skill" ref="<?=$abilities[$index]?>-mod">0</span>
@@ -680,12 +685,12 @@
                     </div>
                     <div class="column">
                         <select calc="skill-type" saveas="skill_ability">
-                            <option value="str">STR</option>
-                            <option value="dex">DEX</option>
-                            <option value="con">CON</option>
-                            <option value="int" selected="selected">INT</option>
-                            <option value="wis">WIS</option>
-                            <option value="cha">CHA</option>
+                            <option value="str"><?=say('str')?></option>
+                            <option value="dex"><?=say('dex')?></option>
+                            <option value="con"><?=say('con')?></option>
+                            <option value="int" selected="selected"><?=say('int')?></option>
+                            <option value="wis"><?=say('wis')?></option>
+                            <option value="cha"><?=say('cha')?></option>
                         </select>
                     </div>
                     <div class="column">
@@ -707,7 +712,7 @@
             <? if ($mode == "edit") { ?>
             <div class="row">
                 <div class="column">
-                    <input type="submit" value="Add" onclick="addRow(this)">
+                    <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
                 </div>
             </div>
             <? } ?>
@@ -717,15 +722,15 @@
         <div class="column column-50">
             <div class="row">
                 <div class="column">
-                    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-star"></span> Feats</h1>
+                    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-star"></span> <?=say('feats')?></h1>
 
                     <section>
                     <div class="row">
                         <div class="column column-40">
-                            <label>Feat</label>
+                            <label><?=say('feat')?></label>
                         </div>
                         <div class="column column-40">
-                            <label>Notes</label>
+                            <label><?=say('notes')?></label>
                         </div>
                         <div class="column column-20">
                             <label>&nbsp;</label>
@@ -750,11 +755,11 @@
                             </div>
                             <div class="row reveal">
                                 <div class="column column-40">
-                                    <label>Reference URL</label>
+                                    <label><?=say('reference_url')?></label>
                                     <input type="url" saveas="feat_url" onclick="select()">
                                 </div>
                                 <div class="column">
-                                    <label>Additional Notes</label>
+                                    <label><?=say('additional_notes')?></label>
                                     <textarea saveas="feat_more_notes"></textarea>
                                 </div>
                             </div>
@@ -764,27 +769,27 @@
                     <? if ($mode == "edit") { ?>
                     <div class="row">
                         <div class="column">
-                            <input type="submit" value="Add" onclick="addRow(this)">
+                            <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
                         </div>
                     </div>
                     <? } ?>
                     </section>
 
-                    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-star-empty"></span> Special Abilities</h1>
+                    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-star-empty"></span> <?=say('special_abilities')?></h1>
 
                     <section>
                     <div class="row">
                         <div class="column column-33">
-                            <label>Ability</label>
+                            <label><?=say('ability')?></label>
                         </div>
                         <div class="column">
-                            <label>Type</label>
+                            <label><?=say('type')?></label>
                         </div>
                         <div class="column">
-                            <label>Uses</label>
+                            <label><?=say('uses')?></label>
                         </div>
                         <div class="column">
-                            <label>Used</label>
+                            <label><?=say('used')?></label>
                         </div>
                         <div class="column column-20">
                             <label>&nbsp;</label>
@@ -800,9 +805,9 @@
                                 <div class="column">
                                     <select saveas="special_type">
                                         <option value=" "> </option>
-                                        <option value="Su">Su</option>
-                                        <option value="Sp">Sp</option>
-                                        <option value="Ex">Ex</option>
+                                        <option value="Su"><?=say('supernatural')?></option>
+                                        <option value="Sp"><?=say('spell_like')?></option>
+                                        <option value="Ex"><?=say('extraordinary')?></option>
                                     </select>
                                 </div>
                                 <div class="column">
@@ -820,11 +825,11 @@
                             </div>
                             <div class="row reveal">
                                 <div class="column column-33">
-                                    <label>Reference URL</label>
+                                    <label><?=say('reference_url')?></label>
                                     <input type="url" saveas="special_url">
                                 </div>
                                 <div class="column">
-                                    <label>Additional Notes</label>
+                                    <label><?=say('additional_notes')?></label>
                                     <textarea saveas="special_notes"></textarea>
                                 </div>
                             </div>
@@ -834,7 +839,7 @@
                     <? if ($mode == "edit") { ?>
                     <div class="row">
                         <div class="column">
-                            <input type="submit" value="Add" onclick="addRow(this)">
+                            <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
                         </div>
                     </div>
                     <? } ?>
@@ -845,122 +850,122 @@
         </div>
     </div>
 
-    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-heart"></span> Health</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-heart"></span> <?=say('health')?></h1>
 
     <section>
     <div class="row" id="health">
         <input type="hidden" ref="con-total">
         <div class="column column-10">
-            <label>Total</label>
+            <label><?=say('total')?></label>
             <h4 class="calc-result" calc="result-total" saveas="final_hp_total">0</h4>
         </div>
         <div class="column column-10">
-            <label>Current</label>
+            <label><?=say('current')?></label>
             <h4 class="calc-result" calc="current" saveas="final_hp_current">0</h4>
         </div>
         <div class="column column-20">
-            <label>Status</label>
+            <label><?=say('status')?></label>
             <h4 calc="status"></h4>
         </div>
         <div class="column column-10">
-            <label>Base</label>
+            <label><?=say('base')?></label>
             <input type="number" calc="total" saveas="health_base">
         </div>
         <div class="column column-10">
-            <label>Temp</label>
+            <label><?=say('temp')?></label>
             <input type="number" calc="total" saveas="health_temp" temp id="health-temp">
         </div>
         <div class="column column-10">
-            <label>Misc</label>
+            <label><?=say('misc')?></label>
             <input type="number" calc="total" saveas="health_misc">
         </div>
         <div class="column column-10">
-            <label>Class</label>
+            <label><?=say('class')?></label>
             <h4 ref="hpbonus" calc="total">0</h4>
         </div>
         <div class="column column-10" calc="lethal">
-            <label>Lethal</label>
+            <label><?=say('lethal')?></label>
             <input type="number" calctype="subtract" saveas="health_lethal" id="health-lethal">
         </div>
         <div class="column column-10" calc="nonlethal">
-            <label>Nonlethal</label>
+            <label><?=say('nonlethal')?></label>
             <input type="number" saveas="health_nonlethal" id="health-nonlethal">
         </div>
     </div>
 
     <div class="row">
         <div class="column column-40">
-            <label>Health Bar</label>
+            <label><?=say('health_bar')?></label>
             <div class="health-bar bar-container">
                 <div class="bar ko" calc="healthbar-ko"></div><div class="bar health" calc="healthbar-hp"></div>
             </div>
         </div>
         <div class="column column-40">
-            <label>Conditions</label>
+            <label><?=say('conditions')?></label>
             <input type="text" id="conditions-tags" saveas="health_conditions">
         </div>
         <div class="column column-10">
-            <label>Damage</label>
+            <label><?=say('damage')?></label>
             <input type="number" id="damage-lethal">
         </div>
         <div class="column column-10">
-            <label>Damage</label>
+            <label><?=say('damage')?></label>
             <input type="number" id="damage-nonlethal">
         </div>
     </div>
     </section>
 
-    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-tower"></span> Armor</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-tower"></span> <?=say('armor')?></h1>
 
     <section>
     <div class="row" calc="armor-class">
         <input type="hidden" ref="dex-mod"> <!-- So armor updates when dex mod changes -->
         <div class="column">
-            <label>Total AC</label>
+            <label><?=say('total_ac')?></label>
             <h4 class="calc-result" calc="total-ac" saveas="final_ac">0</h4>
         </div>
         <div class="column">
-            <label>Touch</label>
+            <label><?=say('touch')?></label>
             <h4 class="calc-result" calc="touch-ac" saveas="final_touch">10</h4>
         </div>
         <div class="column">
-            <label>Flat Foot</label>
+            <label><?=say('flat_foot')?></label>
             <h4 class="calc-result" calc="flatfoot-ac" saveas="final_flatfoot">10</h4>
         </div>
         <div class="column">
-            <label>Armor</label>
+            <label><?=say('armor')?></label>
             <h4 sum="armor-total" calc="armor-gear" saveas="final_armor">0</h4>
         </div>
         <div class="column">
-            <label>Shield</label>
+            <label><?=say('shield')?></label>
             <h4 sum="armor-total" calc="shield-gear" saveas="final_shield">0</h4>
         </div>
         <div class="column">
-            <label>DEX</label>
+            <label><?=say('dex')?></label>
             <h4 sum="armor-total" calc="max-dex-bonus" saveas="final_dex_armor">0</h4>
         </div>
         <div class="column">
-            <label>Size</label>
+            <label><?=say('size')?></label>
             <h4 sum="armor-total" ref="size-mod" saveas="final_size_armor">0</h4>
         </div>
         <div class="column">
-            <label>Dodge</label>
+            <label><?=say('dodge')?></label>
             <input type="number" calc="armor-dodge" sum="armor-total" saveas="armor_dodge">
         </div>
         <div class="column">
-            <label>Natural</label>
+            <label><?=say('natural')?></label>
             <input type="number" sum="armor-total" saveas="armor_natural">
         </div>
         <div class="column">
-            <label>Deflect</label>
+            <label><?=say('deflect')?></label>
             <input type="number" calc="armor-deflect" sum="armor-total" saveas="armor_deflect">
         </div>
         <div class="column">
-            <label>Misc</label>
+            <label><?=say('misc')?></label>
             <input type="number" sum="armor-total" saveas="armor_misc">
         </div>
         <div class="column">
-            <label>Temp</label>
+            <label><?=say('temp')?></label>
             <input type="number" sum="armor-total" saveas="armor_temp" temp>
         </div>
     </div>
@@ -968,35 +973,35 @@
     <? foreach(array("armor", "shield") as $armor) { ?>
     <div class="row" calc="armor-class">
         <div class="column">
-            <label><?=ucfirst($armor)?></label>
+            <label><?=say($armor)?></label>
             <input type="text" saveas="<?=$armor?>_name">
         </div>
         <div class="column column-10">
-            <label>AC Bonus</label>
+            <label><?=say('ac_bonus')?></label>
             <input type="number" calc="<?=$armor?>-ac-bonus" saveas="armor_<?=$armor?>_ac">
         </div>
         <div class="column column-10">
-            <label>Enhance</label>
+            <label><?=say('enhance')?></label>
             <input type="number" calc="<?=$armor?>-enhance-bonus" saveas="armor_<?=$armor?>_enhance">
         </div>
         <div class="column column-10">
-            <label>Max DEX</label>
+            <label><?=say('max_dex')?></label>
             <input type="number" calc="<?=$armor?>-max-dex" saveas="armor_<?=$armor?>_max_dex">
         </div>
         <div class="column column-10">
-            <label>Penalty</label>
+            <label><?=say('penalty')?></label>
             <input type="number" sum="armor-penalty" calctype="subtract" saveas="armor_<?=$armor?>_penalty">
         </div>
         <div class="column column-10">
-            <label>Spell Fail</label>
+            <label><?=say('spell_fail')?></label>
             <input type="number" sum="spell-chance" saveas="armor_<?=$armor?>_spellfail">
         </div>
         <div class="column column-10">
-            <label>Type</label>
+            <label><?=say('type')?></label>
             <input type="text" saveas="armor_<?=$armor?>_type">
         </div>
         <div class="column column-10">
-            <label>Weight</label>
+            <label><?=say('weight')?></label>
             <input type="number" saveas="armor_<?=$armor?>_weight" weight step="0.5">
         </div>
     </div>
@@ -1004,31 +1009,31 @@
 
     <div class="row">
         <div class="column column-10">
-            <label>Penalty</label>
+            <label><?=say('penalty')?></label>
             <h4 ref="penalty-total">0</h4>
             <input type="hidden" calc="penalty-total">
         </div>
         <div class="column column-10">
-            <label>Max DEX</label>
+            <label><?=say('max_dex')?></label>
             <h4 calc="max-dex-total">0</h4>
         </div>
         <div class="column column-10">
-            <label>Spell Fail</label>
+            <label><?=say('spell_fail')?></label>
             <h4 calc="spell-fail-total">0%</h4>
         </div>
         <div class="column column-10" calc="armor-class">
-            <label>DEX Mod</label>
+            <label><?=say('dex_mod')?></label>
             <select saveas="armor_dex_override" calc="armor-dex-override">
-                <option value="str">STR</option>
-                <option value="dex" selected="selected">DEX</option>
-                <option value="con">CON</option>
-                <option value="int">INT</option>
-                <option value="wis">WIS</option>
-                <option value="cha">CHA</option>
+                <option value="str"><?=say('str')?></option>
+                <option value="dex" selected="selected"><?=say('dex')?></option>
+                <option value="con"><?=say('con')?></option>
+                <option value="int"><?=say('int')?></option>
+                <option value="wis"><?=say('wis')?></option>
+                <option value="cha"><?=say('cha')?></option>
             </select>
         </div>
         <div class="column">
-            <label>Notes</label>
+            <label><?=say('notes')?></label>
             <input type="text" saveas="armor_notes">
         </div>
     </div>
@@ -1037,30 +1042,30 @@
     <div class="row">
         <div class="column">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-flash"></span> Saves</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-flash"></span> <?=say('saves')?></h1>
 
             <section>
             <div class="row">
                 <div class="column column-15">
-                    <label>Type</label>
+                    <label><?=say('type')?></label>
                 </div>
                 <div class="column">
-                    <label>Total</label>
+                    <label><?=say('total')?></label>
                 </div>
                 <div class="column">
-                    <label>Class</label>
+                    <label><?=say('class')?></label>
                 </div>
                 <div class="column">
-                    <label>Ability</label>
+                    <label><?=say('ability')?></label>
                 </div>
                 <div class="column">
-                    <label>Enhance</label>
+                    <label><?=say('enhance')?></label>
                 </div>
                 <div class="column">
-                    <label>Misc</label>
+                    <label><?=say('misc')?></label>
                 </div>
                 <div class="column">
-                    <label>Temp</label>
+                    <label><?=say('temp')?></label>
                 </div>
             </div>
 
@@ -1072,7 +1077,7 @@
             <div class="row" calc="saves">
                 <input type="hidden" value="<?=$save?>" calc="save-type">
                 <div class="column column-15">
-                    <h4><?=strtoupper($save)?></h4>
+                    <h4><?=strtoupper(say($save))?></h4>
                 </div>
                 <div class="column">
                     <h4 class="calc-result" calc="save-total" saveas="final_<?=$save?>">0</h4>
@@ -1097,40 +1102,40 @@
 
             <div class="row" calc="saves-more">
                 <div class="column column">
-                    <label>Fort</label>
+                    <label><?=say('fort')?></label>
                     <select calc="fort-type" saveas="fort_ability">
-                        <option value="str">STR</option>
-                        <option value="dex">DEX</option>
-                        <option value="con" selected="selected">CON</option>
-                        <option value="int">INT</option>
-                        <option value="wis">WIS</option>
-                        <option value="cha">CHA</option>
+                        <option value="str"><?=say('str')?></option>
+                        <option value="dex"><?=say('dex')?></option>
+                        <option value="con" selected="selected"><?=say('con')?></option>
+                        <option value="int"><?=say('int')?></option>
+                        <option value="wis"><?=say('wis')?></option>
+                        <option value="cha"><?=say('cha')?></option>
                     </select>
                 </div>
                 <div class="column column">
-                    <label>Ref</label>
+                    <label><?=say('ref')?></label>
                     <select calc="ref-type" saveas="ref_ability">
-                        <option value="str">STR</option>
-                        <option value="dex" selected="selected">DEX</option>
-                        <option value="con">CON</option>
-                        <option value="int">INT</option>
-                        <option value="wis">WIS</option>
-                        <option value="cha">CHA</option>
+                        <option value="str"><?=say('str')?></option>
+                        <option value="dex" selected="selected"><?=say('dex')?></option>
+                        <option value="con"><?=say('con')?></option>
+                        <option value="int"><?=say('int')?></option>
+                        <option value="wis"><?=say('wis')?></option>
+                        <option value="cha"><?=say('cha')?></option>
                     </select>
                 </div>
                 <div class="column column">
-                    <label>Will</label>
+                    <label><?=say('will')?></label>
                     <select calc="will-type" saveas="will_ability">
-                        <option value="str">STR</option>
-                        <option value="dex">DEX</option>
-                        <option value="con">CON</option>
-                        <option value="int">INT</option>
-                        <option value="wis" selected="selected">WIS</option>
-                        <option value="cha">CHA</option>
+                        <option value="str"><?=say('str')?></option>
+                        <option value="dex"><?=say('dex')?></option>
+                        <option value="con"><?=say('con')?></option>
+                        <option value="int"><?=say('int')?></option>
+                        <option value="wis" selected="selected"><?=say('wis')?></option>
+                        <option value="cha"><?=say('cha')?></option>
                     </select>
                 </div>
                 <div class="column column-50">
-                    <label>Notes</label>
+                    <label><?=say('notes')?></label>
                     <input type="text" saveas="save_notes">
                 </div>
             </div>
@@ -1139,16 +1144,16 @@
 
         <div class="column">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-heart-empty"></span> Resistance</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-heart-empty"></span> <?=say('resistance')?></h1>
 
             <section>
             <div class="row">
                 <div class="column column-20">
-                    <label>Spell Resist</label>
+                    <label><?=say('spell_resist')?></label>
                     <input type="number" saveas="spell_resistance">
                 </div>
                 <div class="column">
-                    <label>Damage Resistance</label>
+                    <label><?=say('damage_resist')?></label>
                     <input type="text" saveas="damage_resistance">
                 </div>
             </div>
@@ -1157,7 +1162,7 @@
 
             <div class="row">
                 <div class="column">
-                    <label>Other Resistances</label>
+                    <label><?=say('other_resist')?></label>
                     <input type="text" id="resistance-tags" saveas="other_resistance">
                 </div>
             </div>
@@ -1166,7 +1171,7 @@
 
             <div class="row">
                 <div class="column">
-                    <label>Notes</label>
+                    <label><?=say('notes')?></label>
                     <input type="text" saveas="resistance_notes">
                 </div>
             </div>
@@ -1174,33 +1179,33 @@
         </div>
     </div>
 
-    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-scissors"></span> Weapons</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-scissors"></span> <?=say('weapons')?></h1>
 
     <section>
     <div class="row">
         <div class="column column-20">
-            <label>Weapon Name</label>
+            <label><?=say('weapon_name')?></label>
         </div>
         <div class="column column-15">
-            <label>Attack</label>
+            <label><?=say('attack')?></label>
         </div>
         <div class="column column-15">
-            <label>Damage</label>
+            <label><?=say('damage')?></label>
         </div>
         <div class="column">
-            <label>Critical</label>
+            <label><?=say('critical')?></label>
         </div>
         <div class="column">
-            <label>Range</label>
+            <label><?=say('range')?></label>
         </div>
         <div class="column">
-            <label>Type</label>
+            <label><?=say('type')?></label>
         </div>
         <div class="column">
-            <label>Quantity</label>
+            <label><?=say('quantity')?></label>
         </div>
         <div class="column">
-            <label>Weight</label>
+            <label><?=say('weight')?></label>
         </div>
         <div class="column column-10">
             &nbsp;
@@ -1243,18 +1248,18 @@
             </div>
             <div class="row reveal">
                 <div class="column column-20">
-                    <label>Reference URL</label>
+                    <label><?=say('reference_url')?></label>
                     <input type="url" saveas="weapon_ref" onclick="select()">
 
-                    <label>Attack Type</label>
+                    <label><?=say('attack_type')?></label>
                     <select saveas="weapon_attack_type">
-                        <option value="melee">Melee</option>
-                        <option value="ranged">Ranged</option>
-                        <option value="other">Other</option>
+                        <option value="melee"><?=say('melee')?></option>
+                        <option value="ranged"><?=say('ranged')?></option>
+                        <option value="other"><?=say('other')?></option>
                     </select>
                 </div>
                 <div class="column">
-                    <label>Additional Notes</label>
+                    <label><?=say('additional_notes')?></label>
                     <textarea saveas="weapon_notes"></textarea>
                 </div>
             </div>
@@ -1264,7 +1269,7 @@
     <? if ($mode == "edit") { ?>
     <div class="row">
         <div class="column">
-            <input type="submit" value="Add" onclick="addRow(this)">
+            <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
         </div>
     </div>
     <? } ?>
@@ -1273,7 +1278,7 @@
     <div class="row">
         <div class="column column-50">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-warning-sign"></span> Attacks</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-warning-sign"></span> <?=say('attacks')?></h1>
 
             <section>
             <?
@@ -1282,38 +1287,38 @@
             ?>
             <div class="row" calc="attacks">
                 <div class="column column-15">
-                    <label><?=ucfirst($attack)?></label>
+                    <label><?=say($attack)?></label>
                     <h4 class="calc-result" calc="<?=$attack?>-total" saveas="final_<?=$attack?>">0</h4>
                 </div>
                 <div class="column">
-                    <label>BAB</label>
+                    <label><?=say('bab')?></label>
                     <h4 sum="attack-<?=$attack?>" ref="bab">0</h4>
                 </div>
                 <div class="column">
-                    <label>Ability</label>
+                    <label><?=say('ability')?></label>
                     <h4 sum="attack-<?=$attack?>" calc="<?=$attack?>-ability">0</h4>
                 </div>
                 <div class="column column-20">
-                    <label>Type</label>
+                    <label><?=say('type')?></label>
                     <select calc="<?=$attack?>-type" saveas="<?=$attack?>_ability">
-                        <option value="str"<? if ($type[$index] == "str") { ?> selected="selected"<? } ?>>STR</option>
-                        <option value="dex"<? if ($type[$index] == "dex") { ?> selected="selected"<? } ?>>DEX</option>
-                        <option value="con">CON</option>
-                        <option value="int">INT</option>
-                        <option value="wis">WIS</option>
-                        <option value="cha">CHA</option>
+                        <option value="str"<? if ($type[$index] == "str") { ?> selected="selected"<? } ?>><?=say('str')?></option>
+                        <option value="dex"<? if ($type[$index] == "dex") { ?> selected="selected"<? } ?>><?=say('dex')?></option>
+                        <option value="con"><?=say('con')?></option>
+                        <option value="int"><?=say('int')?></option>
+                        <option value="wis"><?=say('wis')?></option>
+                        <option value="cha"><?=say('cha')?></option>
                     </select>
                 </div>
                 <div class="column column-10">
-                    <label>Size</label>
+                    <label><?=say('size')?></label>
                     <h4 sum="attack-<?=$attack?>" ref="size-mod" calc="attack">0</h4>
                 </div>
                 <div class="column">
-                    <label>Temp</label>
+                    <label><?=say('temp')?></label>
                     <input sum="attack-<?=$attack?>" type="number" calc="attack" saveas="attack_<?=$attack?>_temp" temp>
                 </div>
                 <div class="column">
-                    <label>Misc</label>
+                    <label><?=say('misc')?></label>
                     <input sum="attack-<?=$attack?>" type="number" calc="attack" saveas="attack_<?=$attack?>_misc">
                 </div>
             </div>
@@ -1323,74 +1328,74 @@
         </div>
         <div class="column column-50">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-record"></span> Maneuvers</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-record"></span> <?=say('maneuvers')?></h1>
 
             <section>
             <div class="row" calc="maneuvers">
                 <div class="column column-20">
-                    <label>CMB Total</label>
+                    <label><?=say('cmb')?></label>
                     <h4 class="calc-result" calc="cmb-total" saveas="final_cmb">0</h4>
                 </div>
                 <div class="column">
-                    <label>BAB</label>
+                    <label><?=say('bab')?></label>
                     <h4 ref="bab" sum="cmb">0</h4>
                 </div>
                 <div class="column">
-                    <label>Ability</label>
+                    <label><?=say('ability')?></label>
                     <h4 sum="cmb" calc="cmb-ability">0</h4>
                 </div>
                 <div class="column column-20">
-                    <label>Type</label>
+                    <label><?=say('type')?></label>
                     <select calc="cmb-type" saveas="cmb_ability">
-                        <option value="str" selected="selected">STR</option>
-                        <option value="dex">DEX</option>
-                        <option value="con">CON</option>
-                        <option value="int">INT</option>
-                        <option value="wis">WIS</option>
-                        <option value="cha">CHA</option>
+                        <option value="str" selected="selected"><?=say('str')?></option>
+                        <option value="dex"><?=say('dex')?></option>
+                        <option value="con"><?=say('con')?></option>
+                        <option value="int"><?=say('int')?></option>
+                        <option value="wis"><?=say('wis')?></option>
+                        <option value="cha"><?=say('cha')?></option>
                     </select>
                 </div>
                 <div class="column">
-                    <label>Size</label>
+                    <label><?=say('size')?></label>
                     <h4 ref="size-mod" sum="cmb">0</h4>
                 </div>
                 <div class="column">
-                    <label>Misc</label>
+                    <label><?=say('misc')?></label>
                     <input type="number" sum="cmb" saveas="cmb_misc">
                 </div>
             </div>
 
             <div class="row cmd" calc="maneuvers">
                 <div class="column column-20">
-                    <label>CMD Total</label>
+                    <label><?=say('cmd')?></label>
                     <h4 class="calc-result" calc="cmd-total" saveas="final_cmd">0</h4>
                 </div>
                 <div class="column">
-                    <label>BAB</label>
+                    <label><?=say('bab')?></label>
                     <h4 sum="cmd" ref="bab">0</h4>
                 </div>
                 <div class="column">
-                    <label>Dodge</label>
+                    <label><?=say('dodge')?></label>
                     <h4 sum="cmd" ref="armor-dodge">0</h4>
                 </div>
                 <div class="column">
-                    <label>Deflect</label>
+                    <label><?=say('deflect')?></label>
                     <h4 sum="cmd" ref="armor-deflect">0</h4>
                 </div>
                 <div class="column">
-                    <label>STR</label>
+                    <label><?=say('str')?></label>
                     <h4 sum="cmd" ref="str-mod">0</h4>
                 </div>
                 <div class="column">
-                    <label>DEX</label>
+                    <label><?=say('dex')?></label>
                     <h4 sum="cmd" ref="dex-mod">0</h4>
                 </div>
                 <div class="column">
-                    <label>Size</label>
+                    <label><?=say('size')?></label>
                     <h4 sum="cmd" ref="size-mod-special">0</h4>
                 </div>
                 <div class="column">
-                    <label>Misc</label>
+                    <label><?=say('misc')?></label>
                     <input sum="cmd" type="number" saveas="cmd_misc">
                 </div>
             </div>
@@ -1402,35 +1407,35 @@
     <div class="row">
         <div class="column column-50">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-alert"></span> Initiative</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-alert"></span> <?=say('initiative')?></h1>
 
             <section>
             <div class="row" calc="initiative">
                 <div class="column column-20">
-                    <label>Initivative</label>
+                    <label><?=say('initiative')?></label>
                     <h4 class="calc-result" calc="init-total" saveas="final_init">0</h4>
                 </div>
                 <div class="column column-20">
-                    <label>Ability</label>
+                    <label><?=say('ability')?></label>
                     <h4 calc="init-mod" sum="init">0</h4>
                 </div>
                 <div class="column column-20">
-                    <label>Misc</label>
+                    <label><?=say('misc')?></label>
                     <input sum="init" type="number" saveas="init_misc">
                 </div>
                 <div class="column column-20">
-                    <label>Temp</label>
+                    <label><?=say('temp')?></label>
                     <input sum="init" type="number" saveas="init_temp" temp>
                 </div>
                 <div class="column column-20">
-                    <label>Type</label>
+                    <label><?=say('type')?></label>
                     <select calc="init-type" saveas="init_ability">
-                        <option value="str">STR</option>
-                        <option value="dex" selected="selected">DEX</option>
-                        <option value="con">CON</option>
-                        <option value="int">INT</option>
-                        <option value="wis">WIS</option>
-                        <option value="cha">CHA</option>
+                        <option value="str"><?=say('str')?></option>
+                        <option value="dex" selected="selected"><?=say('dex')?></option>
+                        <option value="con"><?=say('con')?></option>
+                        <option value="int"><?=say('int')?></option>
+                        <option value="wis"><?=say('wis')?></option>
+                        <option value="cha"><?=say('cha')?></option>
                     </select>
                 </div>
             </div>
@@ -1439,32 +1444,32 @@
 
         <div class="column column-50">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-dashboard"></span> Movement</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-dashboard"></span> <?=say('movement')?></h1>
 
             <section>
             <div class="row">
                 <div class="column">
-                    <label>Speed</label>
+                    <label><?=say('speed')?></label>
                     <input type="number" saveas="movement_speed">
                 </div>
                 <div class="column">
-                    <label>Base</label>
+                    <label><?=say('base')?></label>
                     <input type="number" saveas="movement_base">
                 </div>
                 <div class="column">
-                    <label>Fly</label>
+                    <label><?=say('fly')?></label>
                     <input type="number" saveas="movement_fly">
                 </div>
                 <div class="column">
-                    <label>Swim</label>
+                    <label><?=say('swim')?></label>
                     <input type="number" saveas="movement_swim">
                 </div>
                 <div class="column">
-                    <label>Climb</label>
+                    <label><?=say('climb')?></label>
                     <input type="number" saveas="movement_climb">
                 </div>
                 <div class="column">
-                    <label>Misc</label>
+                    <label><?=say('misc')?></label>
                     <input type="number" saveas="movement_misc">
                 </div>
             </div>
@@ -1475,28 +1480,28 @@
     <div class="row">
         <div class="column column-50">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-bookmark"></span> Experience</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-bookmark"></span> <?=say('experience')?></h1>
 
             <section>
             <div class="row" id="experience">
                 <div class="column column-33">
-                    <label>Rate</label>
+                    <label><?=say('rate')?></label>
                     <select saveas="experience_rate">
-                        <option value="slow">Slow</option>
-                        <option value="medium">Medium</option>
-                        <option value="fast">Fast</option>
+                        <option value="slow"><?=say('slow')?></option>
+                        <option value="medium"><?=say('medium')?></option>
+                        <option value="fast"><?=say('fast')?></option>
                     </select>
                 </div>
                 <div class="column">
-                    <label>Points</label>
+                    <label><?=say('points')?></label>
                     <input type="number" calc="experience-points" saveas="experience_points">
                 </div>
                 <div class="column">
-                    <label>Previous Goal</label>
+                    <label><?=say('previous_goal')?></label>
                     <input type="number" calc="experience-prev-goal" saveas="experience_prev_goal">
                 </div>
                 <div class="column">
-                    <label>Next Goal</label>
+                    <label><?=say('next_goal')?></label>
                     <input type="number" calc="experience-goal" saveas="experience_goal">
                 </div>
             </div>
@@ -1512,21 +1517,21 @@
 
         <div class="column column-50">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-tasks"></span> Pool Points</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-tasks"></span> <?=say('pool_points')?></h1>
 
             <section>
             <div class="row">
                 <div class="column column-33">
-                    <label>Type</label>
+                    <label><?=say('type')?></label>
                 </div>
                 <div class="column">
-                    <label>Remaining</label>
+                    <label><?=say('remaining')?></label>
                 </div>
                 <div class="column">
-                    <label>Used</label>
+                    <label><?=say('used')?></label>
                 </div>
                 <div class="column">
-                    <label>Total</label>
+                    <label><?=say('total')?></label>
                 </div>
                 <div class="column column-10">
                 </div>
@@ -1557,7 +1562,7 @@
             <? if ($mode == "edit") { ?>
             <div class="row">
                 <div class="column">
-                    <input type="submit" value="Add" onclick="addRow(this)">
+                    <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
                 </div>
             </div>
             <? } ?>
@@ -1569,7 +1574,7 @@
     <div class="row">
         <div class="column column-50" id="gear">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-shopping-cart"></span> Gear</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-shopping-cart"></span> <?=say('gear')?></h1>
 
             <section>
             <? foreach(array("quantity", "uses") as $geartype) { ?>
@@ -1582,10 +1587,10 @@
                     </label>
                 </div>
                 <div class="column">
-                    <label><?=ucfirst($geartype)?></label>
+                    <label><?=say($geartype)?></label>
                 </div>
                 <div class="column">
-                    <label>Weight</label>
+                    <label><?=say('weight')?></label>
                 </div>
                 <div class="column column-5">
                 </div>
@@ -1617,14 +1622,14 @@
                     </div>
                     <div class="row reveal">
                         <div class="column column-40">
-                            <label>Reference URL</label>
+                            <label><?=say('reference_url')?></label>
                             <input type="url" saveas="gear_<?=$geartype?>_url" onclick="select()">
 
-                            <label>Container</label>
+                            <label><?=say('container')?></label>
                             <select type="text" calc="gear-container-dropdown" saveas="gear_<?=$geartype?>_container" container><option value=""></option></select>
                         </div>
                         <div class="column">
-                            <label>Additional Notes</label>
+                            <label><?=say('additional_notes')?></label>
                             <textarea saveas="gear_<?=$geartype?>_notes"></textarea>
                         </div>
                     </div>
@@ -1634,7 +1639,7 @@
             <? if ($mode == "edit") { ?>
             <div class="row">
                 <div class="column">
-                    <input type="submit" value="Add" onclick="addRow(this)">
+                    <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
                 </div>
             </div>
             <? } ?>
@@ -1642,13 +1647,13 @@
 
             <div class="row">
                 <div class="column column-40">
-                    <label>Container</label>
+                    <label><?=say('container')?></label>
                 </div>
                 <div class="column">
-                    <label>Holding</label>
+                    <label><?=say('holding')?></label>
                 </div>
                 <div class="column">
-                    <label>Weight</label>
+                    <label><?=say('weight')?></label>
                 </div>
                 <div class="column column-5">
                     <label>&nbsp;</label>
@@ -1684,23 +1689,23 @@
                     </div>
                     <div class="row reveal">
                         <div class="column column-40">
-                            <label>Reference URL</label>
+                            <label><?=say('reference_url')?></label>
                             <input type="url" saveas="container_url" onclick="select()">
 
                             <div class="row">
                                 <div class="column column-50">
-                                    <label>Max Weight</label>
+                                    <label><?=say('max_weight')?></label>
                                     <input calc="container-max" type="number" step="0.25" saveas="container_max_weight">
                                 </div>
                                 <div class="column column-50">
-                                    <label title="Determines if the weight in this container should be added to your carried weight.">Add Weight</label>
+                                    <label><?=say('add_weight')?></label>
                                     <input type="checkbox" checked style="margin-top: 1.2rem" saveas="container_add_weight" calc="container-add-weight">
                                 </div>
                             </div>
 
                         </div>
                         <div class="column">
-                            <label>Additional Notes</label>
+                            <label><?=say('additional_notes')?></label>
                             <textarea saveas="container_notes"></textarea>
                         </div>
                     </div>
@@ -1710,7 +1715,7 @@
             <? if ($mode == "edit") { ?>
             <div class="row">
                 <div class="column">
-                    <input type="submit" value="Add" onclick="addRow(this)">
+                    <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
                 </div>
             </div>
             <? } ?>
@@ -1720,15 +1725,15 @@
 
         <div class="column column-50">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-gift"></span> Magic Items</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-gift"></span> <?=say('magic_items')?></h1>
 
             <section>
             <div class="row">
                 <div class="column column-30">
-                    <label>Slot</label>
+                    <label><?=say('slot')?></label>
                 </div>
                 <div class="column">
-                    <label>Description</label>
+                    <label><?=say('description')?></label>
                 </div>
                 <div class="column column-10">
                     <label>&nbsp;</label>
@@ -1749,7 +1754,7 @@
             <div class="entry">
                 <div class="row">
                     <div class="column column-30">
-                        <h4><?=strtoupper($slot)?></h4>
+                        <h4><?=strtoupper(say($slot))?></h4>
                     </div>
                     <div class="column">
                         <input type="text" saveas="magic_item_<?=$slot_save[$index]?>">
@@ -1760,14 +1765,14 @@
                 </div>
                 <div class="row reveal">
                     <div class="column column-30">
-                        <label>Reference URL</label>
+                        <label><?=say('reference_url')?></label>
                         <input type="url" saveas="magic_item_<?=$slot_save[$index]?>_url" onclick="select()">
 
-                        <label>Weight</label>
+                        <label><?=say('weight')?></label>
                         <input type="number" step="0.25" saveas="magic_item_<?=$slot_save[$index]?>_weight" weight>
                     </div>
                         <div class="column">
-                        <label>Additional Notes</label>
+                        <label><?=say('additional_notes')?></label>
                         <textarea saveas="magic_item_<?=$slot_save[$index]?>_notes"></textarea>
                     </div>
                 </div>
@@ -1781,62 +1786,62 @@
     <div class="row">
         <div class="column">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-piggy-bank"></span> Currency</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-piggy-bank"></span> <?=say('currency')?></h1>
 
             <section>
             <div class="row" calc="currency">
                 <div class="column column-25">
-                    <label>Carried</label>
+                    <label><?=say('carried')?></label>
                     <h4 class="calc-result" calc="currency-carried" saveas="final_currency_carried">0</h4>
                 </div>
                 <div class="column">
-                    <label>Copper</label>
+                    <label><?=say('copper')?></label>
                     <input sum="currency-weight" class="narrow" calc="copper-carried" type="number" saveas="copper_carried">
                 </div>
                 <div class="column">
-                    <label>Silver</label>
+                    <label><?=say('silver')?></label>
                     <input sum="currency-weight" class="narrow" calc="silver-carried" type="number" saveas="silver_carried">
                 </div>
                 <div class="column">
-                    <label>Gold</label>
+                    <label><?=say('gold')?></label>
                     <input sum="currency-weight" class="narrow" calc="gold-carried" type="number" saveas="gold_carried">
                 </div>
                 <div class="column">
-                    <label>Platinum</label>
+                    <label><?=say('platinum')?></label>
                     <input sum="currency-weight" class="narrow" calc="platinum-carried" type="number" saveas="platinum_carried">
                 </div>
             </div>
 
             <div class="row" calc="currency">
                 <div class="column column-25">
-                    <label>Stored</label>
+                    <label><?=say('stored')?></label>
                     <h4 class="calc-result" calc="currency-stored" saveas="final_currency_stored">0</h4>
                 </div>
                 <div class="column">
-                    <label>Copper</label>
+                    <label><?=say('copper')?></label>
                     <input class="narrow" type="number" calc="copper-stored" saveas="copper_stored">
                 </div>
                 <div class="column">
-                    <label>Silver</label>
+                    <label><?=say('silver')?></label>
                     <input class="narrow" type="number" calc="silver-stored" saveas="silver_stored">
                 </div>
                 <div class="column">
-                    <label>Gold</label>
+                    <label><?=say('gold')?></label>
                     <input class="narrow" type="number" calc="gold-stored" saveas="gold_stored">
                 </div>
                 <div class="column">
-                    <label>Platinum</label>
+                    <label><?=say('platinum')?></label>
                     <input class="narrow" type="number" calc="platinum-stored" saveas="platinum_stored">
                 </div>
             </div>
 
             <div class="row">
                 <div class="column column-25">
-                    <label>Grand Total</label>
+                    <label><?=say('grand_total')?></label>
                     <h4 class="calc-result" calc="currency-grand-total">0</h4>
                 </div>
                 <div class="column">
-                    <label>Weight</label>
+                    <label><?=say('weight')?></label>
                     <h4 calc="currency-weight">0</h4>
                     <input type="hidden" ref="currency-weight" weight>
                 </div>
@@ -1846,7 +1851,7 @@
         </div>
         <div class="column" id="weight">
 
-            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-scale"></span> Weight</h1>
+            <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-scale"></span> <?=say('weight')?></h1>
 
             <section>
             <div class="row">
@@ -1855,64 +1860,64 @@
                 <input type="hidden" ref="str-total">
                 <input type="hidden" ref="size">
                 <div class="column">
-                    <label>Total</label>
+                    <label><?=say('total')?></label>
                     <h4 class="calc-result" calc="total-weight" saveas="weight_total">0</h4>
                 </div>
                 <div class="column">
-                    <label>Misc</label>
+                    <label><?=say('misc')?></label>
                     <input type="number" step="0.25" weight saveas="weight_misc">
                 </div>
                 <div class="column">
-                    <label>Light</label>
+                    <label><?=say('light')?></label>
                     <h4 calc="weight-light">0</h4>
                 </div>
                 <div class="column">
-                    <label>Medium</label>
+                    <label><?=say('medium')?></label>
                     <h4 calc="weight-medium">0</h4>
                 </div>
                 <div class="column">
-                    <label>Heavy</label>
+                    <label><?=say('heavy')?></label>
                     <h4 calc="weight-heavy">0</h4>
                 </div>
             </div>
 
             <div class="row">
                 <div class="column column-40">
-                    <label>Load Status</label>
+                    <label><?=say('load_status')?></label>
                     <h4 calc="weight-status" saveas="weight_status">LIGHT</h4>
                 </div>
                 <div class="column">
-                    <label>Above Head</label>
+                    <label><?=say('above_head')?></label>
                     <h4 calc="weight-above">0</h4>
                 </div>
                 <div class="column">
-                    <label>Off Ground</label>
+                    <label><?=say('off_ground')?></label>
                     <h4 calc="weight-off-ground">0</h4>
                 </div>
                 <div class="column">
-                    <label>Drag / Push</label>
+                    <label><?=say('drag_push')?></label>
                     <h4 calc="weight-drag">0</h4>
                 </div>
             </div>
 
             <div class="row">
                 <div class="column column-20">
-                    <label>Strength</label>
+                    <label><?=say('strength')?></label>
                     <h4 calc="weight-strength">0</h4>
                 </div>
                 <div class="column column-20">
-                    <label>Bonus</label>
+                    <label><?=say('bonus')?></label>
                     <input type="number" calc="weight-strength-bonus" saveas="weight_strength_bonus">
                 </div>
                 <div class="column column-30">
-                    <label>Size</label>
+                    <label><?=say('size')?></label>
                     <h4 calc="weight-current-size">Medium</h4>
                 </div>
                 <div class="column column-30">
-                    <label>Legs</label>
+                    <label><?=say('legs')?></label>
                     <select calc="weight-legs">
-                        <option value="2" selected="selected">Biped</option>
-                        <option value="4">Quadruped</option>
+                        <option value="2" selected="selected"><?=say('biped')?></option>
+                        <option value="4"><?=say('quadruped')?></option>
                     </select>
                 </div>
             </div>
@@ -1920,7 +1925,7 @@
         </div>
     </div>
 
-    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-fire"></span> Casting</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-fire"></span> <?=say('casting')?></h1>
 
     <section>
     <div id="casting-class" class="entries" savetype="columns">
@@ -1930,46 +1935,46 @@
                 <input type="hidden" ref="<?=$type?>-mod">
                 <? } ?>
                 <div class="column column-20">
-                    <label>Caster Class</label>
+                    <label><?=say('caster_class')?></label>
                     <select saveas="casting_class" calc="casting-class-name"></select>
                 </div>
                 <div class="column">
-                    <label>Level</label>
+                    <label><?=say('level')?></label>
                     <h4 calc="casting-class-level" saveas="final_casting_class_level">1</h4>
                 </div>
                 <div class="column">
-                    <label>Ability</label>
+                    <label><?=say('ability')?></label>
                     <select saveas="casting_modifier" calc="casting-class-attribute">
-                        <option value="str">STR</option>
-                        <option value="dex">DEX</option>
-                        <option value="con">CON</option>
-                        <option value="int" selected="selected">INT</option>
-                        <option value="wis">WIS</option>
-                        <option value="cha">CHA</option>
+                        <option value="str"><?=say('str')?></option>
+                        <option value="dex"><?=say('dex')?></option>
+                        <option value="con"><?=say('con')?></option>
+                        <option value="int" selected="selected"><?=say('int')?></option>
+                        <option value="wis"><?=say('wis')?></option>
+                        <option value="cha"><?=say('cha')?></option>
                     </select>
                 </div>
                 <div class="column">
-                    <label>Modifier</label>
+                    <label><?=say('modifier')?></label>
                     <h4 calc="casting-class-mod" saveas="casting_class_mod">1</h4>
                 </div>
                 <div class="column">
-                    <label>Concen</label>
+                    <label><?=say('concen')?></label>
                     <h4 calc="casting-concentration" saveas="final_concentration"></h4>
                 </div>
                 <div class="column">
-                    <label>Points</label>
+                    <label><?=say('points')?></label>
                     <input type="number" saveas="casting_points">
                 </div>
                 <div class="column">
-                    <label>Close</label>
+                    <label><?=say('close')?></label>
                     <h4 calc="casting-range-close">25ft</h4>
                 </div>
                 <div class="column">
-                    <label>Medium</label>
+                    <label><?=say('medium')?></label>
                     <h4 calc="casting-range-medium">100ft</h4>
                 </div>
                 <div class="column">
-                    <label>Long</label>
+                    <label><?=say('long')?></label>
                     <h4 calc="casting-range-long">400ft</h4>
                 </div>
                 <div class="column column-10" align="right">
@@ -1983,38 +1988,38 @@
 
             <div class="row reveal" calc="spell-casting-class">
                 <div class="column column-20">
-                    <label>Caster Type</label>
+                    <label><?=say('caster_type')?></label>
                     <select saveas="caster_type">
-                        <option value="divine">Divine</option>
-                        <option value="arcane">Arcane</option>
-                        <option value="other">Other</option>
+                        <option value="divine"><?=say('divine')?></option>
+                        <option value="arcane"><?=say('arcane')?></option>
+                        <option value="other"><?=say('other')?></option>
                     </select>
 
-                    <label>Notes</label>
+                    <label><?=say('notes')?></label>
                     <textarea saveas="spells_notes" style="min-height: 39rem"></textarea>
                 </div>
                 <? for($i = 0; $i < 10; $i++) { ?>
                 <div class="column">
-                    <label class="squeeze">Lv<?=$i?> / Day</label>
+                    <label class="squeeze"><?=say('lv')?><?=$i?> / <?=say('day')?></label>
                     <h4 calc="spells-<?=$i?>-day-total" saveas="spells_<?=$i?>_per_day">0</h4>
 
-                    <label>Class</label>
+                    <label><?=say('class')?></label>
                     <input type="number" sum="spells-<?=$i?>-day" saveas="spells_<?=$i?>_day">
 
-                    <label>Bonus</label>
+                    <label><?=say('bonus')?></label>
                     <input type="number" sum="spells-<?=$i?>-day" saveas="spells_<?=$i?>_bonus">
 
-                    <label>Misc</label>
+                    <label><?=say('misc')?></label>
                     <input type="number" sum="spells-<?=$i?>-day" saveas="spells_<?=$i?>_bonus">
 
                     <label>&nbsp;</label>
 
-                    <label class="squeeze">Lv<?=$i?> Known</label>
+                    <label class="squeeze"><?=say('lv')?><?=$i?> <?=say('known')?></label>
                     <input type="number" saveas="spells_<?=$i?>_known">
 
                     <label>&nbsp;</label>
 
-                    <label>Lv<?=$i?> DC</label>
+                    <label><?=say('lv')?><?=$i?> <?=say('dc')?></label>
                     <h4 calc="spell-dc">10</h4>
                 </div>
                 <? } ?>
@@ -2025,7 +2030,7 @@
     <? if ($mode == "edit") { ?>
     <div class="row">
         <div class="column">
-            <input type="submit" value="Add" onclick="addRow(this)">
+            <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
         </div>
     </div>
     <? } ?>
@@ -2035,7 +2040,7 @@
         <div class="column">
             <div class="row">
                 <div class="column">
-                    <label>Caster Attributes</label>
+                    <label><?=say('caster_attributes')?></label>
                 </div>
             </div>
 
@@ -2043,13 +2048,13 @@
                 <div class="row">
                     <div class="column column-33">
                         <select saveas="caster_attr_<?=$i?>_type">
-                            <option value="bloodline">Bloodline</option>
-                            <option value="patron">Patron</option>
-                            <option value="domain">Domain</option>
-                            <option value="subdomain">Subdomain</option>
-                            <option value="specialty">Specialty</option>
-                            <option value="focused">Focused</option>
-                            <option value="prohibited">Prohibited</option>
+                            <option value="bloodline"><?=say('bloodline')?></option>
+                            <option value="patron"><?=say('patron')?></option>
+                            <option value="domain"><?=say('domain')?></option>
+                            <option value="subdomain"><?=say('subdomain')?></option>
+                            <option value="specialty"><?=say('specialty')?></option>
+                            <option value="focused"><?=say('focused')?></option>
+                            <option value="prohibited"><?=say('prohibited')?></option>
                         </select>
                     </div>
                     <div class="column">
@@ -2066,7 +2071,7 @@
             <? if ($mode == "edit") { ?>
             <div class="row">
                 <div class="column">
-                    <input type="submit" value="Add" onclick="addRow(this)">
+                    <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
                 </div>
             </div>
             <? } ?>
@@ -2076,36 +2081,36 @@
     </div>
     </section>
 
-    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-list-alt"></span> Spell List</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-list-alt"></span> <?=say('spell_list')?></h1>
 
     <section>
     <div class="row">
         <div class="column">
-            <label>Lv</label>
+            <label><?=say('lv')?></label>
         </div>
         <div class="column">
-            <label>Prep</label>
+            <label><?=say('prep')?></label>
         </div>
         <div class="column">
-            <label>Used</label>
+            <label><?=say('used')?></label>
         </div>
         <div class="column column-20">
-            <label>Name</label>
+            <label><?=say('name')?></label>
         </div>
         <div class="column column-15">
-            <label>School</label>
+            <label><?=say('school')?></label>
         </div>
         <div class="column column-10">
-            <label>Duration</label>
+            <label><?=say('duration')?></label>
         </div>
         <div class="column column-10">
-            <label>Range</label>
+            <label><?=say('range')?></label>
         </div>
         <div class="column column-10">
-            <label>Save</label>
+            <label><?=say('save')?></label>
         </div>
         <div class="column column-5">
-            <label>SR</label>
+            <label><?=say('sr')?></label>
         </div>
         <div class="column column-15">
         </div>
@@ -2138,9 +2143,9 @@
                 <div class="column column-10">
                     <select saveas="spell_list_save">
                         <option value="na"></option>
-                        <option value="fortitude">FORT</option>
-                        <option value="reflex">REF</option>
-                        <option value="will" selected>WILL</option>
+                        <option value="fortitude"><?=strtoupper(say('fort'))?></option>
+                        <option value="reflex"><?=strtoupper(say('ref'))?></option>
+                        <option value="will" selected><?=strtoupper(say('will'))?></option>
                     </select>
                 </div>
                 <div class="column column-5">
@@ -2159,19 +2164,19 @@
                 <div class="column column-30">
                     <div class="row">
                         <div class="column column-70">
-                            <label>Caster Class</label>
+                            <label><?=say('caster_class')?></label>
                             <select calc="spell-caster-class-name" saveas="spell_list_class_name"></select>
                         </div>
                         <div class="column">
-                            <label>DC</label>
+                            <label><?=say('dc')?></label>
                             <h4 calc="spell-list-dc" saveas="spell_list_dc">10</h4>
                         </div>
                     </div>
-                    <label>Reference URL</label>
+                    <label><?=say('reference_url')?></label>
                     <input type="url" onclick="select()" saveas="spell_list_ref">
                 </div>
                 <div class="column">
-                    <label>Additional Notes</label>
+                    <label><?=say('additional_notes')?></label>
                     <textarea style="min-height: 11.3rem;" saveas="spell_list_notes"></textarea>
                 </div>
             </div>
@@ -2181,21 +2186,21 @@
     <? if ($mode == "edit") { ?>
     <div class="row">
         <div class="column">
-            <input type="submit" value="Add" onclick="addRow(this)">
+            <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
         </div>
     </div>
     <? } ?>
     </section>
 
-    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-file"></span> Notes</h1>
+    <h1 onclick="toggleSection(this)"><span class="glyphicon glyphicon-file"></span> <?=say('notes')?></h1>
 
     <section>
     <div class="row">
         <? for($i = 1; $i < 4; $i++) { ?>
         <div class="column">
-            <label>Title</label>
+            <label><?=say('title')?></label>
             <input type="text" class="strong" saveas="notes_<?=$i?>_header">
-            <label>Contents</label>
+            <label><?=say('contents')?></label>
             <textarea saveas="notes_<?=$i?>_contents" style="min-height: 50rem"></textarea>
         </div>
         <? } ?>
@@ -2203,16 +2208,16 @@
 
     <div class="row">
         <div class="column column-20">
-            <label>Link</label>
+            <label><?=say('link')?></label>
         </div>
         <div class="column">
-            <label>URL</label>
+            <label><?=say('url')?></label>
         </div>
         <div class="column">
-            <label>Title<label>
+            <label><?=say('title')?><label>
         </div>
         <div class="column">
-            <label>Notes<label>
+            <label><?=say('notes')?><label>
         </div>
         <div class="column column-5">
         </div>
@@ -2243,14 +2248,41 @@
     <? if ($mode == "edit") { ?>
     <div class="row">
         <div class="column">
-            <input type="submit" value="Add" onclick="addRow(this)">
+            <input type="submit" value="<?=say('button_add')?>" onclick="addRow(this)">
         </div>
     </div>
     <? } ?>
     </section>
 
 </div>
+<input type="hidden" id="js-fantasy-custom" value="<?=strtoupper(say('fantasy_custom'))?>" />
+<input type="hidden" id="js-fantasy-low" value="<?=strtoupper(say('fantasy_low'))?>" />
+<input type="hidden" id="js-fantasy-standard" value="<?=strtoupper(say('fantasy_standard'))?>" />
+<input type="hidden" id="js-fantasy-high" value="<?=strtoupper(say('fantasy_high'))?>" />
+<input type="hidden" id="js-fantasy-epic" value="<?=strtoupper(say('fantasy_epic'))?>" />
+
+<input type="hidden" id="js-weight-light" value="<?=strtoupper(say('weight_light'))?>" />
+<input type="hidden" id="js-weight-medium" value="<?=strtoupper(say('weight_medium'))?>" />
+<input type="hidden" id="js-weight-heavy" value="<?=strtoupper(say('weight_heavy'))?>" />
+<input type="hidden" id="js-weight-over" value="<?=strtoupper(say('weight_over'))?>" />
+
+<input type="hidden" id="js-health-alive" value="<?=strtoupper(say('health_alive'))?>" />
+<input type="hidden" id="js-health-disabled" value="<?=strtoupper(say('health_disabled'))?>" />
+<input type="hidden" id="js-health-out" value="<?=strtoupper(say('health_out'))?>" />
+<input type="hidden" id="js-health-dead" value="<?=strtoupper(say('health_dead'))?>" />
+<input type="hidden" id="js-health-very-dead" value="<?=strtoupper(say('health_very_dead'))?>" />
+<input type="hidden" id="js-health-ultra-dead" value="<?=strtoupper(say('health_ultra_dead'))?>" />
+
+<input type="hidden" id="message-validation-error" value="<?=say('validation_error')?>" />
+
 <? if ($mode == "edit") { ?>
+<input type="hidden" id="message-save-hp" value="<?=say('updating_health')?>" />
+<input type="hidden" id="message-save-hp-true" value="<?=say('health_update_success')?>" />
+<input type="hidden" id="message-saving" value="<?=say('saving')?>" />
+<input type="hidden" id="message-saved" value="<?=say('sheet_saved')?>" />
+<input type="hidden" id="message-save-failed" value="<?=say('save_failed')?>" />
+<input type="hidden" id="message-row-delete" value="<?=say('row_delete')?>" />
+
 <script type="text/javascript" src="/js/edit.js"></script>
 <? } ?>
 <script type="text/javascript" src="/js/sheet.js"></script>

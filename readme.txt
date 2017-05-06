@@ -55,6 +55,12 @@ Sorry this is a pain but hopefully it won't happen too often!
 
 === Change Log
 
+= v1.4.00
+    * First pass on language support! See the inc/lang folder.
+    * Minor bug fixes.
+    * Cleaned up some stray console logs.
+    * I need to optimize the javascript a lot...
+
 = v1.3.20
     * Fixed bug where container weight would not calculate correctly
     * Fixed bug where ability score related things wouldn't update correctly.

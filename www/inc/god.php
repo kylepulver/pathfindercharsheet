@@ -14,16 +14,16 @@ $result = mysqli_query($link, $query);
 </div>
 <div class="toolbar-under"></div>
 <div class="container">
-    <h1>Campaigns</h1>
+    <h1><?=say('campaigns')?></h1>
     <div class="row">
         <div class="column column-40">
-            <p class="strong">Campaign Name</p>
+            <p class="strong"><?=say('campaign_name')?></p>
         </div>
         <div class="column column-20">
-            <p class="strong">Passkey</p>
+            <p class="strong"><?=say('passkey')?></p>
         </div>
         <div class="column column-20">
-            <p class="strong">Created</p>
+            <p class="strong"><?=say('created')?></p>
         </div>
         <div class="column">
             &nbsp;
@@ -56,10 +56,10 @@ $result = mysqli_query($link, $query);
     </div>
     <div class="row">
         <div class="column">
-            <input type="submit" value="GM View" onclick="goTo(/gm/)">
-            <input type="submit" value="User View" onclick="goTo(/user/)">
-            <input type="submit" value="New Sheet" onclick="createNew()">
-            <input type="submit" value="Log Out" onclick="logout()">
+            <input type="submit" value="<?=say('gm_view')?>" onclick="goTo(/gm/)">
+            <input type="submit" value="<?=say('user_view')?>" onclick="goTo(/user/)">
+            <input type="submit" value="<?=say('new_sheet')?>" onclick="createNew()">
+            <input type="submit" value="<?=say('log_out')?>" onclick="logout()">
         </div>
     </div>
 </div>
@@ -138,9 +138,9 @@ function deleteCampaign(element) {
 
     var rowId = $(element).parents('[row]').attr('row');
     if (rowId == 1)
-        alert("Cannot delete the default campaign!");
+        alert("<?=say('no_delete_camp')?>");
     else {
-        var c = window.confirm("Are you sure you want to delete this campaign?\n\nTHIS CANNOT BE UNDONE!\n\nAll characters in this campaign will be moved to Default.");
+        var c = window.confirm("<?=say('del_campaign')?>");
         if (!c) return;
 
         $.post("/p", {

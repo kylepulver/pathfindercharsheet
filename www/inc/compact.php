@@ -17,8 +17,8 @@
 
 <div class="bg0 strong caps">
     <span saveas="charname" class="list"></span>
-    <a href="/v/<?=$view_id?>" class="list">FULL VIEW</a>
-    <a href="/" class="list">HOME</a>
+    <a href="/v/<?=$view_id?>" class="list"><?=say('full_view')?></a>
+    <a href="/" class="list"><?=say('button_home')?></a>
 </div>
 <div>
     <span saveas="gender"></span>
@@ -37,55 +37,55 @@
     <span saveas="known_languages"></span>
 </div>
 <div>
-    <span class="strong">Init</span>
+    <span class="strong"><?=say('init')?></span>
     <span saveas="final_init"></span>
 </div>
 <div class="header">
-    defense
+    <?=say('defense')?>
 </div>
 <div>
     <span class="list">
-        <span class="strong">AC</span>
+        <span class="strong"><?=say('ac')?></span>
         <span saveas="final_ac"></span>
 
-        <span class="strong">Touch</span>
+        <span class="strong"><?=say('touch')?></span>
         <span saveas="final_touch"></span>
 
-        <span class="strong">Flatfoot</span>
+        <span class="strong"><?=say('flat_foot')?></span>
         <span saveas="final_flatfoot"></span>
     </span>
 
     <span class="list">
         <span class="clear-if-empty">
-            <span>Armor</span>
+            <span><?=say('armor')?></span>
             <span saveas="final_armor"></span>
         </span>
         <span class="clear-if-empty">
-            <span>Shield</span>
+            <span><?=say('shield')?></span>
             <span saveas="final_shield"></span>
         </span>
         <span class="clear-if-empty">
-            <span>Dex</span>
+            <span><?=say('dex')?></span>
             <span saveas="final_dex_armor"></span>
         </span>
         <span class="clear-if-empty">
-            <span>Size</span>
+            <span><?=say('size')?></span>
             <span saveas="final_size_armor"></span>
         </span>
         <span class="clear-if-empty">
-            <span>Dodge</span>
+            <span><?=say('dodge')?></span>
             <span saveas="armor_dodge"></span>
         </span>
         <span class="clear-if-empty">
-            <span>Natural</span>
+            <span><?=say('natural')?></span>
             <span saveas="armor_natural"></span>
         </span>
         <span class="clear-if-empty">
-            <span>Deflect</span>
+            <span><?=say('deflect')?></span>
             <span saveas="armor_deflect"></span>
         </span>
         <span class="clear-if-empty">
-            <span>Misc</span>
+            <span><?=say('misc')?></span>
             <span saveas="armor_misc"></span>
         </span>
     </span>
@@ -93,34 +93,34 @@
 </div>
 <div>
     <span class="list">
-        <span class="strong">HP</span>
+        <span class="strong"><?=say('hp')?></span>
         <span saveas="final_hp_total"></span>
     </span>
 
     <span class="list">
-        <span class="strong">Current</span>
+        <span class="strong"><?=say('current')?></span>
         <span saveas="final_hp_current"></span>
     </span>
 
     <span class="list">
-        <span class="strong">Non Lethal</span>
+        <span class="strong"><?=say('nonlethal')?></span>
         <span saveas="health_nonlethal"></span>
     </span>
 </div>
 <div>
-    <span class="strong">Fort</span>
+    <span class="strong"><?=say('fort')?></span>
     <span saveas="final_fort"></span>
 
-    <span class="strong">Ref</span>
+    <span class="strong"><?=say('ref')?></span>
     <span saveas="final_ref"></span>
 
-    <span class="strong">Will</span>
+    <span class="strong"><?=say('will')?></span>
     <span saveas="final_will"></span>
 </div>
 <div>
     <span class="list">
         <span class="clear-if-empty">
-            <span class="strong">Resist</span>
+            <span class="strong"><?=say('resist')?></span>
             <span saveas="damage_resistance"></span>
         </span>
     </span>
@@ -129,35 +129,35 @@
     </span>
     <span class="list">
         <span class="clear-if-empty">
-            <span class="strong">SR</span>
+            <span class="strong"><?=say('sr')?></span>
             <span saveas="spell_resistance"></span>
         </span>
     </span>
 </div>
 <div class="header">
-    offense
+    <?=say('offense')?>
 </div>
 <div>
     <span class="list">
-        <span class="strong">Speed</span>
+        <span class="strong"><?=say('speed')?></span>
         <span saveas="movement_speed"></span>ft
     </span>
 
     <span class="list">
-        <span class="clear-if-empty">Base <span saveas="movement_base"></span>ft</span>
-        <span class="clear-if-empty">Fly <span saveas="movement_fly"></span>ft</span>
-        <span class="clear-if-empty">Swim <span saveas="movement_swim"></span>ft</span>
-        <span class="clear-if-empty">Climb <span saveas="movement_climb"></span>ft</span>
-        <span class="clear-if-empty">Misc <span saveas="movement_misc"></span>ft</span>
+        <span class="clear-if-empty"><?=say('base')?> <span saveas="movement_base"></span>ft</span>
+        <span class="clear-if-empty"><?=say('fly')?> <span saveas="movement_fly"></span>ft</span>
+        <span class="clear-if-empty"><?=say('swim')?> <span saveas="movement_swim"></span>ft</span>
+        <span class="clear-if-empty"><?=say('climb')?> <span saveas="movement_climb"></span>ft</span>
+        <span class="clear-if-empty"><?=say('misc')?> <span saveas="movement_misc"></span>ft</span>
     </span>
 </div>
 <div>
     <span class="list">
-        <span class="strong">Melee</span>
+        <span class="strong"><?=say('melee')?></span>
         <span saveas="final_melee"></span>
     </span>
     <span class="list">
-        <span class="strong">Ranged</span>
+        <span class="strong"><?=say('ranged')?></span>
         <span saveas="final_ranged"></span>
     </span>
 </div>
@@ -173,9 +173,9 @@
 <div class="entries" savetype="columns" id="spell-list">
     <div>
         <span class="strong" saveas="casting_class"></span>
-        <span class="strong">Spells</span>
-        CL <span saveas="final_casting_class_level"></span>
-        Concentration <span saveas="final_concentration"></span>
+        <span class="strong"><?=say('spells')?></span>
+        <?=say('cl')?> <span saveas="final_casting_class_level"></span>
+        <?=say('concentration')?> <span saveas="final_concentration"></span>
         <div data="spell-entry" class="indent">
             <span data="spell-level"></span>
             [<span data="spell-per-day"></span>]
@@ -200,26 +200,26 @@
 </span>
 
 <div class="header">
-    statistics
+    <?=say('statistics')?>
 </div>
 <div>
     <? foreach(array("str", "dex", "con", "int", "wis", "cha") as $type) { ?>
-    <span class="strong caps"><?=$type?></span>
+    <span class="strong caps"><?=say($type)?></span>
     <span saveas="final_<?=$type?>_total"></span>
     <? } ?>
 </div>
 <div>
-    <span class="strong">BAB</span>
+    <span class="strong"><?=say('bab')?></span>
     <span saveas="final_bab"></span>
 
-    <span class="strong">CMB</span>
+    <span class="strong"><?=say('cmb')?></span>
     <span saveas="final_cmb"></span>
 
-    <span class="strong">CMD</span>
+    <span class="strong"><?=say('cmd')?></span>
     <span saveas="final_cmd"></span>
 </div>
 <div>
-    <span class="strong">Feats</span>
+    <span class="strong"><?=say('feats')?></span>
     <span class="entries" savetype="columns">
         <span class="list">
             <a saveas="feat_name"></a>
@@ -227,7 +227,7 @@
     </span>
 </div>
 <div>
-    <span class="strong">Skills</span>
+    <span class="strong"><?=say('skills')?></span>
     <span class="entries" savetype="columns">
         <span class="list clear-if-empty">
             <span saveas="skill_name"></span>&nbsp;<span saveas="final_skill"></span>
@@ -235,7 +235,7 @@
     </span>
 </div>
 <div>
-    <span class="strong">Abilities</span>
+    <span class="strong"><?=say('abilities')?></span>
     <span class="entries" savetype="columns">
         <span class="list">
             <a saveas="special_name"></a>
@@ -244,7 +244,7 @@
     </span>
 </div>
 <div>
-    <span class="strong">Gear</span>
+    <span class="strong"><?=say('gear')?></span>
     <span class="entries list" savetype="columns">
         <span class="list clear-if-empty">
             <a saveas="gear_quantity_description"></a>&nbsp;x<span saveas="gear_quantity"></span>
@@ -258,7 +258,7 @@
     </span>
 </div>
 <div>
-    <span class="strong">Magic Items</span>
+    <span class="strong"><?=say('magic_items')?></span>
     <span class="entries list">
         <? foreach(array("belt", "body", "chest", "eyes", "feet", "hands", "head", "headband", "neck", "ring", "ring2", "shoulders", "wrist") as $type) { ?>
         <span class="entry clear-if-empty"><a saveas="magic_item_<?=$type?>" magic-item="<?=$type?>"></a>&nbsp;</span>
@@ -266,7 +266,7 @@
     </span>
 </div>
 <div>
-    <span class="strong">Coin</span>
+    <span class="strong"><?=say('coin')?></span>
     <span class="list clear-if-empty">
         <span saveas="final_currency_carried"></span>g&nbsp;carried
     </span>
@@ -275,12 +275,12 @@
     </span>
 </div>
 <div>
-    <span class="strong">Weight</span>
+    <span class="strong"><?=say('weight')?></span>
     <span saveas="weight_total"></span>
     (<span saveas="weight_status"></span>)
 </div>
 <div class="header">
-    special abilities
+    <?=say('special_abilities')?>
 </div>
 <div class="entries" savetype="columns">
     <div>
@@ -296,7 +296,7 @@
     </div>
 </div>
 <div class="header">
-    notes
+    <?=say('notes')?>
 </div>
 <div>
     <span class="strong" saveas="notes_1_header"></span>

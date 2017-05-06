@@ -2,19 +2,19 @@
 $reset_token = $info;
 ?>
 <div class="container">
-    <h1>Reset Passwords</h1>
+    <h1></h1>
     <div class="row">
         <div class="column">
-            <label>Player Password (Leave blank to not change)</label>
+            <label><?=say('player_pass')?></label>
             <input type="password" id="pc-password">
 
-            <label>Game Master Password (Leave blank to not change)</label>
+            <label><?=say('gm_pass')?></label>
             <input type="password" id="gm-password">
 
-            <label>Super Admin Password (Leave blank to not change)</label>
+            <label><?=say('admin_pass')?></label>
             <input type="password" id="admin-password">
 
-            <input type="submit" value="Update Passwords" onclick="newPassword()" id="new-password">
+            <input type="submit" value="<?=say('update_pass')?>" onclick="newPassword()" id="new-password">
         </div>
     </div>
 </div>

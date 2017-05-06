@@ -60,7 +60,7 @@ function applyDamage(amount, element) {
 }
 
 function saveHp() {
-    sendMessage("Updating health...");
+    sendMessage($('#message-save-hp').val());
 
     var finalHpTotal = readValue('#health [saveas="final_hp_total"]');
     var finalHpCurrent = readValue('#health [saveas="final_hp_current"]');
@@ -89,7 +89,7 @@ function saveHp() {
 
             }
             else {
-                sendMessage("Health updated successfully!");
+                sendMessage($('#message-save-hp-true').val());
             }
         });
     }
@@ -97,7 +97,7 @@ function saveHp() {
 }
 
 function save() {
-    sendMessage("Saving...");
+    sendMessage($('#message-saving').val());
 
     var savedata = {};
     var savetype = {};
@@ -150,17 +150,17 @@ function save() {
         },
         function(data, status) {
             if (data == "-") {
-                alert("Save failed!  Export your sheet to back it up.");
-                sendMessage("Validation error :(");
+                alert($('#message-save-failed').val());
+                sendMessage($('#message-validation-error').val());
             }
             else {
                 var json = JSON.parse(data);
                 if (json['message'] == "saved") {
-                    sendMessage("Sheet saved successfully.");
+                    sendMessage($('#message-saved').val());
                 }
                 if (json['error']) {
-                    sendMessage("Validation error :(");
-                    alert("Save failed!  Export your sheet to back it up.");
+                    sendMessage($('#message-validation-error').val());
+                    alert($('#message-save-failed').val());
                 }
             }
         });
@@ -191,7 +191,7 @@ function deleteRow(element) {
     var rowContainer = $(element).parents('.entries');
     var rowCount = rowContainer.children().length;
     if (rowCount > 1) {
-        var c = window.confirm("Are you sure you want to delete this row?\n\nThis cannot be undone!");
+        var c = window.confirm($('#message-row-delete').val());
         if (!c) return;
         var row = $(element).closest('.entry');
         row.find('input, select, textarea').each(function() {

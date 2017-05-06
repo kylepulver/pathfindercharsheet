@@ -8,6 +8,15 @@ $_SESSION['last_activity'] = time();
 require_once("config.php");
 require_once("util.php");
 
+// Language
+$l = array();
+$lang_path = 'inc/lang/' . $config['language'] . '.php';
+if (!file_exists($lang_path)) {
+    $lang_path = 'inc/lang/en.php'; // Default to english
+}
+require_once($lang_path);
+$lang = $l;
+
 // Check Config
 if (!check_config($config)) {
     include('inc/header.php');
@@ -52,6 +61,8 @@ $is_god = $permission == 1000;
 $is_gm = $permission >= 100;
 $is_user = $permission == 10;
 $is_guest = $permission == 0;
+
+
 
 // Get
 $mode = $_GET['mode'];
