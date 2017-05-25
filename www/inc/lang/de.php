@@ -388,8 +388,8 @@ $l['inst_god_pass']         = "Super Admin Passwort";
 //process.php
 $l['error_blank']           = "Es können nicht alle Felder leer sein";
 $l['error_invalid']         = "Ungültige Anfrage";
-$l['error_expired']         = "Reset token expired!";
-$l['reset_success']         = "Check your config email for a link.  (It may be in your spam folder!)";
-$l['error_unique']          = "Can't use the same name for multiple logins!";
+$l['error_expired']         = "Reset Token ist ausgelaufen!";
+$l['reset_success']         = "Der Reset Link wurde an deine konfigurierte Email gesendet. (Schau auch in deinem Spam Ordner!)";
+$l['error_unique']          = "Der Login Name darf nur einmal benutzt werden!";
 
 ?>
