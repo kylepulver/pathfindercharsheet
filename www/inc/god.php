@@ -138,9 +138,9 @@ function deleteCampaign(element) {
 
     var rowId = $(element).parents('[row]').attr('row');
     if (rowId == 1)
-        alert("<?=say('no_delete_camp')?>");
+        alert(`<?=say('no_delete_camp')?>`);
     else {
-        var c = window.confirm("<?=say('del_campaign')?>");
+        var c = window.confirm(`<?=say('del_campaign')?>`);
         if (!c) return;
 
         $.post("/p", {
